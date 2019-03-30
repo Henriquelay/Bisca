@@ -6,7 +6,7 @@
 //Uma matriz para armazenar todo o baralho apenas uma única vez. Ao longo do jogo, será operado ponteiros para esse struct, nem a necessidade de declarar novamente.
 typedef struct Cartas{
     // 1 = não usada; 0 = usada
-    char **disponiveis;
+    char **disponiveis; //errado
     int cartas_nao_usadas;
 }tCartas;
 

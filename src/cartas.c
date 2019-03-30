@@ -7,7 +7,7 @@
 
 
 ////////////main para testes
-/*int main(void){
+int main(void){
     tCartas baralho = iniciaCartas();
 
     printaCartas(&baralho);
@@ -15,7 +15,7 @@
 
     return 0;
 }
-*/
+
 
 tCartas iniciaCartas(void){
     tCartas deck;
