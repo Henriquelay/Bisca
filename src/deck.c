@@ -1,46 +1,68 @@
-#include <../headers/deck.h>
-#include <stdbool.h>
+#include "../headers/deck.h"
+#include <stdlib.h>
+#include <stdio.h>
 
-Cartas iniciaCartas(void){
-    Cartas deck;
-    deck->naipe = malloc(sizeof(bool*) * 4);
-    deck->figuras = malloc(sizeof(bool**) * 10);
+#define numeroNaipes 4
+#define numeroFiguras 10
+
+
+////////////main para testes
+int main(void){
+    tCartas baralho;
+    baralho = iniciaCartas();
+    printaCartas(&baralho);
+
+    freeCartas(&baralho);    
+    return 0;
+}
+
+
+tCartas iniciaCartas(void){
+    tCartas deck;
+    deck.disponiveis = (char**) malloc(sizeof(char*) * numeroFiguras);
+    for(int i = 0; i < numeroFiguras; i++){
+        deck.disponiveis[i] = (char*) malloc(sizeof(char) * numeroNaipes);
+    }
+    if(deck.disponiveis == NULL || deck.disponiveis[0] == NULL){
+        puts("\nOpa amigao, deu algo de errado ao alocar tCartas\n");
+        EXIT_FAILURE;
+    }
 
     //iniciando deck com 0;
-    for(int i = 0; i < 10; i++)
-        for(int j = 0; i < 10; i++)
-            deck->figuras[i][j] = 0;
+    for(int i = 0; i < numeroFiguras; i++)
+        for(int j = 0; j < numeroNaipes; j++){
+            deck.disponiveis[i][j] = 1;
+        }
+    // 1 = não usada; 0 = usada
 
     return deck;
 }
 
-void printaCartas(Cartas baralho){
+void printaCartas(tCartas *baralho){
     printf("\tPaus\tOuros\tCopas\tEspadas\n");
-    for(int i = 0; i < 10; i++)
-        for(int j = 0; j < 4; j++){
-            switch(i){
-                case 1: printf("A\t"); printf("%d\t", baralho->figuras[i][j]); break;
-                case 2: printf("2\t"); printf("%d\t", baralho->figuras[i][j]); break;
-                case 3: printf("3\t"); printf("%d\t", baralho->figuras[i][j]); break;
-                case 4: printf("4\t"); printf("%d\t", baralho->figuras[i][j]); break;
-                case 5: printf("5\t"); printf("%d\t", baralho->figuras[i][j]); break;
-                case 6: printf("6\t"); printf("%d\t", baralho->figuras[i][j]); break;
-                case 7: printf("7\t"); printf("%d\t", baralho->figuras[i][j]); break;
-                case 8: printf("J\t"); printf("%d\t", baralho->figuras[i][j]); break;
-                case 9: printf("Q\t"); printf("%d\t", baralho->figuras[i][j]); break;
-                case 1: printf("K\t"); printf("%d\t", baralho->figuras[i][j]); break;
+    for(int i = 0; i < numeroFiguras; i++){
+        switch(i){
+                case 0: printf("A\t"); break;
+                case 1: printf("2\t"); break;
+                case 2: printf("3\t"); break;
+                case 3: printf("4\t"); break;
+                case 4: printf("5\t"); break;
+                case 5: printf("6\t"); break;
+                case 6: printf("7\t"); break;
+                case 7: printf("J\t"); break;
+                case 8: printf("Q\t"); break;
+                case 9: printf("K\t"); break;
+                default: puts("WTF cara deu ruim aí");
             }
-        }
+        for(int j = 0; j < numeroNaipes; j++)
+            printf("%d\t", baralho->disponiveis[i][j]);
+            
+        printf("\n");
+    }
 }
 
-
-
-
-//main para testes
-int main(void){
-    Cartas baralho = iniciaCartas();
-
-
-    printaCartas 
-    return 0;
+void freeCartas(tCartas *cartas){
+    for(int i = 0; i < numeroFiguras; i++)
+        free(cartas->disponiveis[i]);
+    free(cartas->disponiveis);
 }
