@@ -1,1 +1,0 @@
-#include "../headers/cartas.h"
