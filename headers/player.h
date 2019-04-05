@@ -9,7 +9,7 @@
 typedef struct Player{
     char points;
     tListaCarta hand;
-    tPlayer *proximo;
+    tPlayer *proximo; 
 }tPlayer;
 
 /*Endif para evitar warnings*/
