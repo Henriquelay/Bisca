@@ -45,7 +45,7 @@
     PRE-CONDICAO: ser um naipe e um valor valido dentro do jogo de bisca
     POS-CONDICAO: ponteiro criado com a carta identificada com o naipe e o seu simbulo/valor
 */
-tCarta criaCarta(char naipe; char valor){
+tCarta criaCarta(char naipe, char valor){
     //tCartas cartaAux = (tCartas) malloc(sizeof(tCartas));
     cartaAux->naipe = naipe;
     cartaAux->valor = valor;

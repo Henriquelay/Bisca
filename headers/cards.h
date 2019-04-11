@@ -25,7 +25,7 @@ typedef struct ListaCarta{
 
 ////FUNÇÕES
 
-tCarta criaCarta(char naipe; char valor);
+tCarta criaCarta(char naipe, char valor);
 
 //TODO: Filtro de impressão como função (switch)
 
