@@ -45,15 +45,15 @@ typedef struct{
     PRE-CONDICAO: ser um naipe e um valor valido dentro do jogo de bisca
     POS-CONDICAO: ponteiro criado com a carta identificada com o naipe e o seu simbulo/valor
 */
-tCartas* criaCarta(char n; char v){
+tCartas* criaCarta(char naipe; char valor){
     tCartas *cartaAux = (tCartas*) malloc(sizeof(tCartas));
-    cartaAux->naipe = n;
-    cartaAux->valor = v;
+    cartaAux->naipe = naipe;
+    cartaAux->valor = valor;
 
     return cartaAux;
 }
 
-void imprimeCarta(char n; char v){
+void imprimeCarta(char naipe; char valor){
     printf("%c", )
 }
 /*
