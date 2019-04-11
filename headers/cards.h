@@ -8,6 +8,9 @@ por Henrique Layber e Ezequiel Schneider
 /*Aqui vai as funcoes*/
 #include <stdlib.h>
 
+#define NUMERODENAIPES      4
+#define NUMERODEVALORES     10
+
 //define o numero da carta e o naipe;
 typedef struct Carta{
     char naipe;
@@ -19,6 +22,10 @@ typedef struct ListaCarta{
     tCarta carta;
     tListaCarta *proxima;
 }tListaCarta;
+
+////FUNÇÕES
+
+tCartas* criaCarta(char naipe; char valor);
 
 //TODO: Filtro de impressão como função (switch)
 

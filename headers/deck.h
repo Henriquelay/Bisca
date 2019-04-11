@@ -22,24 +22,40 @@ typedef struct{
 
 ////FUNÇÕES
 /*
-    OBJETIVO: Inicia o deck de maneira correta.
-    ENTRADAS: Ponteiro para o deck.
+    OBJETIVO: Inicia 'deck' de maneira correta.\n
+    ENTRADAS: Ponteiro para 'deck'.
     SAIDA: -
-    PRE-CONDICAO: Foi passado tDeck* deck como argumento para que seja obrigado a existir.
-    POS-CONDICAO: deck é alocado na memória corretamente.
+    PRE-CONDICAO: Foi passado 'tDeck* deck' como argumento para que seja obrigado a existir.
+    POS-CONDICAO: 'deck' é alocado na memória corretamente, de maneira ordenada.
 */
 void iniciaDeckCheio(tDeck *deck);
 
 /*
-    OBJETIVO: Embaralhar o deck.
-    ENTRADAS: Ponteiro para o deck.
+    OBJETIVO: Embaralhar 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
     SAIDA: -
-    PRE-CONDICAO: O deck existe e está alocado corretamente.
-    POS-CONDICAO: O deck está embaralhado.
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'deck' está embaralhado.
 */
 void embaralha(tDeck *deck);
 
+/*
+    OBJETIVO: Desalocar toda a memória ocupada por 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'deck' não ocupa mais espaço no HEAP e aponta para NULL.
+*/
+void destroiDeck(tDeck *deck);
 
+/*
+    OBJETIVO: Imprimir 'deck' na tela.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: Nada é alterado.
+*/
+void imprimeDeck(tDeck *deck);
 
 
 #endif  //_H_DECKBISCA
