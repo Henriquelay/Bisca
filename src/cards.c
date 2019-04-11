@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../headers/cartas.h"
+#include "../headers/cards.h"
 
 // Struct que define as variaveis que representam as cartas do jogo
-typedef struct{
+/* typedef struct{
     char naipe, valor;
 } tCartas;
-
+ */ ///Está definida na .h --Henr
 /*
 //  um vetor que guarda os valores validos de uma carta
     char valores[14];
@@ -45,12 +45,12 @@ typedef struct{
     PRE-CONDICAO: ser um naipe e um valor valido dentro do jogo de bisca
     POS-CONDICAO: ponteiro criado com a carta identificada com o naipe e o seu simbulo/valor
 */
-tCartas criaCarta(char naipe; char valor){
-    tCartas *cartaAux = (tCartas*) malloc(sizeof(tCartas));
+tCarta criaCarta(char naipe; char valor){
+    //tCartas cartaAux = (tCartas) malloc(sizeof(tCartas));
     cartaAux->naipe = naipe;
     cartaAux->valor = valor;
 
-    return *cartaAux;
+    return cartaAux;
 }
 
 void imprimeCarta(char naipe; char valor){

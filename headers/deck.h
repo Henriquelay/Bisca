@@ -7,6 +7,7 @@ por Henrique Layber e Ezequiel Schneider
 #define _H_DECKBISCA
 /*Aqui vai as funcoes*/
 #include "cards.h"  //já inclui a <stdlib.h>
+#include <sys/time.h>
 
 ////DEFINES
 #define INICIODODECK    0
