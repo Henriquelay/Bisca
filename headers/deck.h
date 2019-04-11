@@ -58,5 +58,13 @@ void destroiDeck(tDeck *deck);
 */
 void imprimeDeck(tDeck *deck);
 
+/*
+    OBJETIVO: Verificar se 'deck' está alocado corretamente.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: 0 quando não está corretamente alocado, 1 quando está.
+    PRE-CONDICAO: -
+    POS-CONDICAO: Nada é alterado.
+*/
+char checaExistencia(tDeck *deck);
 
 #endif  //_H_DECKBISCA
