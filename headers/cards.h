@@ -1,4 +1,8 @@
-/* HEADER PARA A BIBLIOTECA CARTAS */
+/* HEADER PARA A BIBLIOTECA CARDS 
+por Henrique Layber e Ezequiel Schneider
+        Suplementa o programa de bisca,
+    adicionando funcionalidades ao TAD tCards
+*/
 #ifndef _H_CARDSBISCA
 #define _H_CARDSBISCA
 /*Aqui vai as funcoes*/
@@ -16,5 +20,7 @@ typedef struct ListaCarta{
     tListaCarta *proxima;
 }tListaCarta;
 
-/*Endif para evitar warnings*/
+//TODO: Filtro de impressão como função (switch)
+
+
 #endif

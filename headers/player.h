@@ -1,4 +1,8 @@
-/* HEADER PARA A BIBLIOTECA HAND */
+/* HEADER PARA A BIBLIOTECA PLAYER 
+por Henrique Layber e Ezequiel Schneider
+        Suplementa o programa de bisca,
+    adicionando funcionalidades ao TAD tPlayer
+*/
 #ifndef _H_PLAYERBISCA
 #define _H_PLAYERBISCA
 /*Aqui vai as funcoes*/
@@ -12,5 +16,4 @@ typedef struct Player{
     tPlayer *proximo; 
 }tPlayer;
 
-/*Endif para evitar warnings*/
 #endif
