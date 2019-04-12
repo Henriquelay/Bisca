@@ -11,50 +11,85 @@
 /*
 //  um vetor que guarda os valores validos de uma carta
     char valores[14];
-    valores[0] = 'a';
-    valores[1] = 'A';
-    valores[2] = 'k';
-    valores[3] = 'K';
-    valores[4] = 'q';
-    valores[5] = 'Q';
-    valores[6] = 'j';
-    valores[7] = 'J';
-    valores[8] = '2';
-    valores[9] = '3';
-    valores[10] = '4';
-    valores[11] = '5';
-    valores[12] = '6';
-    valores[13] = '7';
+    valores[0] = 'A';
+    valores[1] = 'K';
+    valores[2] = 'Q';
+    valores[3] = 'J';
+    valores[4] = '2';
+    valores[5] = '3';
+    valores[6] = '4';
+    valores[7] = '5';
+    valores[8] = '6';
+    valores[9] = '7';
 
 //  Um vetor que guarda os naipes validos de uma carta
     char naipe[8];
-    naipe[0] = 'c';
-    naipe[1] = 'C';
-    naipe[2] = 'e';
-    naipe[3] = 'E';
-    naipe[4] = 'p';
-    naipe[5] = 'P';
-    naipe[6] = 'o';
-    naipe[7] = 'O';
+    naipe[0] = 'C';
+    naipe[1] = 'E';
+    naipe[2] = 'P';
+    naipe[3] = 'O';
 */
 
 /*
     OBJETIVO: Inicializa a carta e cria um ponteiro para ela
-    ENTRADAS: o naipe da carta, a valor da carta
-    SAIDA: um ponteiro do tipo tCartas
-    PRE-CONDICAO: ser um naipe e um valor valido dentro do jogo de bisca
-    POS-CONDICAO: ponteiro criado com a carta identificada com o naipe e o seu simbulo/valor
+    ENTRADAS: O naipe da carta, a valor da carta
+    SAIDA: Um ponteiro do tipo tCartas
+    PRE-CONDICAO: Ser um naipe e um valor valido dentro do jogo de bisca
+    POS-CONDICAO: Ponteiro criado com a carta identificada com o naipe e o seu simbulo/valor
 */
 tCarta criaCarta(char naipe, char valor){
     //tCartas cartaAux = (tCartas) malloc(sizeof(tCartas));
-    cartaAux->naipe = naipe;
-    cartaAux->valor = valor;
+    tCarta cartaAux;
+
+    cartaAux -> naipe = naipe;
+    cartaAux -> valor = valor;
 
     return cartaAux;
 }
 
-void imprimeCarta(char naipe; char valor){
-    printf("%c", )
+/*
+    OBJETIVO: Verificar se o valor da carta eh valido
+    ENTRADAS: Uma variavel do tipo tCarta
+    SAIDA: 1 para valido e 0 para invalido
+    PRE-CONDICAO: Nenhuma
+    POS-CONDICAO: Valor validado ou invalidado
+*/
+int verificaValor(tCarta card){
+    for(int i = 0; i < NUMERODEVALORES; i++){
+        if(card -> valor == valores[i])   return 1;       // Valor valido
+        else return 0;                                  // Valor invalido
+    }
+
+    return 0;                                           // return para evitar erro
+}
+
+/*
+    OBJETIVO: Verificar se o naipe da carta eh valido
+    ENTRADAS: Uma variavel do tipo tCarta
+    SAIDA: 1 para valido e 0 para invalido
+    PRE-CONDICAO: Nenhuma
+    POS-CONDICAO: Naipe validado ou invalidado
+*/
+int verificaNaipe(tCarta card){
+    for(int i = 0; i < NUMERODENAIPES; i++){
+        if(card -> naipe == naipe[i])   return 1;       // Naipe valido
+        else return 0;                                  // Naipe invalido
+    }
+
+    return 0;                                           // return para evitar erro
+}
+
+/*
+    OBJETIVO: Printa a carta
+    ENTRADAS: o naipe da carta, a valor da carta
+    SAIDA: Nenhuma
+    PRE-CONDICAO: Carta existir
+    POS-CONDICAO: Print executado
+*/
+void imprimeCarta(tCarta card){
+    if(verificaNaipe(card) && verificaValor(card)){
+        printf("NAIPE: %c VALOR: %c\n", card -> naipe, card -> valor);
+    }
 }
 /*
     OBJETIVO: Libera o espaco de alocacao de um ponteiro de cartas na memoria

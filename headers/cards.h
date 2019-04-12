@@ -25,7 +25,41 @@ typedef struct ListaCarta{
 
 ////FUNÇÕES
 
+/*
+    OBJETIVO: Inicializa a carta e cria um ponteiro para ela
+    ENTRADAS: O naipe da carta, a valor da carta
+    SAIDA: Um ponteiro do tipo tCartas
+    PRE-CONDICAO: Ser um naipe e um valor valido dentro do jogo de bisca
+    POS-CONDICAO: Ponteiro criado com a carta identificada com o naipe e o seu simbulo/valor
+*/
 tCarta criaCarta(char naipe, char valor);
+
+/*
+    OBJETIVO: Verificar se o valor da carta eh valido
+    ENTRADAS: Uma variavel do tipo tCarta
+    SAIDA: 1 para valido e 0 para invalido
+    PRE-CONDICAO: Nenhuma
+    POS-CONDICAO: Valor validado ou invalidado
+*/
+int verificaValor(tCarta card);
+
+/*
+    OBJETIVO: Verificar se o naipe da carta eh valido
+    ENTRADAS: Uma variavel do tipo tCarta
+    SAIDA: 1 para valido e 0 para invalido
+    PRE-CONDICAO: Nenhuma
+    POS-CONDICAO: Naipe validado ou invalidado
+*/
+int verificaNaipe(tCarta card);
+
+/*
+    OBJETIVO: Printa a carta
+    ENTRADAS: o naipe da carta, a valor da carta
+    SAIDA: Nenhuma
+    PRE-CONDICAO: Carta existir
+    POS-CONDICAO: Print executado
+*/
+void imprimeCarta(tCarta card);
 
 //TODO: Filtro de impressão como função (switch)
 
