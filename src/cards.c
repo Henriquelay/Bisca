@@ -3,27 +3,12 @@
 
 #include "../headers/cards.h"
 
-/*
-    um vetor que guarda os valores validos de uma carta
-    char valores[14];
-    valores[0] = 'A';
-    valores[1] = 'K';
-    valores[2] = 'Q';
-    valores[3] = 'J';
-    valores[4] = '2';
-    valores[5] = '3';
-    valores[6] = '4';
-    valores[7] = '5';
-    valores[8] = '6';
-    valores[9] = '7';
 
-    Um vetor que guarda os naipes validos de uma carta
-    char naipe[8];
-    naipe[0] = 'C';
-    naipe[1] = 'E';
-    naipe[2] = 'P';
-    naipe[3] = 'O';
-*/
+    //um vetor que guarda os valores validos de uma carta
+    char valores[14] = { 'A', 'K', 'Q', 'J', '2', '3', '4', '5', '6', '7' };
+
+    //Um vetor que guarda os naipes validos de uma carta
+    char naipe[8] = { 'C', 'E', 'P', 'O' };
 
 /*
     OBJETIVO: Inicializa a carta e cria um ponteiro para ela
@@ -36,8 +21,8 @@ tCarta criaCarta(char naipe, char valor)
 {
     tCarta cartaAux;
 
-    cartaAux -> naipe = naipe;
-    cartaAux -> valor = valor;
+    cartaAux . naipe = naipe;
+    cartaAux . valor = valor;
 
     return cartaAux;
 }
@@ -98,7 +83,7 @@ int verificaValor(tCarta card)
 {
     for(int i = 0; i < NUMERODEVALORES; i++)
     {
-        if(card -> valor == valores[i])   return 1;       // Valor valido
+        if(card . valor == valores[i])   return 1;       // Valor valido
         else return 0;                                    // Valor invalido
     }
 
@@ -116,7 +101,7 @@ int verificaNaipe(tCarta card)
 {
     for(int i = 0; i < NUMERODENAIPES; i++)
     {
-        if(card -> naipe == naipe[i])   return 1;       // Naipe valido
+        if(card . naipe == naipe[i])   return 1;       // Naipe valido
         else return 0;                                  // Naipe invalido
     }
 
@@ -134,6 +119,6 @@ void imprimeCarta(tCarta card)
 {
     if(verificaNaipe(card) && verificaValor(card))
     {
-        printf("NAIPE: %c VALOR: %c\n", card -> naipe, card -> valor);
+        printf("NAIPE: %c VALOR: %c\n", card . naipe, card . valor);
     }
 }

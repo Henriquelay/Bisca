@@ -12,7 +12,7 @@ por Henrique Layber e Ezequiel Schneider
 #define NUMERODEVALORES     10
 
 //define o numero da carta e o naipe;
-typedef struct Carta{
+typedef struct structCarta{
     char naipe;
     char valor;
 }tCarta;
