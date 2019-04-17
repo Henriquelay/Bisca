@@ -12,16 +12,10 @@ por Henrique Layber e Ezequiel Schneider
 #define NUMERODEVALORES     10
 
 //define o numero da carta e o naipe;
-typedef struct Carta{
+typedef struct structCarta{
     char naipe;
     char valor;
 }tCarta;
-
-//define a lista de cartas (seria usado em várias bibliotecas relacionadas às cartas então é melhor deixar aqui);
-typedef struct ListaCarta{
-    tCarta carta;
-    tListaCarta *proxima;
-}tListaCarta;
 
 ////FUNÇÕES
 
@@ -81,14 +75,14 @@ int verificaNaipe(tCarta card);
 
 /*
     OBJETIVO: Printa a carta
-    ENTRADAS: o naipe da carta, a valor da carta
+    ENTRADAS: o naipe da carta, a valor da carta    //é apenas a carta!!
     SAIDA: Nenhuma
     PRE-CONDICAO: Carta existir
     POS-CONDICAO: Print executado
 */
 void imprimeCarta(tCarta card);
 
-//TODO: Filtro de impressão como função (switch)
+//TODO: Filtro de impressão como função (switch) e aceitar ponteiro como entrada
 
 
 #endif

@@ -1,21 +1,40 @@
 #include "../headers/deck.h"
 
-void iniciaDeckCheio(tDeck *deck){
-    deck->cartas = NULL;
-    deck->cartas = (tDeck*) malloc(sizeof(tCarta) * (MAXIMODODECK + 1));
-    if(deck->cartas == NULL){
-        printf("\n=#=#=#=#=DEU ALGO DE MUITO ERRADO AO TENTAR ALOCAR O DECK!! SAINDO DO PROGRAMA...=#=#=#=#=");
-        EXIT_FAILURE;
-    }
-
-    for(char naipe = 0; naipe < NUMERODENAIPES; naipe++)
-        for(char valor = 0; valor < NUMERODEVALORES; valor++)
-            deck->cartas[NUMERODEVALORES * naipe + valor] = criaCarta(naipe, valor);
-
+itemDeck* inicializaItem(void){
+    itemDeck *item = (itemDeck*) malloc(sizeof(itemDeck));
+    item->proximo = NULL;
+    
+    return item;
 }
 
-void embaralha(tDeck *deck){
-    struct timeval tempo;
-    gettimeofday(&tempo,NULL);
-    srand((unsigned int)tempo.tv_usec);    
+tipoDeck* iniciaDeckVazio(void){
+    tipoDeck *deck = (tipoDeck*) malloc(sizeof(tipoDeck));
+    deck->primeiro = deck->ultimo = NULL;
+    deck->tamanho = 0;
+    return deck;
+}
+
+void preencheDeck(tipoDeck *deck){
+    if(deck == NULL)
+        printf("======INICIE O DECK ANTES DE ALOCAR!!!====\n");
+
+
+    for(char valor = 0; valor < 10; valor++)            //pois sao 10 valores
+        for(char naipe = 0; naipe < 4; naipe++)       //e 4 naipes
+            if(valor == 0 && naipe == 0){
+                deck->primeiro = deck->ultimo = inicializaItem();
+                deck->tamanho++;
+                deck->primeiro->carta = criaCarta(naipe, valor);
+            } else{
+                deck->ultimo = inicializaItem();
+                deck->tamanho++;
+                deck->ultimo->carta = criaCarta(naipe, valor);
+            }
+}
+
+void imprimeDeck(tipoDeck *deck){
+    for(int i = 0; i < deck->tamanho; i++){
+        printf("\tCARTA %d = ");
+        imprimeCarta(deck->primeiro[i].carta);
+    }
 }
