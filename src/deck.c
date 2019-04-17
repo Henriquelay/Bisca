@@ -19,9 +19,15 @@ void preencheDeck(tipoDeck *deck){
         printf("======INICIE O DECK ANTES DE ALOCAR!!!====\n");
 
 
-    for(char valor = 0; valor < 10; valor++){            //pois sao 10 valores
-        for(char naipe = 0; naipe < 4; naipe++){       //e 4 naipes
-            
-        }
-    }
+    for(char valor = 0; valor < 10; valor++)            //pois sao 10 valores
+        for(char naipe = 0; naipe < 4; naipe++)       //e 4 naipes
+            if(valor == 0 && naipe == 0){
+                deck->primeiro = deck->ultimo = inicializaItem();
+                deck->tamanho++;
+                deck->primeiro->carta = criaCarta(naipe, valor);
+            } else{
+                deck->ultimo = inicializaItem();
+                deck->tamanho++;
+                deck->ultimo->carta = criaCarta(naipe, valor);
+            }
 }

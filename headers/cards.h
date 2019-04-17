@@ -17,12 +17,6 @@ typedef struct structCarta{
     char valor;
 }tCarta;
 
-//define a lista de cartas (seria usado em várias bibliotecas relacionadas às cartas então é melhor deixar aqui);
-typedef struct ListaCarta{
-    tCarta carta;
-    tListaCarta *proxima;
-}tListaCarta;
-
 ////FUNÇÕES
 
 /*
