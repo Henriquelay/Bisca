@@ -31,3 +31,10 @@ void preencheDeck(tipoDeck *deck){
                 deck->ultimo->carta = criaCarta(naipe, valor);
             }
 }
+
+void imprimeDeck(tipoDeck *deck){
+    for(int i = 0; i < deck->tamanho; i++){
+        printf("\tCARTA %d = ");
+        imprimeCarta(deck->primeiro[i].carta);
+    }
+}

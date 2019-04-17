@@ -115,7 +115,7 @@ int verificaNaipe(tCarta card)
     PRE-CONDICAO: Carta existir
     POS-CONDICAO: Print executado
 */
-void imprimeCarta(tCarta card)
+void imprimeCarta(tCarta card)          //TODO: Não está fazendo a conversão para char! 0 deve printar A, por exemplo, e os naipes devem printar os chars relativos
 {
     if(verificaNaipe(card) && verificaValor(card))
     {
