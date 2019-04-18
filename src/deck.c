@@ -1,40 +1,75 @@
 #include "../headers/deck.h"
 
-itemDeck* inicializaItem(void){
-    itemDeck *item = (itemDeck*) malloc(sizeof(itemDeck));
-    item->proximo = NULL;
-    
-    return item;
-}
 
-tipoDeck* iniciaDeckVazio(void){
-    tipoDeck *deck = (tipoDeck*) malloc(sizeof(tipoDeck));
-    deck->primeiro = deck->ultimo = NULL;
-    deck->tamanho = 0;
-    return deck;
-}
+/*
+    OBJETIVO: Embaralhar 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'deck' está embaralhado.
+*/
+void embaralha(tDeck *deck);
 
-void preencheDeck(tipoDeck *deck){
-    if(deck == NULL)
-        printf("======INICIE O DECK ANTES DE ALOCAR!!!====\n");
+/*
+    OBJETIVO: Desalocar toda a memória ocupada por 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'deck' não ocupa mais espaço no HEAP e aponta para NULL.
+*/
+void destroiDeck(tDeck *deck);
 
-
-    for(char valor = 0; valor < 10; valor++)            //pois sao 10 valores
-        for(char naipe = 0; naipe < 4; naipe++)       //e 4 naipes
-            if(valor == 0 && naipe == 0){
-                deck->primeiro = deck->ultimo = inicializaItem();
-                deck->tamanho++;
-                deck->primeiro->carta = criaCarta(naipe, valor);
-            } else{
-                deck->ultimo = inicializaItem();
-                deck->tamanho++;
-                deck->ultimo->carta = criaCarta(naipe, valor);
-            }
-}
-
-void imprimeDeck(tipoDeck *deck){
-    for(int i = 0; i < deck->tamanho; i++){
-        printf("\tCARTA %d = ");
-        imprimeCarta(deck->primeiro[i].carta);
+/*
+    OBJETIVO: Imprimir 'deck' na tela.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: Nada é alterado.
+*/
+void imprimeDeck(tDeck *deck){
+    if(!vazio(deck)){
+        filtrAEPrinta(&deck->primeiro->carta);
+        if(deck->primeiro->proximo != NULL){
+            tDeck subdeck = *deck;
+            subdeck.primeiro = subdeck.primeiro->proximo;
+            imprimeDeck(&subdeck);
+        }
     }
+}
+
+/*
+    OBJETIVO: Inserir 'carta' em 'deck'. //TODO: A SER DEFINIDISE SERÁ INCLUÍDA NO INÍCIO OU NO FIM
+    ENTRADAS: Ponteiro para 'deck', ponteiro para 'carta'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'carta' está contida em 'deck'.
+*/
+void insereCarta(tCarta *carta, tDeck *deck);
+
+/*
+    OBJETIVO: Verificar se 'deck' está alocado corretamente.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: 0 quando não está corretamente alocado, 1 quando está.
+    PRE-CONDICAO: -
+    POS-CONDICAO: Nada é alterado.
+*/
+char vazio(tDeck *deck){
+    if(deck->primeiro == NULL || deck->ultimo == NULL)
+        return 1;
+    return 0;
+}
+
+/*
+    OBJETIVO: Iniciar 'deck' vazio corretamente.
+    ENTRADAS: -
+    SAIDA: 'deck'.
+    PRE-CONDICAO: -
+    POS-CONDICAO: Inicializado, porém sem elementos.
+*/
+tDeck iniciaVazio(void){
+    tDeck deck;
+    deck.primeiro = deck.ultimo = NULL;
+    deck.quantidade = 0;
+
+    return deck;
 }

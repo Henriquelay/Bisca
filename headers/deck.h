@@ -11,12 +11,15 @@ por Henrique Layber e Ezequiel Schneider
 
 
 ////STRUCTS
-typedef struct structDeck{
+
+//Define os items que serão contidos no deck. (lista encadeada de cartas com sentinela)
+typedef struct itemDeck{
     tCarta carta;
-    tipoDeck *proximo;
+    itemDeck *proximo;
 } itemDeck;
 
-typedef struct controladorDeck{
+//Define as sentinelas e auxiliadores do deck. (lista encadeada de cartas com sentinela)
+typedef struct tDeck{
     itemDeck *primeiro, *ultimo;
     int quantidade;
 } tDeck;
@@ -58,7 +61,7 @@ void imprimeDeck(tDeck *deck);
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: 'carta' está contida em 'deck'.
 */
-void insereCarta(tCarta *carta, tDeck *deck;)
+void insereCarta(tCarta *carta, tDeck *deck);
 
 /*
     OBJETIVO: Verificar se 'deck' está alocado corretamente.
@@ -68,5 +71,14 @@ void insereCarta(tCarta *carta, tDeck *deck;)
     POS-CONDICAO: Nada é alterado.
 */
 char vazio(tDeck *deck);
+
+/*
+    OBJETIVO: Iniciar 'deck' vazio corretamente.
+    ENTRADAS: -
+    SAIDA: 'deck'.
+    PRE-CONDICAO: -
+    POS-CONDICAO: Inicializado, porém sem elementos.
+*/
+tDeck iniciaVazio(void);
 
 #endif  //_H_DECKBISCA
