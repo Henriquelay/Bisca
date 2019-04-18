@@ -13,25 +13,16 @@ por Henrique Layber e Ezequiel Schneider
 ////STRUCTS
 typedef struct structDeck{
     tCarta carta;
-    tipoDeck* proximo;
+    tipoDeck *proximo;
 } itemDeck;
 
 typedef struct controladorDeck{
     itemDeck *primeiro, *ultimo;
-    int tamanho;
-} tipoDeck;
+    int quantidade;
+} tDeck;
 
 
 ////FUNÇÕES
-/*
-    OBJETIVO: Preenche 'deck' de maneira correta.\n
-    ENTRADAS: Ponteiro para 'deck'.
-    SAIDA: -
-    PRE-CONDICAO: 'deck' está alocado.
-    POS-CONDICAO: 'deck' é alocado na memória corretamente, de maneira ordenada. 
-    O que 'deck' apontava antes é perdido.
-*/
-void preencheDeck(tipoDeck *deck);
 
 /*
     OBJETIVO: Embaralhar 'deck'.
@@ -40,7 +31,7 @@ void preencheDeck(tipoDeck *deck);
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: 'deck' está embaralhado.
 */
-void embaralha(tipoDeck *deck);
+void embaralha(tDeck *deck);
 
 /*
     OBJETIVO: Desalocar toda a memória ocupada por 'deck'.
@@ -49,7 +40,7 @@ void embaralha(tipoDeck *deck);
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: 'deck' não ocupa mais espaço no HEAP e aponta para NULL.
 */
-void destroiDeck(tipoDeck *deck);
+void destroiDeck(tDeck *deck);
 
 /*
     OBJETIVO: Imprimir 'deck' na tela.
@@ -58,7 +49,16 @@ void destroiDeck(tipoDeck *deck);
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: Nada é alterado.
 */
-void imprimeDeck(tipoDeck *deck);
+void imprimeDeck(tDeck *deck);
+
+/*
+    OBJETIVO: Inserir 'carta' em 'deck'. //TODO: A SER DEFINIDISE SERÁ INCLUÍDA NO INÍCIO OU NO FIM
+    ENTRADAS: Ponteiro para 'deck', ponteiro para 'carta'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'carta' está contida em 'deck'.
+*/
+void insereCarta(tCarta *carta, tDeck *deck;)
 
 /*
     OBJETIVO: Verificar se 'deck' está alocado corretamente.
@@ -67,6 +67,6 @@ void imprimeDeck(tipoDeck *deck);
     PRE-CONDICAO: -
     POS-CONDICAO: Nada é alterado.
 */
-char checaExistencia(tDeck *deck);
+char vazio(tDeck *deck);
 
 #endif  //_H_DECKBISCA
