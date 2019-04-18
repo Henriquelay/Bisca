@@ -60,16 +60,16 @@ char getValor(tCarta *carta)
 */
 void trocaCarta(tCarta* card1, tCarta* card2)
 {
-    tCarta* cardAux;
+    tCarta cardAux;
     
-    cardAux -> valor = card1 -> valor;
-    cardAux -> naipe = card1 -> naipe;
+    cardAux.valor = getValor(card1);
+    cardAux.naipe = getNaipe(card1);
 
-    card1 -> valor = card2 -> valor;
-    card1 -> naipe = card2 -> naipe;
+    card1 -> valor = getValor(card2);
+    card1 -> naipe = getNaipe(card2);
 
-    card2 -> valor = cardAux -> valor;
-    card2 -> naipe = cardAux -> naipe;
+    card2 -> valor = getValor(&cardAux);
+    card2 -> naipe = getNaipe(&cardAux);
 }
 
 /*

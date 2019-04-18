@@ -29,6 +29,33 @@ typedef struct structCarta{
 tCarta criaCarta(char naipe, char valor);
 
 /*
+    OBJETIVO: retorna o valor do naipe da carta
+    ENTRADAS: Uma carta
+    SAIDA: O naipe da carta de entrada
+    PRE-CONDICAO: Nenhuma
+    POS-CONDICAO: Nenhuma
+*/
+char getNaipe(tCarta *carta);
+
+/*
+    OBJETIVO: retorna o valor da carta
+    ENTRADAS: Uma carta
+    SAIDA: O valor da carta de entrada
+    PRE-CONDICAO: Nenhuma
+    POS-CONDICAO: Nenhuma
+*/
+char getValor(tCarta *carta);
+
+/*
+    OBJETIVO: Inicializa a carta e cria um ponteiro para ela
+    ENTRADAS: O naipe da carta, a valor da carta
+    SAIDA: Um ponteiro do tipo tCartas
+    PRE-CONDICAO: Ser um naipe e um valor valido dentro do jogo de bisca
+    POS-CONDICAO: Ponteiro criado com a carta identificada com o naipe e o seu simbulo/valor
+*/
+void trocaCarta(tCarta* card1, tCarta* card2);
+
+/*
     OBJETIVO: Verificar se o valor da carta eh valido
     ENTRADAS: Uma variavel do tipo tCarta
     SAIDA: 1 para valido e 0 para invalido
