@@ -11,6 +11,7 @@ CC=gcc
 CFLAGS=-I. -Wall -lm -g
 DEPS = headers/cards.h headers/deck.h
 OBJ = cards.o deck.o main.o
+msg="$1"
 
 %.o: src/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
@@ -21,8 +22,16 @@ main: $(OBJ)
 	rm -f *.o
 	mv main bisca
 
+run:
+	make main
+	valgrind ./bisca
 
 clean:
 	rm -f *.o
 	rm -f bisca
 	rm -f main
+
+push:
+	git add .
+	git commit -m "$msg"
+	git push origin master

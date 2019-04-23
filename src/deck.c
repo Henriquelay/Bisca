@@ -51,15 +51,8 @@ itemDeck* criaItem(tCarta *carta){
     POS-CONDICAO: 'carta' está contida em 'deck'.
 */
 void insereCarta(tCarta *carta, tDeck *deck){
-    if(deck == NULL)
-        return;
-
-    itemDeck *atual = deck->primeiro;
-    while(atual != NULL && !(getvalor(atual->carta) == getvalor(carta) && getnaipe(atual->carta) == getnaipe(carta)))
-        atual = atual->proximo;
-
-    if(atual != NULL){      //encontrou uma carta
-        printf(" *** Foi tentando alocar a carta %d %d duas vezes! ***\n", getvalor(carta), getnaipe(carta));
+    if(deck == NULL){
+        printf(" *** DECK EH NULO!!! ***");
         return;
     }
 

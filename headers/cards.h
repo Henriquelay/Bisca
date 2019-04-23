@@ -12,13 +12,13 @@ por Henrique Layber e Ezequiel Schneider
 #define NUMERODENAIPES      4
 #define NUMERODEVALORES     10
 
-//define o numero da carta e o naipe;
+/*define o numero da carta e o naipe;
+char naipe, valor;*/
 typedef struct structCarta{
-    char naipe;
-    char valor;
+    char naipe, valor;
 }tCarta;
 
-////FUNÇÕES
+//FUNÇÕES
 
 /*
     OBJETIVO: Inicializa a carta e cria um ponteiro para ela
