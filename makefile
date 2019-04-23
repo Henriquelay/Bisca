@@ -11,7 +11,7 @@ CC=gcc
 CFLAGS=-I. -Wall -lm -g
 DEPS = headers/cards.h headers/deck.h
 OBJ = cards.o deck.o main.o
-msg="$1"
+msg="$3"
 
 %.o: src/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
