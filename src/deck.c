@@ -27,24 +27,23 @@ void destroiDeck(tDeck *deck);
     POS-CONDICAO: Nada é alterado.
 */
 void imprimeDeck(tDeck *deck){
-    itemDeck *cartaAtual = deck->primeiro;
+    tCelula *cartaAtual = deck->primeiro;
     while(!vazio(cartaAtual)){
         filtrAEPrinta(&cartaAtual->carta);
         cartaAtual = cartaAtual->proximo;
     }
 }
 
-itemDeck* criaItem(tCarta *carta){
+tCelula* criaItem(tCarta *carta){
     if(carta == NULL)
         return;
 
-    itemDeck *item = (itemDeck*) malloc(sizeof(itemDeck));
+    tCelula *item = (tCelula*) malloc(sizeof(tCelula));
     item->proximo = NULL;
 }
 
-
 /*
-    OBJETIVO: Inserir 'carta' em 'deck'. //TODO: A SER DEFINIR SE SERÁ INCLUÍDA NO INÍCIO OU NO FIM
+    OBJETIVO: Inserir 'carta' em 'deck'. //*Será inserida no início
     ENTRADAS: Ponteiro para 'deck', ponteiro para 'carta'.
     SAIDA: -
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
@@ -56,7 +55,7 @@ void insereCarta(tCarta *carta, tDeck *deck){
         return;
     }
 
-    itemDeck *item = (itemDeck*) malloc(sizeof(itemDeck));
+    tCelula *item = (tCelula*) malloc(sizeof(tCelula));
     item->carta = *carta;
     item->proximo = deck->primeiro;
     deck->primeiro = item;

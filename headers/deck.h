@@ -13,14 +13,14 @@ por Henrique Layber e Ezequiel Schneider
 //*STRUCTS
 
 //Define os items que serão contidos no deck. (lista encadeada de cartas com sentinela)
-typedef struct itemDeck{
+typedef struct tCelula{
     tCarta carta;
-    itemDeck *proximo;
-} itemDeck;
+    tCelula *proximo;
+} tCelula;
 
 //Define as sentinelas e auxiliadores do deck. (lista encadeada de cartas com sentinela)
 typedef struct tDeck{
-    itemDeck *primeiro, *ultimo;
+    tCelula *primeiro, *ultimo;
     int quantidade;
 } tDeck;
 
@@ -53,6 +53,15 @@ typedef struct tDeck{
     POS-CONDICAO: 'deck' está embaralhado.
 */
 void embaralha(tDeck *deck);
+
+/*
+    OBJETIVO: Preencher 'deck' corretamente.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'deck'u está embaralhado.
+*/
+void preenche(tDeck *deck);
 
 /*
     OBJETIVO: Desalocar toda a memória ocupada por 'deck'.
