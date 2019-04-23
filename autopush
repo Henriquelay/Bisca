@@ -1,0 +1,13 @@
+#!/bin/bash
+
+msg="$1"
+
+git add .
+
+if [[ ${msg} -ne "" ]]; then
+	git commit -m "${msg}"
+else
+	git commit -m "Push automatico"
+fi
+
+git push origin master

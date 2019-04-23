@@ -11,7 +11,7 @@ CC=gcc
 CFLAGS=-I. -Wall -lm -g
 DEPS = headers/cards.h headers/deck.h
 OBJ = cards.o deck.o main.o
-msg="$3"
+msg="$2"
 
 %.o: src/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
@@ -33,5 +33,10 @@ clean:
 
 push:
 	git add .
-	git commit -m "$msg"
+	if [[ ${msg} -ne "" ]]; then
+		git commit -m ${msg}
+	fi
+	else
+		git commit -m "auto push"
+	esle
 	git push origin master
