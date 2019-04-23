@@ -8,6 +8,9 @@
     POS-CONDICAO: O valor "traduzido" foi impresso na tela e nada foi alterado.
 */
 void filtrAEPrinta(tCarta *carta){
+    if(carta == NULL)
+        return;
+
     switch(carta->valor){
         case 0: printf("2 "); break; 
         case 1: printf("3 "); break; 
@@ -46,6 +49,7 @@ tCarta criaCarta(char naipe, char valor){
     return cartaAux;
 }
 
+#define CARTA10 5
 /*
     OBJETIVO: retorna o naipe da carta
     ENTRADAS: Uma carta
@@ -68,3 +72,5 @@ char getValor(tCarta *carta){
     return carta->valor;
 }
 
+
+#define CARTA10 5

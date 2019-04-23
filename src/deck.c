@@ -1,6 +1,24 @@
 #include "../headers/deck.h"
 
 
+//DEFINEM AS CARTAS PARA LEGIBILIDADE (O VALOR REPRESENTA A ORDEM DE ENCARTE)
+#define CARTA1 9
+#define CARTA2 0
+#define CARTA3 1
+#define CARTA4 2
+#define CARTA5 3
+#define CARTA6 4
+#define CARTA7 8
+#define CARTAJ 6
+#define CARTAQ 5
+#define CARTAK 7
+
+//DEFINEM OS NAIPES PARA LEGIBILIDADE
+#define NAIPEO 0
+#define NAIPEP 1
+#define NAIPEC 2
+#define NAIPEE 3
+
 /*
     OBJETIVO: Embaralhar 'deck'.
     ENTRADAS: Ponteiro para 'deck'.
@@ -27,13 +45,10 @@ void destroiDeck(tDeck *deck);
     POS-CONDICAO: Nada é alterado.
 */
 void imprimeDeck(tDeck *deck){
-    if(!vazio(deck)){
-        filtrAEPrinta(&deck->primeiro->carta);
-        if(deck->primeiro->proximo != NULL){
-            tDeck subdeck = *deck;
-            subdeck.primeiro = subdeck.primeiro->proximo;
-            imprimeDeck(&subdeck);
-        }
+    tDeck *cartaAtual = deck;
+    while(!vazio(cartaAtual)){
+        filtrAEPrinta(&cartaAtual->primeiro->carta);
+        cartaAtual = cartaAtual->Prox;
     }
 }
 
@@ -54,7 +69,7 @@ void insereCarta(tCarta *carta, tDeck *deck);
     POS-CONDICAO: Nada é alterado.
 */
 char vazio(tDeck *deck){
-    if(deck->primeiro == NULL || deck->ultimo == NULL)
+    if(deck->primeiro == NULL || deck->ultimo == NULL || quantidade == 0)
         return 1;
     return 0;
 }
@@ -66,10 +81,9 @@ char vazio(tDeck *deck){
     PRE-CONDICAO: -
     POS-CONDICAO: Inicializado, porém sem elementos.
 */
-tDeck iniciaVazio(void){
-    tDeck deck;
-    deck.primeiro = deck.ultimo = NULL;
-    deck.quantidade = 0;
-
+tDeck* iniciaVazio(void){
+    tDeck *deck = (deck*) malloc(sizeof(deck));
+    deck->primeiro = deck->ultimo = NULL;
+    deck->quantidade = 0;
     return deck;
 }

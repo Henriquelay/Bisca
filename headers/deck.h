@@ -15,7 +15,7 @@ por Henrique Layber e Ezequiel Schneider
 //Define os items que serão contidos no deck. (lista encadeada de cartas com sentinela)
 typedef struct itemDeck{
     tCarta carta;
-    itemDeck *proximo;
+    itemDeck *proximo, anterior;
 } itemDeck;
 
 //Define as sentinelas e auxiliadores do deck. (lista encadeada de cartas com sentinela)
