@@ -4,10 +4,10 @@ msg="$1"
 
 git add .
 
-if [[ ${msg} -ne "" ]]; then
-	git commit -m "${msg}"
+if [[ ${msg} -eq "" ]]; then
+        git commit -m "Push automatico"
 else
-	git commit -m "Push automatico"
+	git commit -m "${msg}"
 fi
 
 git push origin master
