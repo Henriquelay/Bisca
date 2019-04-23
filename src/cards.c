@@ -4,7 +4,7 @@
     OBJETIVO: Traduzir a saída de números para cartas.
     ENTRADAS: A carta.
     SAIDA: -
-    PRE-CONDICAO: Ser um naipe e um valor valido dentro do jogo de bisca.
+r    PRE-CONDICAO: Ser um naipe e um valor valido dentro do jogo de bisca.
     POS-CONDICAO: O valor "traduzido" foi impresso na tela e nada foi alterado.
 */
 void filtrAEPrinta(tCarta *carta){
@@ -29,7 +29,7 @@ void filtrAEPrinta(tCarta *carta){
         case 1: printf("Paus"); break;
         case 2: printf("Copas"); break;
         case 3: printf("Espadas"); break;
-        default: puts("###### DEU ALGO ERRADO COM O NAIPE MEU CONSAGRATED ######");
+        default: puts("###### DEU ALGO ERRADO COM O NAIPE MEU PROGRAMADO ######");
     }
 }
 
@@ -48,8 +48,6 @@ tCarta criaCarta(char naipe, char valor){
 
     return cartaAux;
 }
-
-#define CARTA10 5
 /*
     OBJETIVO: retorna o naipe da carta
     ENTRADAS: Uma carta
@@ -71,6 +69,3 @@ char getNaipe(tCarta *carta){
 char getValor(tCarta *carta){
     return carta->valor;
 }
-
-
-#define CARTA10 5

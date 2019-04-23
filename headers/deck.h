@@ -10,12 +10,12 @@ por Henrique Layber e Ezequiel Schneider
 #include <sys/time.h>
 
 
-////STRUCTS
+//*STRUCTS
 
 //Define os items que serão contidos no deck. (lista encadeada de cartas com sentinela)
 typedef struct itemDeck{
     tCarta carta;
-    itemDeck *proximo, anterior;
+    itemDeck *proximo;
 } itemDeck;
 
 //Define as sentinelas e auxiliadores do deck. (lista encadeada de cartas com sentinela)
@@ -25,7 +25,25 @@ typedef struct tDeck{
 } tDeck;
 
 
-////FUNÇÕES
+//*DEFINEM AS CARTAS PARA LEGIBILIDADE (O VALOR REPRESENTA A ORDEM DE ENCARTE)
+#define CARTA1 9
+#define CARTA2 0
+#define CARTA3 1
+#define CARTA4 2
+#define CARTA5 3
+#define CARTA6 4
+#define CARTA7 8
+#define CARTAJ 6
+#define CARTAQ 5
+#define CARTAK 7
+
+//*DEFINEM OS NAIPES PARA LEGIBILIDADE
+#define NAIPEO 0
+#define NAIPEP 1
+#define NAIPEC 2
+#define NAIPEE 3
+
+//*FUNÇÕES
 
 /*
     OBJETIVO: Embaralhar 'deck'.
@@ -79,6 +97,6 @@ char vazio(tDeck *deck);
     PRE-CONDICAO: -
     POS-CONDICAO: Inicializado, porém sem elementos.
 */
-tDeck iniciaVazio(void);
+tDeck* iniciaVazio(void);
 
 #endif  //_H_DECKBISCA

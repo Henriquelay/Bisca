@@ -1,24 +1,6 @@
 #include "../headers/deck.h"
 
 
-//DEFINEM AS CARTAS PARA LEGIBILIDADE (O VALOR REPRESENTA A ORDEM DE ENCARTE)
-#define CARTA1 9
-#define CARTA2 0
-#define CARTA3 1
-#define CARTA4 2
-#define CARTA5 3
-#define CARTA6 4
-#define CARTA7 8
-#define CARTAJ 6
-#define CARTAQ 5
-#define CARTAK 7
-
-//DEFINEM OS NAIPES PARA LEGIBILIDADE
-#define NAIPEO 0
-#define NAIPEP 1
-#define NAIPEC 2
-#define NAIPEE 3
-
 /*
     OBJETIVO: Embaralhar 'deck'.
     ENTRADAS: Ponteiro para 'deck'.
@@ -45,21 +27,47 @@ void destroiDeck(tDeck *deck);
     POS-CONDICAO: Nada é alterado.
 */
 void imprimeDeck(tDeck *deck){
-    tDeck *cartaAtual = deck;
+    itemDeck *cartaAtual = deck->primeiro;
     while(!vazio(cartaAtual)){
-        filtrAEPrinta(&cartaAtual->primeiro->carta);
-        cartaAtual = cartaAtual->Prox;
+        filtrAEPrinta(&cartaAtual->carta);
+        cartaAtual = cartaAtual->proximo;
     }
 }
 
+itemDeck* criaItem(tCarta *carta){
+    if(carta == NULL)
+        return;
+
+    itemDeck *item = (itemDeck*) malloc(sizeof(itemDeck));
+    item->proximo = NULL;
+}
+
+
 /*
-    OBJETIVO: Inserir 'carta' em 'deck'. //TODO: A SER DEFINIDISE SERÁ INCLUÍDA NO INÍCIO OU NO FIM
+    OBJETIVO: Inserir 'carta' em 'deck'. //TODO: A SER DEFINIR SE SERÁ INCLUÍDA NO INÍCIO OU NO FIM
     ENTRADAS: Ponteiro para 'deck', ponteiro para 'carta'.
     SAIDA: -
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: 'carta' está contida em 'deck'.
 */
-void insereCarta(tCarta *carta, tDeck *deck);
+void insereCarta(tCarta *carta, tDeck *deck){
+    if(deck == NULL)
+        return;
+
+    itemDeck *atual = deck->primeiro;
+    while(atual != NULL && !(getvalor(atual->carta) == getvalor(carta) && getnaipe(atual->carta) == getnaipe(carta)))
+        atual = atual->proximo;
+
+    if(atual != NULL){      //encontrou uma carta
+        printf(" *** Foi tentando alocar a carta %d %d duas vezes! ***\n", getvalor(carta), getnaipe(carta));
+        return;
+    }
+
+    itemDeck *item = (itemDeck*) malloc(sizeof(itemDeck));
+    item->carta = *carta;
+    item->proximo = deck->primeiro;
+    deck->primeiro = item;
+}
 
 /*
     OBJETIVO: Verificar se 'deck' está alocado corretamente.
@@ -69,7 +77,7 @@ void insereCarta(tCarta *carta, tDeck *deck);
     POS-CONDICAO: Nada é alterado.
 */
 char vazio(tDeck *deck){
-    if(deck->primeiro == NULL || deck->ultimo == NULL || quantidade == 0)
+    if(deck->primeiro == NULL || deck->ultimo == NULL || deck->quantidade == 0)
         return 1;
     return 0;
 }
@@ -82,7 +90,7 @@ char vazio(tDeck *deck){
     POS-CONDICAO: Inicializado, porém sem elementos.
 */
 tDeck* iniciaVazio(void){
-    tDeck *deck = (deck*) malloc(sizeof(deck));
+    tDeck *deck = (tDeck*) malloc(sizeof(tDeck));
     deck->primeiro = deck->ultimo = NULL;
     deck->quantidade = 0;
     return deck;
