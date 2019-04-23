@@ -32,11 +32,4 @@ clean:
 	rm -f main
 
 push:
-	git add .
-	if [[ ${msg} -ne "" ]]; then
-		git commit -m ${msg}
-	fi
-	else
-		git commit -m "auto push"
-	esle
-	git push origin master
+	./autopush ${msg}
