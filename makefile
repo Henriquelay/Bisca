@@ -16,10 +16,9 @@ OBJ = cards.o deck.o main.o
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 main: $(OBJ)
-	make clean
 	$(CC) -o $@ $^ $(CFLAGS)
-	rm -f *.o
 	mv main bisca
+	rm -f *.o
 
 run:
 	make main

@@ -13,6 +13,7 @@ por Henrique Layber e Ezequiel Schneider
 //*STRUCTS
 
 //Define os items que serão contidos no deck. (lista encadeada de cartas com sentinela)
+typedef struct tCelula tCelula;
 typedef struct tCelula{
     tCarta carta;
     tCelula *proximo;
@@ -59,7 +60,7 @@ void embaralha(tDeck *deck);
     ENTRADAS: Ponteiro para 'deck'.
     SAIDA: -
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
-    POS-CONDICAO: 'deck'u está embaralhado.
+    POS-CONDICAO: 'deck' com todas as cartas que serão usadas na bisca nele.
 */
 void preenche(tDeck *deck);
 
