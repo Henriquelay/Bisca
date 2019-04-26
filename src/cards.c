@@ -4,7 +4,7 @@
     OBJETIVO: Traduzir a saída de números para cartas.
     ENTRADAS: A carta.
     SAIDA: -
-r    PRE-CONDICAO: Ser um naipe e um valor valido dentro do jogo de bisca.
+    PRE-CONDICAO: Ser um naipe e um valor valido dentro do jogo de bisca.
     POS-CONDICAO: O valor "traduzido" foi impresso na tela e nada foi alterado.
 */
 void filtrAEPrinta(tCarta *carta){
