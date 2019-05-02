@@ -69,7 +69,6 @@ void corta(tDeck *deck){
     aux->proximo = NULL;
     deck->ultimo -> proximo = aux;
     deck->ultimo = aux;
-
 }
 
 
