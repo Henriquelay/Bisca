@@ -19,12 +19,14 @@ typedef struct Player{
 }tPlayer;
 
 
+//FUNÇÕES
+
 /*
-    OBJETIVO: Troca 2 células de lugar.
-    ENTRADAS: Ponteiro para duas células.
-    SAIDA: -
-    PRE-CONDICAO: As células existem e são válidas.
-    POS-CONDICAO: As duas células trocam de posição na lista, inalteradas.
+    OBJETIVO: Inicia os jogadores que jogarão o jogo.
+    ENTRADAS: A quantidade de jogadores a serem iniciados.
+    SAIDA: Ponteiro para o primeiro dos jogadores a ser iniciado.
+    PRE-CONDICAO: 'qtde' > 0.
+    POS-CONDICAO: Os jogadores são alocados dinâmicamente e corretamente.
 */
 tPlayer* iniciaJogadores(int qtde);
 
