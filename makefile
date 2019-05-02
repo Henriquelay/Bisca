@@ -22,6 +22,10 @@ main: $(OBJ)
 
 run:
 	make main
+	./bisca
+
+val:
+	make main
 	valgrind ./bisca
 
 clean:

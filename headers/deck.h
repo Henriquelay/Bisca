@@ -6,8 +6,8 @@ por Henrique Layber e Ezequiel Schneider
 #ifndef _H_DECKBISCA
 #define _H_DECKBISCA
 /*Aqui vai as funcoes*/
-#include "cards.h"  //já inclui a <stdlib.h>
-#include <sys/time.h>
+#include "cards.h"  //já inclui a <stdlib.h> e <stdio.h>
+#include <time.h>
 
 
 //*STRUCTS
@@ -53,7 +53,16 @@ typedef struct tDeck{
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: 'deck' está embaralhado.
 */
-void embaralha(tDeck *deck);
+void embaralha(tDeck *deck, int passes);
+
+/*
+    OBJETIVO: Cortar 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'deck' está cortado (a carta cortada é o trunfo e ela vai pro fundo do deck).
+*/
+void corta(tDeck *deck);
 
 /*
     OBJETIVO: Preencher 'deck' corretamente.
@@ -94,11 +103,20 @@ void insereCarta(tCarta *carta, tDeck *deck);
 /*
     OBJETIVO: Verificar se 'deck' está alocado corretamente.
     ENTRADAS: Ponteiro para 'deck'.
-    SAIDA: 0 quando não está corretamente alocado, 1 quando está.
+    SAIDA: 3 quando é nulo, 1 quando está vazio 2 quando a sentila está errada, 0 quando não é vazio nem nulo, e está OK, -1 quando tem algo de muito errado.
     PRE-CONDICAO: -
     POS-CONDICAO: Nada é alterado.
 */
 char vazio(tDeck *deck);
+
+/*
+    OBJETIVO: Troca 2 células de lugar.
+    ENTRADAS: Ponteiro para duas células.
+    SAIDA: -
+    PRE-CONDICAO: As células existem e são válidas.
+    POS-CONDICAO: As duas células trocam de posição na lista, inalteradas.
+*/
+void swap2Celulas(tCelula *a, tCelula *b);
 
 /*
     OBJETIVO: Iniciar 'deck' vazio corretamente.
@@ -108,5 +126,14 @@ char vazio(tDeck *deck);
     POS-CONDICAO: Inicializado, porém sem elementos.
 */
 tDeck* iniciaVazio(void);
+
+/*
+    OBJETIVO: Inserir 'carta' em 'deck'. *Será inserida no início
+    ENTRADAS: Ponteiro para 'deck', ponteiro para 'carta'.
+    SAIDA: Endereço para a célula criada.
+    PRE-CONDICAO: A carta existe.
+    POS-CONDICAO: A célula foi corretamente alocada, a carta não foi alterada.
+*/
+tCelula* criaItem(tCarta *carta);
 
 #endif  //_H_DECKBISCA

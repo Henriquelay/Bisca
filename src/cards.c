@@ -24,6 +24,9 @@ void filtrAEPrinta(tCarta *carta){
         case 9: printf("A "); break;
         default: puts("###### DEU ALGO ERRADO COM O VALOR MEU CONSAGRATED ######");
     }
+
+    printf("de ");
+    
     switch(carta->naipe){
         case 0: printf("Ouros"); break;
         case 1: printf("Paus"); break;
@@ -40,11 +43,11 @@ void filtrAEPrinta(tCarta *carta){
     PRE-CONDICAO: Ser um naipe e um valor valido dentro do jogo de bisca
     POS-CONDICAO: Ponteiro criado com a carta identificada com o naipe e o seu simbulo/valor
 */
-tCarta criaCarta(char naipe, char valor){
+tCarta criaCarta(char *naipe, char *valor){
     tCarta cartaAux;
 
-    cartaAux.naipe = naipe;
-    cartaAux.valor = valor;
+    cartaAux.naipe = *naipe;
+    cartaAux.valor = *valor;
 
     return cartaAux;
 }

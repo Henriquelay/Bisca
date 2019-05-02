@@ -10,20 +10,60 @@
 void preenche(tDeck *deck){
     if(deck == NULL)
         deck = iniciaVazio();
-
-    if(deck->primeiro != NULL || deck->ultimo != NULL){
-        printf(" ***Esvazie o deck antes de preencher!");
+    else if(!vazio(deck)){
+            printf(" ***Esvazie o deck antes de preencher!");
         return;
     }
 
     tCarta atual;
-    for(int naipe = 0; naipe < 4; naipe++)
-        for(int valor = 0; valor < 10; valor++){
-            atual.naipe = naipe;
-            atual.valor = valor;
+    for(char naipe = 0; naipe < 4; naipe++)
+        for(char valor = 0; valor < 10; valor++){
+            atual = criaCarta(&naipe, &valor);
             insereCarta(&atual, deck);
         }
 }
+
+/*
+    OBJETIVO: Troca 2 células de lugar.
+    ENTRADAS: Ponteiro para duas células.
+    SAIDA: -
+    PRE-CONDICAO: As células existem e são válidas.
+    POS-CONDICAO: As duas células trocam de posição na lista, inalteradas.
+*/
+void swap2Celulas(tCelula *a, tCelula *b){
+    tCarta cartaAux = a->carta;
+    
+    a->carta = b->carta;
+    b->carta = cartaAux;
+}
+
+/*
+    OBJETIVO: Cortar 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'deck' está cortado (a carta cortada é o trunfo e ela vai pro fundo do deck).
+*/
+void corta(tDeck *deck){
+    if(vazio(deck))
+        return;
+
+    srand(time(NULL));
+    tCelula *aux = deck->primeiro;
+    int lugardocorte = rand() % 40;
+
+    printf("\nLUGAR DO CORTE = %d\n", lugardocorte);
+
+    for(int i = 0; i < lugardocorte; i++){
+        if(aux->proximo == NULL)
+            break;
+        aux = aux->proximo;
+    }
+
+    swap2Celulas(aux, deck->ultimo);
+
+}
+
 
 /*
     OBJETIVO: Embaralhar 'deck'.
@@ -32,7 +72,27 @@ void preenche(tDeck *deck){
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: 'deck' está embaralhado.
 */
-void embaralha(tDeck *deck);
+void embaralha(tDeck *deck, int passes){
+    if(vazio(deck))
+        return;
+
+    tCelula *aux = deck->primeiro;
+    srand(time(NULL));
+
+    int iteracao = rand() % 40;
+    for(int i = 0; i < passes; i++){
+        for(int n = 0; n < iteracao; n++){
+            if(aux->proximo == NULL)
+                break;
+            aux = aux->proximo;
+        }
+
+        swap2Celulas(deck->primeiro, aux);
+
+        iteracao = rand() % 40;
+        aux = deck->primeiro;
+    }
+}
 
 /*
     OBJETIVO: Desalocar toda a memória ocupada por 'deck'.
@@ -42,7 +102,7 @@ void embaralha(tDeck *deck);
     POS-CONDICAO: 'deck' não ocupa mais espaço no HEAP e aponta para NULL.
 */
 void destroiDeck(tDeck *deck){
-    if(deck == NULL)
+    if(vazio(deck))
         return;
     if(deck->primeiro == NULL){
         free(deck);
@@ -77,6 +137,14 @@ void imprimeDeck(tDeck *deck){
     }
 }
 
+
+/*
+    OBJETIVO: Inserir 'carta' em 'deck'. *Será inserida no início
+    ENTRADAS: Ponteiro para 'deck', ponteiro para 'carta'.
+    SAIDA: Endereço para a célula criada.
+    PRE-CONDICAO: A carta existe.
+    POS-CONDICAO: A célula foi corretamente alocada, a carta não foi alterada.
+*/
 tCelula* criaItem(tCarta *carta){
     if(carta == NULL)
         return NULL;
@@ -92,7 +160,7 @@ tCelula* criaItem(tCarta *carta){
 }
 
 /*
-    OBJETIVO: Inserir 'carta' em 'deck'. *Será inserida no início
+    OBJETIVO: Cria uma célula para ser inserido em 'deck'.
     ENTRADAS: Ponteiro para 'deck', ponteiro para 'carta'.
     SAIDA: -
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
@@ -115,16 +183,20 @@ void insereCarta(tCarta *carta, tDeck *deck){
 /*
     OBJETIVO: Verificar se 'deck' está alocado corretamente.
     ENTRADAS: Ponteiro para 'deck'.
-    SAIDA: 0 quando não está corretamente alocado, 1 quando está.
+    SAIDA: 3 quando é nulo, 1 quando está vazio 2 quando a sentila está errada, 0 quando não é vazio nem nulo, e está OK, -1 quando tem algo de muito errado.
     PRE-CONDICAO: -
     POS-CONDICAO: Nada é alterado.
 */
 char vazio(tDeck *deck){
     if(deck == NULL)
+        return 3;
+    if(deck->quantidade == 0)
         return 1;
-    if(deck->primeiro == NULL || deck->ultimo == NULL || deck->quantidade == 0)
-        return 1;
-    return 0;
+    if(deck->primeiro == NULL || deck->ultimo == NULL)
+        return 2;
+    if(deck->ultimo->proximo == NULL)
+        return 0;
+    return -1;
 }
 
 /*

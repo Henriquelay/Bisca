@@ -27,7 +27,7 @@ typedef struct structCarta{
     PRE-CONDICAO: Ser um naipe e um valor valido dentro do jogo de bisca
     POS-CONDICAO: Ponteiro criado com a carta identificada com o naipe e o seu simbulo/valor
 */
-tCarta criaCarta(char naipe, char valor);
+tCarta criaCarta(char *naipe, char *valor);
 
 /*
     OBJETIVO: retorna o valor do naipe da carta
