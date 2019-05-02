@@ -50,6 +50,7 @@ void corta(tDeck *deck){
 
     srand(time(NULL));
     tCelula *aux = deck->primeiro;
+    tCelula *anterior = NULL;
     int lugardocorte = rand() % 40;
 
     printf("\nLUGAR DO CORTE = %d\n", lugardocorte);
@@ -57,10 +58,17 @@ void corta(tDeck *deck){
     for(int i = 0; i < lugardocorte; i++){
         if(aux->proximo == NULL)
             break;
+        anterior = aux;
         aux = aux->proximo;
     }
 
-    swap2Celulas(aux, deck->ultimo);
+    // swap2Celulas(aux, deck->ultimo);
+
+    if(anterior != NULL)
+        anterior->proximo = aux->proximo;
+    aux->proximo = NULL;
+    deck->ultimo -> proximo = aux;
+    deck->ultimo = aux;
 
 }
 
