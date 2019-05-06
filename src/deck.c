@@ -255,4 +255,28 @@ tCarta* menorCarta(tDeck *deck, char *trunfo){
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: .
 */
-char contaPontos(tDeck *deck);
+char contaPontos(tDeck *deck){
+    if(vazio(deck))
+        return 0;
+
+    tCelula *aux = deck->primeiro;
+    char acc = 0;
+    while(aux != NULL)
+        acc += filtroDePontos(&aux->carta);
+
+    return acc;
+}
+
+/*
+    OBJETIVO: Pegar o trunfo do fundo do baralho.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: O naipe do fundo de 'deck'.
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: Nada é alterado.
+*/
+char defineTrunfo(tDeck *deck){
+    if(vazio(deck))
+        return 4;
+    char trunfo = getNaipe(&deck->ultimo->carta);
+    return trunfo;
+}

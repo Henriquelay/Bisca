@@ -145,4 +145,22 @@ tCelula* criaItem(tCarta *carta);
 */
 tCarta* menorCarta(tDeck *deck, char *trunfo);
 
+/*
+    OBJETIVO: Pegar o trunfo do fundo do baralho.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: O naipe do fundo de 'deck'.
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: Nada é alterado.
+*/
+char defineTrunfo(tDeck *deck);
+
+/*
+    OBJETIVO: Selecionar a menor carta de 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: Ponteiro para a menor carta.
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: .
+*/
+char contaPontos(tDeck *deck);
+
 #endif  //_H_DECKBISCA

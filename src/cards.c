@@ -37,11 +37,11 @@ void filtrAEPrinta(tCarta *carta){
 }
 
 /*
-    OBJETIVO: P.
-    ENTRADAS: A carta.
-    SAIDA: -
+    OBJETIVO: Retornar o número de pontos da carta.
+    ENTRADAS: Ponteiro para a carta.
+    SAIDA: O valor em pontos dela.
     PRE-CONDICAO: Ser um naipe e um valor valido dentro do jogo de bisca.
-    POS-CONDICAO: O valor "traduzido" foi impresso na tela e nada foi alterado.
+    POS-CONDICAO: Nada foi alterado.
 */
 char filtroDePontos(tCarta *carta){
     if(carta == NULL)

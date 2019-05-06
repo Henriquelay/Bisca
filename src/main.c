@@ -11,10 +11,13 @@ int main(void){
     imprimeDeck(baralho);
     corta(baralho);
     imprimeDeck(baralho);
-    char trunfo = 3;
+    char trunfo = defineTrunfo(baralho);
+    printf("\nO Trunfo eh %d\n", trunfo);
     tCarta *menor = menorCarta(baralho, &trunfo);
     printf("\nA menor carta eh: ");
     filtrAEPrinta(menor);
+    char pontos = contaPontos(baralho);
+    printf("\nPontuacao Total: %d\n", pontos);
     destroiDeck(baralho);
     return 0;
 }
