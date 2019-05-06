@@ -19,20 +19,34 @@ void inserePlayer(tPlayer* lista, tPlayer* inserir){
         lista = aux;
 }
 
-void setPontos(tPlayer *player){
-
+void setPontos(tPlayer *player, char pontos){
+    if(player != NULL)
+        player->points = pontos;
 }
 
 char getPontos(tPlayer *player){
-
+    if(player != NULL)
+        return player->points;
 }
 
 void setProximo(tPlayer *player, tPlayer *proximo){
-
+    if(player != NULL)
+        player->proximo = proximo;
 }
 
 tPlayer* getProximo(tPlayer *player){
-    
+    if(player != NULL)
+        return player->proximo;
+}
+
+void setMao(tPlayer *player, tDeck *mao){
+    if(player != NULL)
+        player->mao = mao;
+}
+
+tDeck* getProximo(tPlayer *player){
+    if(player != NULL)
+        return player->mao;
 }
 
 /*
@@ -44,5 +58,7 @@ tPlayer* getProximo(tPlayer *player){
 */
 tPlayer* iniciaPlayerVazio(void){
     tPlayer *player = (tPlayer*) malloc(sizeof(tPlayer));
-    setPontos 
+    setPontos(player, 0);
+    setProximo(player, NULL);
+    set
 }
