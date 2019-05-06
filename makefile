@@ -9,28 +9,28 @@
 
 CC=gcc
 CFLAGS=-I. -Wall -lm -g
-DEPS = headers/cards.h headers/deck.h
-OBJ = cards.o deck.o main.o
+DEPS= headers/cards.h headers/deck.h
+OBJ= cards.o deck.o main.o
+EXEC= programa
 
 %.o: src/%.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 main: $(OBJ)
-	$(CC) -o $@ $^ $(CFLAGS)
-	mv main bisca
+	$(CC) -o ${EXEC} $^ $(CFLAGS)
 	rm -f *.o
 
 run:
 	make main
-	./bisca
+	./${EXEC}
 
 val:
 	make main
-	valgrind ./bisca
+	valgrind ./${EXEC}
 
 clean:
 	rm -f *.o
-	rm -f bisca
+	rm -f ${EXEC}
 	rm -f main
 
 push:
