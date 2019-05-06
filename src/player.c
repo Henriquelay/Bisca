@@ -9,7 +9,7 @@
 */
 void inserePlayer(tPlayer* lista, tPlayer* inserir){
     if(inserir == NULL)
-        tPlayer *inserir =  (tPlayer*) malloc(sizeof(tPlayer));
+        inserir =  (tPlayer*) malloc(sizeof(tPlayer));
     
     tPlayer *aux = inserir;
 
@@ -19,17 +19,30 @@ void inserePlayer(tPlayer* lista, tPlayer* inserir){
         lista = aux;
 }
 
-/*
-    OBJETIVO: Troca 2 células de lugar.
-    ENTRADAS: Ponteiro para duas células.
-    SAIDA: -
-    PRE-CONDICAO: As células existem e são válidas.
-    POS-CONDICAO: As duas células trocam de posição na lista, inalteradas.
-*/
-tPlayer* iniciaJogador(int qtde){
-    if(qtde < 1)
-        return NULL;
+void setPontos(tPlayer *player){
 
-    tPlayer *primeiro;
+}
+
+char getPontos(tPlayer *player){
+
+}
+
+void setProximo(tPlayer *player, tPlayer *proximo){
+
+}
+
+tPlayer* getProximo(tPlayer *player){
     
+}
+
+/*
+    OBJETIVO: Iniciar 'Player' vazio corretamente.
+    ENTRADAS: -
+    SAIDA: Ponteiro para tPlayer, apontando para o jogador criado.
+    PRE-CONDICAO: -
+    POS-CONDICAO: Inicializado, porém sem elementos, ou zerados.
+*/
+tPlayer* iniciaPlayerVazio(void){
+    tPlayer *player = (tPlayer*) malloc(sizeof(tPlayer));
+    setPontos 
 }

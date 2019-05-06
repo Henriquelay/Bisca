@@ -239,7 +239,7 @@ tCarta* menorCarta(tDeck *deck, char *trunfo){
 
     while(aux != NULL){
         if(getValor(&aux->carta) < getValor(menor))
-            if(getNaipe(menor) == *trunfo || getNaipe(&aux->carta) != *trunfo)
+            if( getNaipe(&aux->carta) != *trunfo || getNaipe(menor) == *trunfo)
                 menor = &aux->carta;
 
         aux = aux->proximo;
@@ -261,8 +261,10 @@ char contaPontos(tDeck *deck){
 
     tCelula *aux = deck->primeiro;
     char acc = 0;
-    while(aux != NULL)
+    while(aux != NULL){
         acc += filtroDePontos(&aux->carta);
+        aux = aux->proximo;
+    }
 
     return acc;
 }

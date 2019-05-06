@@ -17,7 +17,8 @@ int main(void){
     printf("\nA menor carta eh: ");
     filtrAEPrinta(menor);
     char pontos = contaPontos(baralho);
-    printf("\nPontuacao Total: %d\n", pontos);
+    printf("\nPontuacao Total: %d\nIniciando jogadores...", pontos);
+    
     destroiDeck(baralho);
     return 0;
 }

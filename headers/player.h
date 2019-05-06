@@ -14,7 +14,7 @@ typedef struct Player tPlayer;
 
 typedef struct Player{
     char points;
-    tDeck hand;
+    tDeck *mao;
     tPlayer *proximo; 
 }tPlayer;
 
@@ -22,13 +22,13 @@ typedef struct Player{
 //FUNÇÕES
 
 /*
-    OBJETIVO: Inicia os jogadores que jogarão o jogo.
-    ENTRADAS: A quantidade de jogadores a serem iniciados.
-    SAIDA: Ponteiro para o primeiro dos jogadores a ser iniciado.
-    PRE-CONDICAO: 'qtde' > 0.
-    POS-CONDICAO: Os jogadores são alocados dinâmicamente e corretamente.
+    OBJETIVO: Inserir 'inserir' em 'lista', no final, e caso 'lista' seja vazio, inicia com ele.
+    ENTRADAS: Ponteiros de jogadores para 'lista' e 'inserir'.
+    SAIDA: -
+    PRE-CONDICAO: -
+    POS-CONDICAO: Os jogadores são inseridos na lista.
 */
-tPlayer* iniciaJogadores(int qtde);
+void inserePlayer(tPlayer* lista, tPlayer* inserir);
 
 
 
