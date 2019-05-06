@@ -28,12 +28,40 @@ void filtrAEPrinta(tCarta *carta){
     printf("de ");
     
     switch(carta->naipe){
-        case 0: printf("Ouros"); break;
-        case 1: printf("Paus"); break;
-        case 2: printf("Copas"); break;
-        case 3: printf("Espadas"); break;
+        case 0: printf("Ouros "); break;
+        case 1: printf("Paus "); break;
+        case 2: printf("Copas "); break;
+        case 3: printf("Espadas "); break;
         default: puts("###### DEU ALGO ERRADO COM O NAIPE MEU PROGRAMADO ######");
     }
+}
+
+/*
+    OBJETIVO: P.
+    ENTRADAS: A carta.
+    SAIDA: -
+    PRE-CONDICAO: Ser um naipe e um valor valido dentro do jogo de bisca.
+    POS-CONDICAO: O valor "traduzido" foi impresso na tela e nada foi alterado.
+*/
+char filtroDePontos(tCarta *carta){
+    if(carta == NULL)
+        return 0;
+
+    switch(carta->valor){
+        case 0: 
+        case 1: 
+        case 2: 
+        case 3: 
+        case 4: 
+            return 0;
+        case 5: return 2;
+        case 6: return 3;
+        case 7: return 4;
+        case 8: return 10;
+        case 9: return 11;
+        default: puts("###### DEU ALGO ERRADO COM O VALOR MEU CONSAGRATED ######");
+    }
+    return 0;
 }
 
 /*

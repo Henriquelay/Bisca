@@ -57,4 +57,5 @@ char getValor(tCarta *carta);
 void filtrAEPrinta(tCarta *carta);
 
 
+
 #endif

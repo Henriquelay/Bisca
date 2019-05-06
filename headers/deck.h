@@ -136,4 +136,13 @@ tDeck* iniciaVazio(void);
 */
 tCelula* criaItem(tCarta *carta);
 
+/*
+    OBJETIVO: Selecionar a menor carta de 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: Ponteiro para a menor carta.
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: .
+*/
+tCarta* menorCarta(tDeck *deck, char *trunfo);
+
 #endif  //_H_DECKBISCA

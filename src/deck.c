@@ -51,7 +51,7 @@ void corta(tDeck *deck){
     srand(time(NULL));
     tCelula *aux = deck->primeiro;
     tCelula *anterior = NULL;
-    int lugardocorte = rand() % 40;
+    int lugardocorte = rand() % 39;
 
     printf("\nLUGAR DO CORTE = %d\n", lugardocorte);
 
@@ -61,8 +61,6 @@ void corta(tDeck *deck){
         anterior = aux;
         aux = aux->proximo;
     }
-
-    // swap2Celulas(aux, deck->ultimo);
 
     if(anterior != NULL)
         anterior->proximo = aux->proximo;
@@ -203,7 +201,7 @@ char vazio(tDeck *deck){
         return 2;
     if(deck->ultimo->proximo == NULL)
         return 0;
-    return -1;
+    return -1;              //algo de muito errado
 }
 
 /*
@@ -224,3 +222,37 @@ tDeck* iniciaVazio(void){
     }
     return deck;
 }
+
+/*
+    OBJETIVO: Selecionar a menor carta de 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: Ponteiro para a menor carta.
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: .
+*/
+tCarta* menorCarta(tDeck *deck, char *trunfo){
+    if(vazio(deck))
+        return NULL;
+
+    tCelula *aux = deck->primeiro;
+    tCarta *menor = &aux->carta;
+
+    while(aux != NULL){
+        if(getValor(&aux->carta) < getValor(menor))
+            if(getNaipe(menor) == *trunfo || getNaipe(&aux->carta) != *trunfo)
+                menor = &aux->carta;
+
+        aux = aux->proximo;
+    }
+
+    return menor;
+}
+
+/*
+    OBJETIVO: Selecionar a menor carta de 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: Ponteiro para a menor carta.
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: .
+*/
+char contaPontos(tDeck *deck);
