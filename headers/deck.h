@@ -60,6 +60,10 @@ tCarta* getCarta(tCelula *cel);
 
 void setCarta(tCelula *cel, tCarta card);
 
+void setQuantidade(tDeck *deck, int qtd);
+
+int getQuantidade(tDeck *deck);
+
 /*
     OBJETIVO: Embaralhar 'deck'.
     ENTRADAS: Ponteiro para 'deck'.

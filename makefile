@@ -8,7 +8,7 @@
 #-lm obrigatorio caso utilize a biblioteca math.h
 
 CC=gcc
-CFLAGS=-I. -Wall -lm -g
+CFLAGS=-I. -Wall -g
 DEPS= headers/cards.h headers/deck.h headers/player.h
 OBJ= cards.o deck.o main.o player.o
 EXEC= programa

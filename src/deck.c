@@ -88,15 +88,15 @@ void embaralha(tDeck *deck, int passes){
     int iteracao = rand() % 40;
     for(int i = 0; i < passes; i++){
         for(int n = 0; n < iteracao; n++){
-            if(aux->proximo == NULL)
+            if(dGetProximo(aux) == NULL)
                 break;
-            aux = aux->proximo;
+            aux = dGetProximo(aux);
         }
 
-        swap2Celulas(deck->primeiro, aux);
+        swap2Celulas(primeiro(deck), aux);
 
         iteracao = rand() % 40;
-        aux = deck->primeiro;
+        aux = primeiro(deck);
     }
 }
 
@@ -110,12 +110,12 @@ void embaralha(tDeck *deck, int passes){
 void destroiDeck(tDeck *deck){
     if(vazio(deck))
         return;
-    if(deck->primeiro == NULL){
+    if(primeiro(deck) == NULL){
         free(deck);
         return;
     }
 
-    for(tCelula *atual = deck->primeiro; atual != NULL; atual = deck->primeiro){
+    for(tCelula *atual = primeiro(deck); atual != NULL; atual = primeiro(deck)){
         deck->primeiro = deck->primeiro->proximo;
         free(atual);
         deck->quantidade--;
@@ -320,4 +320,15 @@ tCarta* getCarta(tCelula *cel){
 void setCarta(tCelula *cel, tCarta carta){
     if(cel != NULL)
         cel->carta = carta;
+}
+
+void setQuantidade(tDeck *deck, int qtd){
+    if(!vazio(deck))
+        deck->quantidade = qtd;
+}
+
+int getQuantidade(tDeck *deck){
+    if(!vazio(deck))
+        return deck->quantidade;
+    return 0;
 }

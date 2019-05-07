@@ -19,11 +19,11 @@ int main(void){
     filtrAEPrinta(menor);
     char pontos = contaPontos(baralho);
     printf("\nPontuacao Total: %d\nIniciando jogadores...", pontos);
-    tPlayer *jogador = iniciaNPlayers(4);
+    // tPlayer *jogador = iniciaNPlayers(4);
     // compraCarta(jogador, baralho);compraCarta(jogador, baralho);compraCarta(jogador, baralho);compraCarta(jogador, baralho);    
-    printf("A mao do jogador 1 eh:\n");
-    imprimeMao(jogador);
-    destroiPlayers(jogador);
+    // printf("A mao do jogador 1 eh:\n");
+    // imprimeMao(jogador);
+    // destroiPlayers(jogador);
     destroiDeck(baralho);
     return 0;
 }
