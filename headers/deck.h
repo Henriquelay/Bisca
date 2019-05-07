@@ -46,6 +46,18 @@ typedef struct tDeck{
 
 //*FUNÇÕES
 
+void dSetProximo(tCelula *cel, tCelula *proximo);
+
+void dSetCel(tCelula *cel1, tCelula *cel2);
+
+tCelula* dGetProximo(tCelula *cel);
+
+tCelula* primeiro(tDeck *deck);
+
+tCelula* ultimo(tDeck *deck);
+
+tCarta* getCarta(tCelula *cel);
+
 /*
     OBJETIVO: Embaralhar 'deck'.
     ENTRADAS: Ponteiro para 'deck'.
@@ -92,7 +104,7 @@ void destroiDeck(tDeck *deck);
 void imprimeDeck(tDeck *deck);
 
 /*
-    OBJETIVO: Inserir 'carta' em 'deck'. //TODO: A SER DEFINIDISE SERÁ INCLUÍDA NO INÍCIO OU NO FIM
+    OBJETIVO: Inserir 'carta' em 'deck'.
     ENTRADAS: Ponteiro para 'deck', ponteiro para 'carta'.
     SAIDA: -
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
@@ -143,7 +155,7 @@ tCelula* criaItem(tCarta *carta);
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: .
 */
-tCarta* menorCarta(tDeck *deck, char *trunfo);
+tCarta* menorCarta(tDeck *deck, tCarta *trunfo);
 
 /*
     OBJETIVO: Pegar o trunfo do fundo do baralho.
@@ -152,7 +164,7 @@ tCarta* menorCarta(tDeck *deck, char *trunfo);
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: Nada é alterado.
 */
-char defineTrunfo(tDeck *deck);
+tCarta* defineTrunfo(tDeck *deck);
 
 /*
     OBJETIVO: Selecionar a menor carta de 'deck'.

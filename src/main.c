@@ -11,14 +11,19 @@ int main(void){
     imprimeDeck(baralho);
     corta(baralho);
     imprimeDeck(baralho);
-    char trunfo = defineTrunfo(baralho);
-    printf("\nO Trunfo eh %d\n", trunfo);
-    tCarta *menor = menorCarta(baralho, &trunfo);
+    tCarta *trunfo = defineTrunfo(baralho);
+    printf("\nO Trunfo eh \n");
+    filtrAEPrinta(trunfo);
+    tCarta *menor = menorCarta(baralho, trunfo);
     printf("\nA menor carta eh: ");
     filtrAEPrinta(menor);
     char pontos = contaPontos(baralho);
     printf("\nPontuacao Total: %d\nIniciando jogadores...", pontos);
-    
+    tPlayer *jogador = iniciaNPlayers(4);
+    compraCarta(jogador, baralho);compraCarta(jogador, baralho);
+    compraCarta(jogador, baralho);compraCarta(jogador, baralho);    
+    printf("A mao do jogador 1 eh:\n");
+    imprimeMao(jogador);
     destroiDeck(baralho);
     return 0;
 }

@@ -230,7 +230,7 @@ tDeck* iniciaVazio(void){
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: .
 */
-tCarta* menorCarta(tDeck *deck, char *trunfo){
+tCarta* menorCarta(tDeck *deck, tCarta *trunfo){
     if(vazio(deck))
         return NULL;
 
@@ -239,7 +239,7 @@ tCarta* menorCarta(tDeck *deck, char *trunfo){
 
     while(aux != NULL){
         if(getValor(&aux->carta) < getValor(menor))
-            if( getNaipe(&aux->carta) != *trunfo || getNaipe(menor) == *trunfo)
+            if( getNaipe(&aux->carta) != getNaipe(trunfo) || getNaipe(menor) == getNaipe(trunfo))
                 menor = &aux->carta;
 
         aux = aux->proximo;
@@ -276,9 +276,42 @@ char contaPontos(tDeck *deck){
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: Nada é alterado.
 */
-char defineTrunfo(tDeck *deck){
+tCarta* defineTrunfo(tDeck *deck){
     if(vazio(deck))
-        return 4;
-    char trunfo = getNaipe(&deck->ultimo->carta);
+        return NULL;
+    tCarta *trunfo = getCarta(ultimo(deck));
     return trunfo;
+}
+
+void dSetProximo(tCelula *cel, tCelula *proximo){
+    if(cel != NULL)
+        cel->proximo = proximo;
+}
+
+void dSetCel(tCelula *cel1, tCelula *cel2){
+    cel1 = cel2;
+}
+
+tCelula* dGetProximo(tCelula *cel){
+    if(cel != NULL)
+        return cel->proximo;
+    return NULL;
+}
+
+tCelula* primeiro(tDeck *deck){
+    if(!vazio(deck))
+        return deck->primeiro;
+    return NULL;
+}
+
+tCelula* ultimo(tDeck *deck){
+    if(!vazio(deck))
+        return deck->ultimo;
+    return NULL;
+}
+
+tCarta* getCarta(tCelula *cel){
+    if(cel != NULL)
+        return &cel->carta;
+    return NULL;
 }

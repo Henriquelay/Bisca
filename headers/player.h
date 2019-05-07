@@ -21,16 +21,61 @@ typedef struct Player{
 
 //FUNÇÕES
 
+void pSetPontos(tPlayer *player, char pontos);
+
+char pGetPontos(tPlayer *player);
+
+void pSetProximo(tPlayer *player, tPlayer *proximo);
+
+tPlayer* pGetProximo(tPlayer *player);
+
+void pSetMao(tPlayer *player, tDeck *mao);
+
+tDeck *pGetMao(tPlayer *player);
+
 /*
-    OBJETIVO: Inserir 'inserir' em 'lista', no final, e caso 'lista' seja vazio, inicia com ele.
-    ENTRADAS: Ponteiros de jogadores para 'lista' e 'inserir'.
-    SAIDA: -
+    OBJETIVO: Iniciar 'Player' vazio corretamente.
+    ENTRADAS: -
+    SAIDA: Ponteiro para tPlayer, apontando para o jogador criado.
     PRE-CONDICAO: -
-    POS-CONDICAO: Os jogadores são inseridos na lista.
+    POS-CONDICAO: Inicializado, porém sem elementos, ou zerados.
 */
-void inserePlayer(tPlayer* lista, tPlayer* inserir);
+tPlayer* iniciaPlayerVazio(void);
 
+/*
+    OBJETIVO: Iniciar 'n' quantidades de tPlayers vazios corretamente.
+    ENTRADAS: A quantidade de players a ser inicializada.
+    SAIDA: Ponteiro para tPlayer, apontando para o jogador criado.
+    PRE-CONDICAO: n > 0.
+    POS-CONDICAO: Inicializados, porém sem elementos, ou zerados.
+*/
+tPlayer* iniciaNPlayers(int n);
 
+/*
+    OBJETIVO: Imprimir 'mao' na tela.
+    ENTRADAS: Ponteiro para 'player'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: Nada é alterado.
+*/
+void imprimeMao(tPlayer *player);
 
+/*
+    OBJETIVO: Verificar se 'player' está alocado corretamente.
+    ENTRADAS: Ponteiro para 'player'.
+    SAIDA: 1 quando é nulo, 2 quando a mão é nula, 3 quando o próximo é nulo, 0 quando 
+    PRE-CONDICAO: -
+    POS-CONDICAO: Nada é alterado.
+*/
+char invalido(tPlayer *player);
+
+/*
+    OBJETIVO: Faz 'player' compra a carta do topo de 'deck'.
+    ENTRADAS: Ponteiro para 'player' e ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente, o mesmo para player.
+    POS-CONDICAO: Nada é alterado.
+*/
+void compraCarta(tPlayer *player, tDeck *deck);
 
 #endif

@@ -9,8 +9,8 @@
 
 CC=gcc
 CFLAGS=-I. -Wall -lm -g
-DEPS= headers/cards.h headers/deck.h
-OBJ= cards.o deck.o main.o
+DEPS= headers/cards.h headers/deck.h headers/player.h
+OBJ= cards.o deck.o main.o player.o
 EXEC= programa
 
 %.o: src/%.c $(DEPS)
