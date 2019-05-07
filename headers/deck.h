@@ -48,7 +48,7 @@ typedef struct tDeck{
 
 void dSetProximo(tCelula *cel, tCelula *proximo);
 
-tCelula* dGetProximo(tCelula *cel);
+tCelula* proximo(tCelula *cel);
 
 void dSetCel(tCelula *cel1, tCelula *cel2);
 

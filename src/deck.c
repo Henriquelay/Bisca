@@ -57,14 +57,14 @@ void corta(tDeck *deck){
     printf("\nLUGAR DO CORTE = %d\n", lugardocorte);
 
     for(int i = 0; i < lugardocorte; i++){
-        if(dGetProximo(aux) == NULL)
+        if(proximo(aux) == NULL)
             break;
         dSetCel(anterior, aux);
-        dSetCel(aux, dGetProximo(aux));
+        dSetCel(aux, proximo(aux));
     }
 
     if(anterior != NULL)
-        dSetCel(dGetProximo(anterior), dGetProximo(aux));
+        dSetCel(proximo(anterior), proximo(aux));
     dSetProximo(aux, NULL);
     dSetProximo(ultimo(deck), aux);
     dSetCel(ultimo(deck), aux);
@@ -88,9 +88,9 @@ void embaralha(tDeck *deck, int passes){
     int iteracao = rand() % 40;
     for(int i = 0; i < passes; i++){
         for(int n = 0; n < iteracao; n++){
-            if(dGetProximo(aux) == NULL)
+            if(proximo(aux) == NULL)
                 break;
-            aux = dGetProximo(aux);
+            aux = proximo(aux);
         }
 
         swap2Celulas(primeiro(deck), aux);
@@ -134,12 +134,12 @@ void imprimeDeck(tDeck *deck){
     tCelula *cartaAtual = NULL;
 
     if(!vazio(deck))
-        cartaAtual = deck->primeiro;
+        cartaAtual = primeiro(deck);
 
     while(cartaAtual != NULL){
-        filtrAEPrinta(&cartaAtual->carta);
+        filtrAEPrinta(getCarta(cartaAtual));
         printf("\n");
-        cartaAtual = cartaAtual->proximo;
+        cartaAtual = proximo(cartaAtual);
     }
 }
 
@@ -293,7 +293,7 @@ void dSetCel(tCelula *cel1, tCelula *cel2){
     cel1 = cel2;
 }
 
-tCelula* dGetProximo(tCelula *cel){
+tCelula* proximo(tCelula *cel){
     if(cel != NULL)
         return cel->proximo;
     return NULL;
