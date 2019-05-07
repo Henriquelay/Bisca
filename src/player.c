@@ -108,9 +108,5 @@ void compraCarta(tPlayer *player, tDeck *deck){
     if(invalido(player) == 2) 
         pSetMao(player, iniciaVazio());
 
-    dSetProximo(ultimo(pGetMao(player)), primeiro(deck));
-    dSetCel(ultimo(pGetMao(player)), primeiro(deck));
-    dSetCel(primeiro(deck), dGetProximo(primeiro(deck)));
-    dSetProximo(ultimo(pGetMao(player)), NULL);
-
+    //TODO: NAO ACABADA TODO:
 }
