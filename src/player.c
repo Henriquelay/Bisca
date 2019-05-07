@@ -110,3 +110,25 @@ void compraCarta(tPlayer *player, tDeck *deck){
 
     //TODO: NAO ACABADA TODO:
 }
+
+/*
+    OBJETIVO: Desalocar toda a memória ocupada por 'player'.
+    ENTRADAS: Ponteiro para 'player'.
+    SAIDA: -
+    PRE-CONDICAO: 'player' existe e está alocado corretamente.
+    POS-CONDICAO: 'player' não ocupa mais espaço no HEAP e aponta para NULL.
+*/
+void destroiPlayers(tPlayer *player){
+    if(invalido(player))
+        return;
+
+    tPlayer *aux = pGetProximo(player);
+    while(pGetProximo(aux) != player)
+        aux = pGetProximo(aux);
+    //agora o aux é o 'ultimo' da lista circular
+    pSetProximo(aux, pGetProximo(player));
+    //fecho a lista circular com o 'player' de fora
+    destroiDeck(pGetMao(player));
+    free(player);
+    destroiPlayers(aux);
+}

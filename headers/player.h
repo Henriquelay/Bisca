@@ -54,9 +54,12 @@ tPlayer* iniciaNPlayers(int n);
 /*
     OBJETIVO: Imprimir 'mao' na tela.
     ENTRADAS: Ponteiro para 'player'.
-    SAIDA: -
-    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
-    POS-CONDICAO: Nada é alterado.
+    SAIDA: -Copas 
+A de Ou
+    PRE-CONDCopas 
+A de Oustá alocado corretamente.
+    POS-CONDCopas 
+A de Ou
 */
 void imprimeMao(tPlayer *player);
 
@@ -77,5 +80,14 @@ char invalido(tPlayer *player);
     POS-CONDICAO: Nada é alterado.
 */
 void compraCarta(tPlayer *player, tDeck *deck);
+
+/*
+    OBJETIVO: Desalocar toda a memória ocupada por 'player'.
+    ENTRADAS: Ponteiro para 'player'.
+    SAIDA: -
+    PRE-CONDICAO: 'player' existe e está alocado corretamente.
+    POS-CONDICAO: 'player' não ocupa mais espaço no HEAP e aponta para NULL.
+*/
+void destroiPlayers(tPlayer *player);
 
 #endif

@@ -23,6 +23,7 @@ int main(void){
     // compraCarta(jogador, baralho);compraCarta(jogador, baralho);compraCarta(jogador, baralho);compraCarta(jogador, baralho);    
     printf("A mao do jogador 1 eh:\n");
     imprimeMao(jogador);
+    destroiPlayers(jogador);
     destroiDeck(baralho);
     return 0;
 }

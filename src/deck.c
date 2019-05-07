@@ -31,10 +31,10 @@ void preenche(tDeck *deck){
     POS-CONDICAO: As duas células trocam de posição na lista, inalteradas.
 */
 void swap2Celulas(tCelula *a, tCelula *b){
-    tCarta cartaAux = a->carta;
+    tCarta cartaAux = *getCarta(a);
     
-    a->carta = b->carta;
-    b->carta = cartaAux;
+    setCarta(a, *getCarta(b));
+    setCarta(b, cartaAux);
 }
 
 /*
@@ -49,24 +49,25 @@ void corta(tDeck *deck){
         return;
 
     srand(time(NULL));
-    tCelula *aux = deck->primeiro;
+    tCelula *aux = NULL;
+    dSetCel(aux, primeiro(deck));
     tCelula *anterior = NULL;
     int lugardocorte = rand() % 39;
 
     printf("\nLUGAR DO CORTE = %d\n", lugardocorte);
 
     for(int i = 0; i < lugardocorte; i++){
-        if(aux->proximo == NULL)
+        if(dGetProximo(aux) == NULL)
             break;
-        anterior = aux;
-        aux = aux->proximo;
+        dSetCel(anterior, aux);
+        dSetCel(aux, dGetProximo(aux));
     }
 
     if(anterior != NULL)
-        anterior->proximo = aux->proximo;
-    aux->proximo = NULL;
-    deck->ultimo -> proximo = aux;
-    deck->ultimo = aux;
+        dSetCel(dGetProximo(anterior), dGetProximo(aux));
+    dSetProximo(aux, NULL);
+    dSetProximo(ultimo(deck), aux);
+    dSetCel(ultimo(deck), aux);
 }
 
 
@@ -314,4 +315,9 @@ tCarta* getCarta(tCelula *cel){
     if(cel != NULL)
         return &cel->carta;
     return NULL;
+}
+
+void setCarta(tCelula *cel, tCarta carta){
+    if(cel != NULL)
+        cel->carta = carta;
 }

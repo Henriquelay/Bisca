@@ -48,15 +48,17 @@ typedef struct tDeck{
 
 void dSetProximo(tCelula *cel, tCelula *proximo);
 
-void dSetCel(tCelula *cel1, tCelula *cel2);
-
 tCelula* dGetProximo(tCelula *cel);
+
+void dSetCel(tCelula *cel1, tCelula *cel2);
 
 tCelula* primeiro(tDeck *deck);
 
 tCelula* ultimo(tDeck *deck);
 
 tCarta* getCarta(tCelula *cel);
+
+void setCarta(tCelula *cel, tCarta card);
 
 /*
     OBJETIVO: Embaralhar 'deck'.
