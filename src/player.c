@@ -124,9 +124,18 @@ void compraCarta(tPlayer *player, tDeck *deck){
 void destroiPlayers(tPlayer *player){
     if(player == NULL)
         return;
-    if(player->mao == NULL)
-        return;
-    destroiDeck(player->mao);
-    destroiPlayers(player->proximo);
-    free(player);
+
+    tPlayer *aux = player;
+    do{
+        destroiDeck(aux->mao);
+        aux = aux->proximo;
+    } while(aux != player);
+    //agora selecionei o ultimo da lista, aproveitei e liberei as mãos
+    aux->proximo = NULL;
+    aux = player->proximo;
+    while(aux != NULL){
+        free(player);
+        player = aux;
+        aux = aux->proximo;
+    }
 }

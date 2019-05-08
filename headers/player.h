@@ -89,5 +89,4 @@ void compraCarta(tPlayer *player, tDeck *deck);
     POS-CONDICAO: 'player' não ocupa mais espaço no HEAP e aponta para NULL.
 */
 void destroiPlayers(tPlayer *player);
-
 #endif
