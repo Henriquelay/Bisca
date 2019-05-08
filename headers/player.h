@@ -82,6 +82,15 @@ char invalido(tPlayer *player);
 void compraCarta(tPlayer *player, tDeck *deck);
 
 /*
+    OBJETIVO: Faz 'player' jogar a carta da posição 'n' da sua mão em 'deck'.
+    ENTRADAS: Ponteiro para 'player' e ponteiro para 'deck' e a posição da carta.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente, o mesmo para player.
+    POS-CONDICAO: Nada é alterado.
+*/
+void jogaCarta(tPlayer *player, tDeck *deck, int n);
+
+/*
     OBJETIVO: Desalocar toda a memória ocupada por 'player'.
     ENTRADAS: Ponteiro para 'player'.
     SAIDA: -

@@ -8,9 +8,7 @@
     POS-CONDICAO: 'deck' com todas as cartas que serão usadas na bisca nele.
 */
 void preenche(tDeck *deck){
-    if(deck == NULL)
-        deck = iniciaVazio();
-    else if(!vazio(deck)){
+    if(!vazio(deck)){
             printf(" ***Esvazie o deck antes de preencher!");
         return;
     }
@@ -54,7 +52,7 @@ void corta(tDeck *deck){
     tCelula *anterior = NULL;
     int lugardocorte = rand() % 39;
 
-    printf("\nLUGAR DO CORTE = %d\n", lugardocorte);
+    // printf("\nLUGAR DO CORTE = %d\n", lugardocorte);
 
     for(int i = 0; i < lugardocorte; i++){
         if(proximo(aux) == NULL)
@@ -108,19 +106,13 @@ void embaralha(tDeck *deck, int passes){
     POS-CONDICAO: 'deck' não ocupa mais espaço no HEAP e aponta para NULL.
 */
 void destroiDeck(tDeck *deck){
-    if(vazio(deck))
-        return;
-    if(primeiro(deck) == NULL){
-        free(deck);
-        return;
+    tCelula *Aux = NULL;
+    while(!vazio(deck)){
+        Aux = deck->primeiro;
+        deck->primeiro = deck->primeiro->proximo;
+        free(Aux);
     }
-
-    for(tCelula *atual = primeiro(deck); atual != NULL; atual = primeiro(deck)){
-        deck->primeiro = proximo(primeiro(deck));   //TODO:Não consegui me livrar desse deck->primeiro, a func não funciona, talvez seja erro de referência?
-        free(atual);
-        setQuantidade(deck, getQuantidade(deck) - 1);
-    }
-    free(deck); 
+    free(deck);
 }
 
 /*
@@ -157,10 +149,10 @@ tCelula* criaItem(tCarta *carta){
 
     tCelula *item = (tCelula*) malloc(sizeof(tCelula));
     if(item == NULL)
-        printf(" ***DEU BOSTA AO ALOCAR CARTA!!!");
+        printf(" ***DEU BOSTA AO ALOCAR CARTA!!!\n");
     else{
-        dSetCel(proximo(item), NULL);
-        setCarta(item, *carta);
+        item->proximo = NULL;
+        item->carta = *carta;
     }
     return item;
 }
@@ -174,17 +166,16 @@ tCelula* criaItem(tCarta *carta){
 */
 //TODO: NÃO CONSIGO MEXER NESSA FUNÇÃO PRA ELA NÃO USA ACESSO DIRETO
 void insereCarta(tCarta *carta, tDeck *deck){
-    if(deck == NULL){ //não passei na função 'vazio()' pq ele pode não apontar pro inicio e final
-        printf(" *** DECK TA ZUADO!!! ***");
-        return;
-    }
-
     tCelula *item = criaItem(carta);
-    item->proximo = deck->primeiro;
-    deck->primeiro = item;
+    if(item == NULL) return;
+
+    if(vazio(deck))
+        deck->primeiro = deck->ultimo = item;
+    else{
+        deck->ultimo->proximo = item;
+        deck->ultimo = deck->ultimo->proximo;
+    }
     deck->quantidade++;
-    if(deck->ultimo == NULL)
-        deck->ultimo = item;
 }
 
 /*
@@ -195,15 +186,8 @@ void insereCarta(tCarta *carta, tDeck *deck){
     POS-CONDICAO: Nada é alterado.
 */
 char vazio(tDeck *deck){
-    if(deck == NULL)
-        return 3;
-    if(getQuantidade(deck) == 0)
-        return 1;
-    if(primeiro(deck) == NULL || ultimo(deck) == NULL)
-        return 2;
-    if(proximo(ultimo(deck)) == NULL)
-        return 0;
-    return -1;              //algo de muito errado
+    if(deck == NULL) return -1;
+    return (deck->primeiro == NULL);
 }
 
 /*

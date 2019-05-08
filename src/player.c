@@ -115,6 +115,31 @@ void compraCarta(tPlayer *player, tDeck *deck){
 }
 
 /*
+    OBJETIVO: Faz 'player' jogar a carta da posição 'n' da sua mão em 'deck'.
+    ENTRADAS: Ponteiro para 'player' e ponteiro para 'deck' e a posição da carta.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente, o mesmo para player.
+    POS-CONDICAO: Nada é alterado.
+    OBS: 'n' É EM CONTAGEM NATURAL, E NÃO 'ÍNDICE DE VETOR'!!
+*/
+void jogaCarta(tPlayer *player, tDeck *deck, int n){
+    if(invalido(player) == 1) 
+        return;
+    if(invalido(player) == 2) 
+        pSetMao(player, iniciaVazio());
+    printf("Quantidade na mao = %d\n", player->mao->quantidade);
+    if(player->mao->quantidade < n){
+        printf("\nA mao nao tem essa quantidade de cartas!\n");
+        return;
+    }
+    tCelula *aux = primeiro(pGetMao(player));
+    for(int i = 0; i < n - 1; i++)
+        aux = aux->proximo;
+    //aux já é a celula q eu quero
+    insereCarta(getCarta(aux), deck);
+}
+
+/*
     OBJETIVO: Desalocar toda a memória ocupada por 'player'.
     ENTRADAS: Ponteiro para 'player'.
     SAIDA: -
@@ -138,6 +163,5 @@ void destroiPlayers(tPlayer *player){
         aux = aux->proximo;
         free(player);
         player = aux;
-        printf("\nLIBEREI UM CU\n");
     }
 }
