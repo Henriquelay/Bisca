@@ -108,7 +108,10 @@ void compraCarta(tPlayer *player, tDeck *deck){
     if(invalido(player) == 2) 
         pSetMao(player, iniciaVazio());
 
-    //TODO: NAO ACABADA TODO:
+    insereCarta(getCarta(primeiro(deck)), pGetMao(player));
+    tCelula *aux = primeiro(deck);
+    deck->primeiro = deck->primeiro->proximo;
+    free(aux);
 }
 
 /*
@@ -119,16 +122,11 @@ void compraCarta(tPlayer *player, tDeck *deck){
     POS-CONDICAO: 'player' não ocupa mais espaço no HEAP e aponta para NULL.
 */
 void destroiPlayers(tPlayer *player){
-    if(invalido(player))
+    if(player == NULL)
         return;
-
-    tPlayer *aux = pGetProximo(player);
-    while(pGetProximo(aux) != player)
-        aux = pGetProximo(aux);
-    //agora o aux é o 'ultimo' da lista circular
-    pSetProximo(aux, pGetProximo(player));
-    //fecho a lista circular com o 'player' de fora
-    destroiDeck(pGetMao(player));
+    if(player->mao == NULL)
+        return;
+    destroiDeck(player->mao);
+    destroiPlayers(player->proximo);
     free(player);
-    destroiPlayers(aux);
 }

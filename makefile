@@ -26,7 +26,7 @@ run:
 
 val:
 	make main
-	valgrind ./${EXEC}
+	valgrind --leak-check=full ./${EXEC}
 
 clean:
 	rm -f *.o

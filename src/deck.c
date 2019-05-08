@@ -116,9 +116,9 @@ void destroiDeck(tDeck *deck){
     }
 
     for(tCelula *atual = primeiro(deck); atual != NULL; atual = primeiro(deck)){
-        deck->primeiro = deck->primeiro->proximo;
+        deck->primeiro = proximo(primeiro(deck));   //TODO:Não consegui me livrar desse deck->primeiro, a func não funciona, talvez seja erro de referência?
         free(atual);
-        deck->quantidade--;
+        setQuantidade(deck, getQuantidade(deck) - 1);
     }
     free(deck); 
 }
@@ -159,8 +159,8 @@ tCelula* criaItem(tCarta *carta){
     if(item == NULL)
         printf(" ***DEU BOSTA AO ALOCAR CARTA!!!");
     else{
-        item->proximo = NULL;
-        item->carta = *carta;
+        dSetCel(proximo(item), NULL);
+        setCarta(item, *carta);
     }
     return item;
 }
@@ -172,6 +172,7 @@ tCelula* criaItem(tCarta *carta){
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: 'carta' está contida em 'deck'.
 */
+//TODO: NÃO CONSIGO MEXER NESSA FUNÇÃO PRA ELA NÃO USA ACESSO DIRETO
 void insereCarta(tCarta *carta, tDeck *deck){
     if(deck == NULL){ //não passei na função 'vazio()' pq ele pode não apontar pro inicio e final
         printf(" *** DECK TA ZUADO!!! ***");
@@ -196,11 +197,11 @@ void insereCarta(tCarta *carta, tDeck *deck){
 char vazio(tDeck *deck){
     if(deck == NULL)
         return 3;
-    if(deck->quantidade == 0)
+    if(getQuantidade(deck) == 0)
         return 1;
-    if(deck->primeiro == NULL || deck->ultimo == NULL)
+    if(primeiro(deck) == NULL || ultimo(deck) == NULL)
         return 2;
-    if(deck->ultimo->proximo == NULL)
+    if(proximo(ultimo(deck)) == NULL)
         return 0;
     return -1;              //algo de muito errado
 }
@@ -240,7 +241,7 @@ tCarta* menorCarta(tDeck *deck, tCarta *trunfo){
 
     while(aux != NULL){
         if(getValor(&aux->carta) < getValor(menor))
-            if( getNaipe(&aux->carta) != getNaipe(trunfo) || getNaipe(menor) == getNaipe(trunfo))
+            if(getNaipe(&aux->carta) != getNaipe(trunfo) || getNaipe(menor) == getNaipe(trunfo))
                 menor = &aux->carta;
 
         aux = aux->proximo;
@@ -300,13 +301,13 @@ tCelula* proximo(tCelula *cel){
 }
 
 tCelula* primeiro(tDeck *deck){
-    if(!vazio(deck))
+    if(deck != NULL)
         return deck->primeiro;
     return NULL;
 }
 
 tCelula* ultimo(tDeck *deck){
-    if(!vazio(deck))
+    if(deck != NULL)
         return deck->ultimo;
     return NULL;
 }
@@ -328,7 +329,7 @@ void setQuantidade(tDeck *deck, int qtd){
 }
 
 int getQuantidade(tDeck *deck){
-    if(!vazio(deck))
+    if(deck != NULL)
         return deck->quantidade;
     return 0;
 }
