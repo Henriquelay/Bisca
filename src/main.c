@@ -20,7 +20,7 @@ int main(void){
     char pontos = contaPontos(baralho);
     printf("\nPontuacao Total: %d\nIniciando jogadores...\n", pontos);
     tPlayer *jogador = iniciaNPlayers(4);
-    // compraCarta(jogador, baralho);compraCarta(jogador, baralho);compraCarta(jogador, baralho);compraCarta(jogador, baralho);    
+    for(int i =)    
     printf("A mao do jogador 1 eh:\n");
     imprimeMao(jogador);
     printf("\nBaralho:\n");

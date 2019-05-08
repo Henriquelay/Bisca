@@ -129,13 +129,15 @@ void destroiPlayers(tPlayer *player){
     do{
         destroiDeck(aux->mao);
         aux = aux->proximo;
-    } while(aux != player);
+    } while(aux->proximo != player);
     //agora selecionei o ultimo da lista, aproveitei e liberei as mãos
     aux->proximo = NULL;
-    aux = player->proximo;
+    //agora é lista normal
+    aux = player;
     while(aux != NULL){
+        aux = aux->proximo;
         free(player);
         player = aux;
-        aux = aux->proximo;
+        printf("\nLIBEREI UM CU\n");
     }
 }
