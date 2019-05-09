@@ -1,7 +1,7 @@
 #include "../headers/AI.h"
 
 void jogadaEasy(tPlayer *player, tDeck *monte, tCarta *trunfo){
-    printf("Jogada feita = ");
+    printf("Jogada feita pelos bot = ");
     filtrAEPrinta(getCarta(primeiro(pGetMao(player))));
     jogaCarta(player, monte, 1);
 }

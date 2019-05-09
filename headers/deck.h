@@ -100,6 +100,8 @@ void preenche(tDeck *deck);
 */
 void destroiDeck(tDeck *deck);
 
+tCelula* retiraCelula(tDeck *deck, int n);
+
 /*
     OBJETIVO: Imprimir 'deck' na tela.
     ENTRADAS: Ponteiro para 'deck'.

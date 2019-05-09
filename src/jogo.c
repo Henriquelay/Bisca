@@ -31,18 +31,22 @@ int ganhador(tDeck *monte, tCarta *trunfo){
 }
 
 void todosCompram(tPlayer *player, tDeck *baralho){
-    for(tPlayer *aux = player; pGetProximo(aux) != player; aux = pGetProximo(aux))
+    tPlayer *aux = player;
+    do{
         compraCarta(aux, baralho);
+        aux = pGetProximo(aux);
+    } while(aux != player);
 }
 
 void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade){
     
     int cartaJogada = -1;
-    for(tPlayer *aux = player; pGetProximo(aux) != player; aux = pGetProximo(aux)){
+    tPlayer *aux = player;
+    do{
         if(pGetHumano(aux)){
             puts("Sua mao:");
             imprimeDeck(pGetMao(aux));
-            printf("Que carta quer jogar? >");
+            printf("Que carta quer jogar? > ");
             scanf(" %d", &cartaJogada);
             jogaCarta(aux, monte, cartaJogada);
             printf("Quantidade da mao apos jogada: %d\nCarta q vc jogou: ", player->mao->quantidade);
@@ -50,7 +54,7 @@ void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade){
         }
         else jogadaBot(aux, monte, trunfo, dificuldade);
         aux = pGetProximo(aux);
-    }
+    } while(pGetProximo(aux) != player);
 }
 
 void turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCarta *trunfo, char dificuldade){
@@ -74,27 +78,39 @@ void turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCarta *trunfo, char d
 void jogo(tDeck *baralho){
     tDeck *monte = iniciaVazio();
     preenche(baralho);
-    embaralha(baralho, 15000);
+    embaralha(baralho, 1500);
     corta(baralho);
     tCarta *trunfo = defineTrunfo(baralho);
     int nJogadores;
-    printf("O jogo sera para quantos jogadores? >");
+
+    //-----------------
+    printf("O jogo sera para quantos jogadores? > ");
     scanf(" %d", &nJogadores);
 
     tPlayer *players = iniciaNPlayers(nJogadores);
-
     pSetHumano(players, 1);      //define o primeiro player como player humano
 
     for(int i = 0; i < 3; i++)
         todosCompram(players, baralho);
 
-    printf("MAO: %p\n", players->mao);
-
-    while(ultimo(baralho) != NULL){
-        printf("O Trunfo é ");
-        filtrAEPrinta(trunfo);
-        turno(players, baralho, monte, trunfo, 0);  //teste no easy
+    int cont0 = 1;
+    for(tPlayer *aux = pGetProximo(players); aux != players; aux = pGetProximo(aux)){
+        printf("MAO PLAYER %d:\n", cont0++);
+        imprimeDeck(pGetMao(aux));
+        if(primeiro(pGetMao(aux)) == NULL) printf("A MAO E NULA!\n");
     }
+    turno(players, baralho, monte, trunfo, 0);
+
+    printf("MAO APOS O TURNO:\n");
+    imprimeDeck(players->mao);
+    printf("MONTE:\n");
+    imprimeDeck(monte);
+
+    // while(ultimo(baralho) != NULL){
+    //     printf("O Trunfo é ");
+    //     filtrAEPrinta(trunfo);
+    //     turno(players, baralho, monte, trunfo, 0);  //teste no easy
+    // }
     destroiPlayers(players);
     destroiDeck(monte);
 }

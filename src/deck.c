@@ -21,6 +21,33 @@ void preenche(tDeck *deck){
         }
 }
 
+tCelula* retiraCelula(tDeck *deck, int n){
+    if(deck == NULL || n < 0 || n > getQuantidade(deck)) return NULL;
+
+    tCelula *anterior = NULL;
+    tCelula *aux = primeiro(deck);
+    for(int i = 0 ; i < n; i++){
+        anterior = aux;
+        aux = proximo(aux);
+    }   //cheguei na celula que quero
+
+    if(aux == NULL) return NULL;
+
+    if(proximo(aux) == NULL){    //se for a ultima
+        deck->ultimo = anterior;
+        dSetProximo(anterior, NULL);
+    }
+    else{
+        if(anterior != NULL)    //se não for a primeira
+            dSetProximo(anterior, proximo(aux));
+        else                    //se for a primeira
+            deck->primeiro = proximo(aux);
+        dSetProximo(aux, NULL);
+    }
+    return aux;     //??
+
+}
+
 /*
     OBJETIVO: Troca 2 células de lugar.
     ENTRADAS: Ponteiro para duas células.

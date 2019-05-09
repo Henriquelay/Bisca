@@ -87,7 +87,7 @@ tPlayer* iniciaNPlayers(int n){
         return NULL;
     tPlayer *cabeca, *atual;
     cabeca = atual = iniciaPlayerVazio();
-    for(int i = 1; i < n; i++){
+    for(int i = 0; i < n; i++){
         atual->proximo = iniciaPlayerVazio();   //percorre criando os outros N players
         atual = atual->proximo;
     }   
@@ -142,11 +142,8 @@ void jogaCarta(tPlayer *player, tDeck *deck, int n){
         printf("\nA mao nao tem essa quantidade de cartas!\n");
         return;
     }
-    tCelula *aux = primeiro(pGetMao(player));
-    for(int i = 0; i < n - 1; i++)
-        aux = aux->proximo;
-    //aux já é a celula q eu quero
-    insereCarta(getCarta(aux), deck);
+    tCelula *celula = (retiraCelula(pGetMao(player), n - 1));
+    insereCarta(getCarta(celula), deck);
     setQuantidade(pGetMao(player), getQuantidade(pGetMao(player)) - 1);
 }
 
@@ -162,17 +159,11 @@ void destroiPlayers(tPlayer *player){
         return;
 
     tPlayer *aux = player;
+    tPlayer *anterior = NULL;
     do{
         destroiDeck(aux->mao);
+        anterior = aux;
         aux = aux->proximo;
-    } while(aux->proximo != player);
-    //agora selecionei o ultimo da lista, aproveitei e liberei as mãos
-    aux->proximo = NULL;
-    //agora é lista normal
-    aux = player;
-    while(aux != NULL){
-        aux = aux->proximo;
-        free(player);
-        player = aux;
-    }
+        free(anterior);
+    } while(aux != player);
 }
