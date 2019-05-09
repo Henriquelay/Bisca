@@ -75,8 +75,8 @@ tPlayer* iniciaNPlayers(int n){
     tPlayer *cabeca, *atual;
     cabeca = atual = iniciaPlayerVazio();
     for(int i = 1; i < n; i++){
-    atual->proximo = iniciaPlayerVazio();   //percorre criando os outros N players
-    atual = atual->proximo;
+        atual->proximo = iniciaPlayerVazio();   //percorre criando os outros N players
+        atual = atual->proximo;
     }   
     atual->proximo = cabeca;    //faz a lista ficar circular;
 
@@ -102,11 +102,10 @@ void imprimeMao(tPlayer *player){
     PRE-CONDICAO: 'deck' existe e está alocado corretamente, o mesmo para player.
     POS-CONDICAO: Nada é alterado.
 */
+//TODO: Fazer uma função que compre transferindo a célula entre listas
 void compraCarta(tPlayer *player, tDeck *deck){
-    if(invalido(player) == 1) 
-        return;
-    if(invalido(player) == 2) 
-        pSetMao(player, iniciaVazio());
+    if(invalido(player) == 1) return;
+    if(invalido(player) == 2) pSetMao(player, iniciaVazio());
 
     insereCarta(getCarta(primeiro(deck)), pGetMao(player));
     tCelula *aux = primeiro(deck);

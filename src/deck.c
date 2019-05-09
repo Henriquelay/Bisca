@@ -50,7 +50,7 @@ void corta(tDeck *deck){
     tCelula *aux = NULL;
     dSetCel(aux, primeiro(deck));
     tCelula *anterior = NULL;
-    int lugardocorte = rand() % 39;
+    int lugardocorte = rand() % deck->quantidade - 1;
 
     // printf("\nLUGAR DO CORTE = %d\n", lugardocorte);
 
@@ -61,11 +61,11 @@ void corta(tDeck *deck){
         dSetCel(aux, proximo(aux));
     }
 
-    if(anterior != NULL)
-        dSetCel(proximo(anterior), proximo(aux));
-    dSetProximo(aux, NULL);
+    if(anterior != NULL)    // aux nao eh a primeira do baralho
+        dSetCel(proximo(anterior), proximo(aux));   //configurei a lista a passar por cima de aux
+    dSetProximo(aux, NULL);             // Colocando a carta no fundo do deck
     dSetProximo(ultimo(deck), aux);
-    dSetCel(ultimo(deck), aux);
+    dSetCel(ultimo(deck), aux);         // Atualizando a sentinela
 }
 
 
@@ -80,10 +80,10 @@ void embaralha(tDeck *deck, int passes){
     if(vazio(deck))
         return;
 
-    tCelula *aux = deck->primeiro;
+    tCelula *aux = primeiro(deck);
     srand(time(NULL));
 
-    int iteracao = rand() % 40;
+    int iteracao = rand() % getQuantidade(deck);
     for(int i = 0; i < passes; i++){
         for(int n = 0; n < iteracao; n++){
             if(proximo(aux) == NULL)
@@ -93,7 +93,7 @@ void embaralha(tDeck *deck, int passes){
 
         swap2Celulas(primeiro(deck), aux);
 
-        iteracao = rand() % 40;
+        iteracao = rand() % getQuantidade(deck);
         aux = primeiro(deck);
     }
 }
@@ -130,7 +130,6 @@ void imprimeDeck(tDeck *deck){
 
     while(cartaAtual != NULL){
         filtrAEPrinta(getCarta(cartaAtual));
-        printf("\n");
         cartaAtual = proximo(cartaAtual);
     }
 }
@@ -265,8 +264,7 @@ char contaPontos(tDeck *deck){
 tCarta* defineTrunfo(tDeck *deck){
     if(vazio(deck))
         return NULL;
-    tCarta *trunfo = getCarta(ultimo(deck));
-    return trunfo;
+    return getCarta(ultimo(deck));
 }
 
 void dSetProximo(tCelula *cel, tCelula *proximo){

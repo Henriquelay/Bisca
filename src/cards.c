@@ -34,6 +34,7 @@ void filtrAEPrinta(tCarta *carta){
         case 3: printf("Espadas "); break;
         default: puts("###### DEU ALGO ERRADO COM O NAIPE MEU PROGRAMADO ######");
     }
+    puts("");
 }
 
 /*
