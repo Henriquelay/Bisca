@@ -6,8 +6,9 @@ por Henrique Layber e Ezequiel Schneider
 #ifndef _H_AIBISCA
 #define _H_AIBISCA
 /*Aqui vai as funcoes*/
-#include <stdlib.h>
+#include "player.h"
 
+void jogadaBot(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade);
 
 
 #endif

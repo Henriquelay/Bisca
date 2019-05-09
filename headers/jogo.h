@@ -6,7 +6,7 @@ por Henrique Layber e Ezequiel Schneider
 #ifndef _H_JOGOBISCA
 #define _H_JOGOBISCA
 /*Aqui vai as funcoes*/
-#include "player.h"
+#include "AI.h"
 
 
 int ganhador(tDeck *monte, tCarta *trunfo);

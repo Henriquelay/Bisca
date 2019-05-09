@@ -25,6 +25,17 @@ char pGetPontos(tPlayer *player){
     return 0;
 }
 
+void pSetHumano(tPlayer *player, char humano){
+    if(player != NULL)
+        player->ehHumano = humano;
+}
+
+char pGetHumano(tPlayer *player){
+    if(player != NULL)
+        return player->ehHumano;
+    return 0;
+}
+
 void pSetProximo(tPlayer *player, tPlayer *proximo){
     if(player != NULL)
         player->proximo = proximo;
@@ -59,6 +70,7 @@ tPlayer* iniciaPlayerVazio(void){
     pSetPontos(player, 0);
     pSetProximo(player, NULL);
     pSetMao(player, NULL);
+    
     return player;
 }
 
@@ -79,6 +91,8 @@ tPlayer* iniciaNPlayers(int n){
         atual = atual->proximo;
     }   
     atual->proximo = cabeca;    //faz a lista ficar circular;
+
+    pSetHumano(cabeca, 1);      //define o primeiro player como player humano
 
     return cabeca;
 }
@@ -127,7 +141,7 @@ void jogaCarta(tPlayer *player, tDeck *deck, int n){
         return;
     if(invalido(player) == 2) 
         pSetMao(player, iniciaVazio());
-    printf("Quantidade na mao = %d\n", player->mao->quantidade);
+    // printf("Quantidade na mao = %d\n", player->mao->quantidade);
     if(player->mao->quantidade < n){
         printf("\nA mao nao tem essa quantidade de cartas!\n");
         return;

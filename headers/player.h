@@ -13,9 +13,9 @@ por Henrique Layber e Ezequiel Schneider
 typedef struct Player tPlayer;
 
 typedef struct Player{
-    char points;
+    char points, ehHumano;
     tDeck *mao;
-    tPlayer *proximo; 
+    tPlayer *proximo;
 }tPlayer;
 
 
@@ -24,6 +24,10 @@ typedef struct Player{
 void pSetPontos(tPlayer *player, char pontos);
 
 char pGetPontos(tPlayer *player);
+
+void pSetHumano(tPlayer *player, char humano);
+
+char pGetHumano(tPlayer *player);
 
 void pSetProximo(tPlayer *player, tPlayer *proximo);
 

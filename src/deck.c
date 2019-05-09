@@ -127,8 +127,8 @@ void imprimeDeck(tDeck *deck){
 
     if(!vazio(deck))
         cartaAtual = primeiro(deck);
-
-    while(cartaAtual != NULL){
+    for(int cont = 1; cartaAtual != NULL; cont++){
+        printf("%d. ", cont);
         filtrAEPrinta(getCarta(cartaAtual));
         cartaAtual = proximo(cartaAtual);
     }
