@@ -56,6 +56,8 @@ char getValor(tCarta *carta);
 */
 void filtrAEPrinta(tCarta *carta);
 
+char cartasIguais(tCarta *carta1, tCarta *carta2);
+
 /*
     OBJETIVO: Retornar o número de pontos da carta.
     ENTRADAS: Ponteiro para a carta.

@@ -1,16 +1,17 @@
-#include "../headers/player.h"
-
+#include "../headers/jogo.h"
+// #include <locale.h>  //decidi não incluir por pesar mais 10 MB no HEAP e 10 allocs
 
 
 int main(void){
+    // setlocale(LC_ALL, "Portuguese_Brasil");
     tDeck *baralho = iniciaVazio();
     preenche(baralho);
-    // imprimeDeck(baralho);
-    printf("\n\n");
     embaralha(baralho, 15000);
-    imprimeDeck(baralho);
-    corta(baralho);
     // imprimeDeck(baralho);
+    // printf("\n\n");
+    // imprimeDeck(baralho);
+    corta(baralho);
+    imprimeDeck(baralho);
     tCarta *trunfo = defineTrunfo(baralho);
     printf("\nO Trunfo eh \n");
     filtrAEPrinta(trunfo);
@@ -32,7 +33,15 @@ int main(void){
     puts("Jogando a carta 2:");
     jogaCarta(jogador, baralho, 2);
     // printf("\nBaralho:\n");
-    // imprimeDeck(baralho);
+    imprimeDeck(baralho);
+    printf("\n\nO GANHADOR EH: ");
+    tCelula *maior = primeiro(baralho);
+    for(int i = 0; i < ganhador(baralho, trunfo); i++){
+        maior = proximo(maior);
+    }
+    filtrAEPrinta(getCarta(maior));
+    printf("TRUNFO EH: ");
+    filtrAEPrinta(trunfo);
     destroiPlayers(jogador);
     destroiDeck(baralho);
     return 0;

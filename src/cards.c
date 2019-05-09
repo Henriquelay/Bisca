@@ -91,6 +91,10 @@ char getNaipe(tCarta *carta){
     return carta->naipe;
 }
 
+char cartasIguais(tCarta *carta1, tCarta *carta2){
+    return (getNaipe(carta1) == getNaipe(carta2) && getValor(carta1) == getValor(carta2));
+}
+
 /*
     OBJETIVO: retorna o valor da carta
     ENTRADAS: Uma carta

@@ -104,6 +104,7 @@ void imprimeMao(tPlayer *player){
 */
 //TODO: Fazer uma função que compre transferindo a célula entre listas
 void compraCarta(tPlayer *player, tDeck *deck){
+    if(vazio(deck)) return;
     if(invalido(player) == 1) return;
     if(invalido(player) == 2) pSetMao(player, iniciaVazio());
 
