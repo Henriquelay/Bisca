@@ -3,7 +3,7 @@
 /*
     OBJETIVO: Verificar se 'player' está alocado corretamente.
     ENTRADAS: Ponteiro para 'player'.
-    SAIDA: 1 quando é nulo, 2 quando a mão é nula, 3 quando o próximo é nulo.
+    SAIDA: 1 quando é nulo, 2 quando a mão é nula, 3 quando o próximo é nulo, 0 quando tá safe.
     PRE-CONDICAO: -
     POS-CONDICAO: Nada é alterado.
 */
@@ -69,7 +69,8 @@ tPlayer* iniciaPlayerVazio(void){
     tPlayer *player = (tPlayer*) malloc(sizeof(tPlayer));
     pSetPontos(player, 0);
     pSetProximo(player, NULL);
-    pSetMao(player, NULL);
+    pSetMao(player, iniciaVazio());
+    pSetHumano(player, 0);
     
     return player;
 }
@@ -91,8 +92,6 @@ tPlayer* iniciaNPlayers(int n){
         atual = atual->proximo;
     }   
     atual->proximo = cabeca;    //faz a lista ficar circular;
-
-    pSetHumano(cabeca, 1);      //define o primeiro player como player humano
 
     return cabeca;
 }
@@ -118,8 +117,7 @@ void imprimeMao(tPlayer *player){
 */
 //TODO: Fazer uma função que compre transferindo a célula entre listas
 void compraCarta(tPlayer *player, tDeck *deck){
-    if(vazio(deck)) return;
-    if(invalido(player) == 1) return;
+    if(vazio(deck) || invalido(player) == 1) return;
     if(invalido(player) == 2) pSetMao(player, iniciaVazio());
 
     insereCarta(getCarta(primeiro(deck)), pGetMao(player));
@@ -137,10 +135,8 @@ void compraCarta(tPlayer *player, tDeck *deck){
     OBS: 'n' É EM CONTAGEM NATURAL, E NÃO 'ÍNDICE DE VETOR'!!
 */
 void jogaCarta(tPlayer *player, tDeck *deck, int n){
-    if(invalido(player) == 1) 
+    if(invalido(player) == 1 || invalido(player) == 2) 
         return;
-    if(invalido(player) == 2) 
-        pSetMao(player, iniciaVazio());
     // printf("Quantidade na mao = %d\n", player->mao->quantidade);
     if(player->mao->quantidade < n){
         printf("\nA mao nao tem essa quantidade de cartas!\n");
@@ -151,6 +147,7 @@ void jogaCarta(tPlayer *player, tDeck *deck, int n){
         aux = aux->proximo;
     //aux já é a celula q eu quero
     insereCarta(getCarta(aux), deck);
+    setQuantidade(pGetMao(player), getQuantidade(pGetMao(player)) - 1);
 }
 
 /*

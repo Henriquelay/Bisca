@@ -165,9 +165,9 @@ tCelula* criaItem(tCarta *carta){
 */
 //TODO: NÃO CONSIGO MEXER NESSA FUNÇÃO PRA ELA NÃO USA ACESSO DIRETO
 void insereCarta(tCarta *carta, tDeck *deck){
+    if(deck == NULL) return;
     tCelula *item = criaItem(carta);
     if(item == NULL) return;
-
     if(vazio(deck))
         deck->primeiro = deck->ultimo = item;
     else{

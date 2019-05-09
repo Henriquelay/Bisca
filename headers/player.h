@@ -70,7 +70,7 @@ void imprimeMao(tPlayer *player);
 /*
     OBJETIVO: Verificar se 'player' está alocado corretamente.
     ENTRADAS: Ponteiro para 'player'.
-    SAIDA: 1 quando é nulo, 2 quando a mão é nula, 3 quando o próximo é nulo, 0 quando 
+    SAIDA: 1 quando é nulo, 2 quando a mão é nula, 3 quando o próximo é nulo, 0 quando tá safe
     PRE-CONDICAO: -
     POS-CONDICAO: Nada é alterado.
 */
