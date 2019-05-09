@@ -102,6 +102,8 @@ void destroiDeck(tDeck *deck);
 
 tCelula* retiraCelula(tDeck *deck, int n);
 
+void transfereCelula(tDeck *deck1, tDeck *deck2, int n);
+
 /*
     OBJETIVO: Imprimir 'deck' na tela.
     ENTRADAS: Ponteiro para 'deck'.

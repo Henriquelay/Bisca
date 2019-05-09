@@ -93,6 +93,9 @@ void jogo(tDeck *baralho){
     for(int i = 0; i < 3; i++)
         todosCompram(players, baralho);
 
+    puts("Baralho:");
+    imprimeDeck(baralho);
+
     int cont0 = 1;
     for(tPlayer *aux = pGetProximo(players); aux != players; aux = pGetProximo(aux)){
         printf("MAO PLAYER %d:\n", cont0++);
@@ -100,6 +103,11 @@ void jogo(tDeck *baralho){
         if(primeiro(pGetMao(aux)) == NULL) printf("A MAO E NULA!\n");
     }
     turno(players, baralho, monte, trunfo, 0);
+
+    // puts("Carta \"comprada\":");
+    // filtrAEPrinta(getCarta(retiraCelula(baralho, 0)));
+    puts("Baralho apos o turno:");
+    imprimeDeck(baralho);
 
     printf("MAO APOS O TURNO:\n");
     imprimeDeck(players->mao);

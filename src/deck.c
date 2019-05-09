@@ -21,6 +21,18 @@ void preenche(tDeck *deck){
         }
 }
 
+void transfereCelula(tDeck *deck1, tDeck *deck2, int n){
+    if(deck2 == NULL || n < 0 || n > getQuantidade(deck2)) return;
+
+    tCelula *celula = retiraCelula(deck2, n);
+
+    if(primeiro(deck1) == NULL && ultimo(deck1) == NULL && getQuantidade(deck1) == 0)
+        deck1->primeiro = deck1->ultimo = celula;
+    else{
+        dSetCel(proximo(ultimo(deck1)), celula);
+    }
+}
+
 tCelula* retiraCelula(tDeck *deck, int n){
     if(deck == NULL || n < 0 || n > getQuantidade(deck)) return NULL;
 
@@ -32,19 +44,21 @@ tCelula* retiraCelula(tDeck *deck, int n){
     }   //cheguei na celula que quero
 
     if(aux == NULL) return NULL;
+    if(aux == primeiro(deck) && aux == ultimo(deck))
+        deck->primeiro = deck->ultimo = NULL;
 
-    if(proximo(aux) == NULL){    //se for a ultima
+    if(aux == ultimo(deck)){
         deck->ultimo = anterior;
         dSetProximo(anterior, NULL);
     }
-    else{
-        if(anterior != NULL)    //se não for a primeira
-            dSetProximo(anterior, proximo(aux));
-        else                    //se for a primeira
-            deck->primeiro = proximo(aux);
-        dSetProximo(aux, NULL);
-    }
-    return aux;     //??
+    if(aux == primeiro(deck))
+        deck->primeiro = proximo(aux);  
+    else
+        dSetProximo(anterior, proximo(aux));
+
+    setQuantidade(deck, getQuantidade(deck) - 1);
+    dSetProximo(aux, NULL);
+    return aux;
 
 }
 

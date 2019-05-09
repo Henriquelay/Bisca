@@ -120,10 +120,12 @@ void compraCarta(tPlayer *player, tDeck *deck){
     if(vazio(deck) || invalido(player) == 1) return;
     if(invalido(player) == 2) pSetMao(player, iniciaVazio());
 
-    insereCarta(getCarta(primeiro(deck)), pGetMao(player));
-    tCelula *aux = primeiro(deck);
-    deck->primeiro = deck->primeiro->proximo;
-    free(aux);
+    tCelula *celula = retiraCelula(deck, 0);
+    if(primeiro(deck) == NULL) deck->primeiro = deck->ultimo = celula;
+    else{
+        deck->ultimo->proximo = celula;
+        deck->ultimo = celula;
+    }
 }
 
 /*
