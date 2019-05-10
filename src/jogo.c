@@ -110,8 +110,9 @@ void jogo(tDeck *baralho){
     // puts("SUA MAO");
     // imprimeDeck(pGetMao(players));
     tDeck *monte = iniciaVazio();
-    turno(players, baralho, monte, trunfo, 0);
-
+    while(!vazio(pGetMao(players)))
+        turno(players, baralho, monte, trunfo, 0);
+    // preenche(monte);
     // puts("Carta \"comprada\":");
     // filtrAEPrinta(getCarta(retiraCelula(baralho, 0)));
     // puts("Baralho apos o turno:");

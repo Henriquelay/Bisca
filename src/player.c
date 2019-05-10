@@ -139,8 +139,7 @@ void jogaCarta(tPlayer *player, tDeck *deck, int n){
         printf("\nA mao nao tem essa quantidade de cartas!\n");
         return;
     }
-    tCelula *celula = (retiraCelula(pGetMao(player), n - 1));
-    insereCarta(getCarta(celula), deck);
+    transfereCelula(deck, pGetMao(player), n-1);
 }
 
 /*
