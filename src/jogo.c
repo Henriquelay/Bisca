@@ -46,6 +46,8 @@ void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade){
     tPlayer *aux = player;
     do{
         if(pGetHumano(aux)){
+            // puts("Monte:");
+            // imprimeDeck(monte);
             puts("Sua mao:");
             imprimeDeck(pGetMao(aux));
             printf("O trunfo é ");
@@ -65,6 +67,17 @@ void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade){
     } while(aux != player);
 }
 
+void mostraPontuacao(tPlayer *players){
+    int cont0 = 1, maior = 0, pontosAux = 0;
+    for(tPlayer *aux = pGetProximo(players); aux != players; aux = pGetProximo(aux)){
+        pontosAux = pGetPontos(aux);
+        printf("PONTOS BOT %d: %d\n", cont0++, pontosAux);
+        if(pontosAux > maior)
+            maior = pontosAux;
+    }
+    printf("Seus pontos: %d\n", pGetPontos(players));
+}
+
 void turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCarta *trunfo, char dificuldade){
 
     // if(player != NULL)
@@ -72,16 +85,13 @@ void turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCarta *trunfo, char d
     if(getQuantidade(pGetMao(player)) < 3)
         todosCompram(player, baralho);
     jogada(player, monte, trunfo, 0);
-
-    puts("#MONTE#");
-    imprimeDeck(monte);
     
     //indicar quem ganhou
     int qmGanhouIndice = ganhador(monte, trunfo);
     tPlayer *qmGanhou = player;
     for(int i = 0; i < qmGanhouIndice; i++)
         qmGanhou = pGetProximo(qmGanhou);
-    printf("O ganhador da partida eh: ");
+    printf("O ganhador do monte eh: ");
     if(qmGanhouIndice == 0) 
         printf("Voce!\n");
     else 
@@ -89,7 +99,21 @@ void turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCarta *trunfo, char d
 
     //somar os pontos
     pSetPontos(qmGanhou, pGetPontos(qmGanhou) + contaPontos(monte));
+
+    puts("#MONTE NO FIM DO TURNO#");
+    imprimeDeck(monte);
     esvaziaDeck(monte);
+}
+
+void mostraquemganha(tPlayer *player){
+    mostraPontuacao(player);
+    int maiorponto = 0;
+    for(tPlayer *aux = player; proximo(aux) != player; aux = proximo(aux)){
+        maiorponto = pGetPontos(aux);
+        aux = proximo(aux);
+        if(pGetPontos(aux) > maiorponto)
+            maiorponto = (pGetPontos(aux));
+    }
 }
 
 /*
@@ -97,11 +121,12 @@ void turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCarta *trunfo, char d
     ENTRADAS: A quantidade de players a ser inicializada.
     SAIDA: Ponteiro para tPlayer, apontando para o jogador criado.
     PRE-CONDICAO: n > 0.
-    POS-CONDICAO: Inicializados, porém sem elementos, ou zerados.
+    POS-CONDICAO: Inicializados, porém sem eleme0ntos, ou zerados.
 */
 void jogo(tDeck *baralho){
     preenche(baralho);
-    embaralha(baralho, 1500);
+    embaralha(baralho, 15000);
+    imprimeDeck(baralho);
     corta(baralho);
     tCarta *trunfo = defineTrunfo(baralho);
     int nJogadores;
@@ -114,6 +139,9 @@ void jogo(tDeck *baralho){
     //-----------------
     printf("O jogo sera para quantos jogadores? > ");
     scanf(" %d", &nJogadores);
+    if((NUMERODENAIPES * NUMERODEVALORES) % nJogadores != 0){
+        printf("O jogo n funciona com essa quantidade de players. Coloque uma quantidade que todos comprem carta iguais. Sao %d cartas.\n", NUMERODENAIPES * NUMERODEVALORES);
+    }
     if(nJogadores > getQuantidade(baralho)) return;
 
     tPlayer *players = iniciaNPlayers(nJogadores);
@@ -148,21 +176,7 @@ void jogo(tDeck *baralho){
     //     turno(players, baralho, monte, trunfo, 0);  //teste no easy
     // }
 
-    int cont0 = 1, maior = 0, pontosAux = 0;
-    for(tPlayer *aux = pGetProximo(players); aux != players; aux = pGetProximo(aux)){
-        pontosAux = pGetPontos(aux);
-        printf("PONTOS BOT %d: %d\n", cont0++, pontosAux);
-        if(pontosAux > maior)
-            maior = pontosAux;
-    }
-    printf("Seus pontos: %d\n", pGetPontos(players));
-    if(pGetPontos(players) > maior)
-        printf("PARABENS, VC GANHOU!!!\n");
-    else
-        printf("BOT %d ganhou!\n", cont0);
-
-
-    
+    mostraquemganha(players);
 
     destroiPlayers(players);
     destroiDeck(monte);

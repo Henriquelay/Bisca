@@ -14,8 +14,8 @@ void preenche(tDeck *deck){
     }
 
     tCarta atual;
-    for(char naipe = 0; naipe < 4; naipe++)
-        for(char valor = 0; valor < 10; valor++){
+    for(char naipe = 0; naipe < NUMERODENAIPES; naipe++)
+        for(char valor = 0; valor < NUMERODEVALORES; valor++){
             atual = criaCarta(&naipe, &valor);
             insereCarta(&atual, deck);
         }
