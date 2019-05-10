@@ -87,7 +87,7 @@ tPlayer* iniciaNPlayers(int n){
         return NULL;
     tPlayer *cabeca, *atual;
     cabeca = atual = iniciaPlayerVazio();
-    for(int i = 0; i < n; i++){
+    for(int i = 1; i < n; i++){
         atual->proximo = iniciaPlayerVazio();   //percorre criando os outros N players
         atual = atual->proximo;
     }   
@@ -117,15 +117,10 @@ void imprimeMao(tPlayer *player){
 */
 //TODO: Fazer uma função que compre transferindo a célula entre listas
 void compraCarta(tPlayer *player, tDeck *deck){
-    if(vazio(deck) || invalido(player) == 1) return;
+    if(invalido(player) == 1) return;
     if(invalido(player) == 2) pSetMao(player, iniciaVazio());
 
-    tCelula *celula = retiraCelula(deck, 0);
-    if(primeiro(deck) == NULL) deck->primeiro = deck->ultimo = celula;
-    else{
-        deck->ultimo->proximo = celula;
-        deck->ultimo = celula;
-    }
+    transfereCelula(pGetMao(player), deck, 0);
 }
 
 /*
@@ -146,7 +141,6 @@ void jogaCarta(tPlayer *player, tDeck *deck, int n){
     }
     tCelula *celula = (retiraCelula(pGetMao(player), n - 1));
     insereCarta(getCarta(celula), deck);
-    setQuantidade(pGetMao(player), getQuantidade(pGetMao(player)) - 1);
 }
 
 /*

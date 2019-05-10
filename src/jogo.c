@@ -54,7 +54,7 @@ void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade){
         }
         else jogadaBot(aux, monte, trunfo, dificuldade);
         aux = pGetProximo(aux);
-    } while(pGetProximo(aux) != player);
+    } while(aux != player);
 }
 
 void turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCarta *trunfo, char dificuldade){
@@ -76,16 +76,21 @@ void turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCarta *trunfo, char d
     POS-CONDICAO: Inicializados, porém sem elementos, ou zerados.
 */
 void jogo(tDeck *baralho){
-    tDeck *monte = iniciaVazio();
     preenche(baralho);
     embaralha(baralho, 1500);
     corta(baralho);
     tCarta *trunfo = defineTrunfo(baralho);
     int nJogadores;
 
+    // puts("Baralho:");
+    // imprimeDeck(baralho);
+    // puts("Trunfo:");
+    // filtrAEPrinta(trunfo);
+
     //-----------------
     printf("O jogo sera para quantos jogadores? > ");
     scanf(" %d", &nJogadores);
+    if(nJogadores > getQuantidade(baralho)) return;
 
     tPlayer *players = iniciaNPlayers(nJogadores);
     pSetHumano(players, 1);      //define o primeiro player como player humano
@@ -93,24 +98,27 @@ void jogo(tDeck *baralho){
     for(int i = 0; i < 3; i++)
         todosCompram(players, baralho);
 
-    puts("Baralho:");
-    imprimeDeck(baralho);
+    // puts("Baralho:");
+    // imprimeDeck(baralho);
 
     int cont0 = 1;
     for(tPlayer *aux = pGetProximo(players); aux != players; aux = pGetProximo(aux)){
-        printf("MAO PLAYER %d:\n", cont0++);
+        printf("MAO BOT %d:\n", cont0++);
         imprimeDeck(pGetMao(aux));
         if(primeiro(pGetMao(aux)) == NULL) printf("A MAO E NULA!\n");
     }
+    // puts("SUA MAO");
+    // imprimeDeck(pGetMao(players));
+    tDeck *monte = iniciaVazio();
     turno(players, baralho, monte, trunfo, 0);
 
     // puts("Carta \"comprada\":");
     // filtrAEPrinta(getCarta(retiraCelula(baralho, 0)));
-    puts("Baralho apos o turno:");
-    imprimeDeck(baralho);
+    // puts("Baralho apos o turno:");
+    // imprimeDeck(baralho);
 
-    printf("MAO APOS O TURNO:\n");
-    imprimeDeck(players->mao);
+    // printf("MAO APOS O TURNO:\n");
+    // imprimeDeck(players->mao);
     printf("MONTE:\n");
     imprimeDeck(monte);
 

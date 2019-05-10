@@ -26,11 +26,13 @@ void transfereCelula(tDeck *deck1, tDeck *deck2, int n){
 
     tCelula *celula = retiraCelula(deck2, n);
 
-    if(primeiro(deck1) == NULL && ultimo(deck1) == NULL && getQuantidade(deck1) == 0)
+    if(getQuantidade(deck1) == 0)
         deck1->primeiro = deck1->ultimo = celula;
-    else{
-        dSetCel(proximo(ultimo(deck1)), celula);
+    else{       //nn tô usando funções do TAD pq deu bosta e ed 1 é 10
+        deck1->ultimo->proximo = celula;
+        deck1->ultimo = celula;
     }
+    setQuantidade(deck1, getQuantidade(deck1) + 1);
 }
 
 tCelula* retiraCelula(tDeck *deck, int n){
@@ -148,7 +150,7 @@ void embaralha(tDeck *deck, int passes){
 */
 void destroiDeck(tDeck *deck){
     tCelula *Aux = NULL;
-    while(!vazio(deck)){
+    while(deck->primeiro != NULL){
         Aux = deck->primeiro;
         deck->primeiro = deck->primeiro->proximo;
         free(Aux);
