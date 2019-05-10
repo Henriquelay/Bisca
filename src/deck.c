@@ -158,6 +158,25 @@ void destroiDeck(tDeck *deck){
     free(deck);
 }
 
+//mesma coisa q o destroiDeck so q sem dar free no primeiro ponteiro
+void esvaziaDeck(tDeck *deck){
+    tCelula *Aux = NULL;
+    while(deck->primeiro != NULL){
+        Aux = deck->primeiro;
+        deck->primeiro = deck->primeiro->proximo;
+        free(Aux);
+    }
+    deck->primeiro = deck->ultimo = NULL;   //só pra garantir, e setar o último
+    deck->quantidade = 0;
+}
+
+tCelula* buscaCelula(tDeck* deck, int n){
+    tCelula *aux = deck->primeiro;
+    for(int i = 0; i < n && aux != NULL; i++)
+        aux = proximo(aux);
+    return aux;
+}
+
 /*
     OBJETIVO: Imprimir 'deck' na tela.
     ENTRADAS: Ponteiro para 'deck'.

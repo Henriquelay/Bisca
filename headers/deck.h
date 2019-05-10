@@ -100,6 +100,10 @@ void preenche(tDeck *deck);
 */
 void destroiDeck(tDeck *deck);
 
+void esvaziaDeck(tDeck *deck);
+
+tCelula* buscaCelula(tDeck* deck, int n);
+
 tCelula* retiraCelula(tDeck *deck, int n);
 
 void transfereCelula(tDeck *deck1, tDeck *deck2, int n);
