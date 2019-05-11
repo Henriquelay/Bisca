@@ -111,6 +111,13 @@ void mostraPontuacaoEQuemGanhou(tPlayer *players){
 
 }
 
+/*
+    OBJETIVO: Printa e define qual jogador ganhou a rodada e soma sua pontuacao (int).
+    ENTRADAS: Ponteiro tPlayer* para 'Lista de jogadores', Ponteiro tDeck* para 'monte', Ponteiro tCarta* para 'trunfo'.
+    SAIDA: Ponteiro tPlayer* para 'jogador vencedor da rodada'.
+    PRE-CONDICAO: O turno ter terminado.
+    POS-CONDICAO: Definido o proximo a jogar.
+*/
 tPlayer* ganhadorMonte(tPlayer *player, tDeck *monte, tCarta* trunfo){
     int qmGanhouIndice = ganhador(monte, trunfo);
     tPlayer *qmGanhou = player;
@@ -132,6 +139,7 @@ tPlayer* ganhadorMonte(tPlayer *player, tDeck *monte, tCarta* trunfo){
 
     return qmGanhou;
 }
+
 /*
     OBJETIVO: Funcao que realiza a jogada, distribui os pontos ao ganhador da rodada e retorna o jogador vencedor do turno.
     ENTRADAS: Ponteiro tPlayer* para 'Lista de jogadores', Ponteiro tDeck* para 'baralho', Ponteiro tDeck* para 'monte', Ponteiro tCarta para 'trunfo', Variavel char para 'Dificuldade do jogo', Variavel int para 'numero de jogadores'.

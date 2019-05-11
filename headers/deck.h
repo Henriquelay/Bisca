@@ -65,24 +65,6 @@ void setQuantidade(tDeck *deck, int qtd);
 int getQuantidade(tDeck *deck);
 
 /*
-    OBJETIVO: Embaralhar 'deck'.
-    ENTRADAS: Ponteiro para 'deck'.
-    SAIDA: -
-    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
-    POS-CONDICAO: 'deck' está embaralhado.
-*/
-void embaralha(tDeck *deck, int passes);
-
-/*
-    OBJETIVO: Cortar 'deck'.
-    ENTRADAS: Ponteiro para 'deck'.
-    SAIDA: -
-    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
-    POS-CONDICAO: 'deck' está cortado (a carta cortada é o trunfo e ela vai pro fundo do deck).
-*/
-void corta(tDeck *deck);
-
-/*
     OBJETIVO: Preencher 'deck' corretamente.
     ENTRADAS: Ponteiro para 'deck'.
     SAIDA: -
@@ -90,28 +72,6 @@ void corta(tDeck *deck);
     POS-CONDICAO: 'deck' com todas as cartas que serão usadas na bisca nele.
 */
 void preenche(tDeck *deck);
-
-/*
-    OBJETIVO: Desalocar toda a memória ocupada por 'deck'.
-    ENTRADAS: Ponteiro para 'deck'.
-    SAIDA: -
-    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
-    POS-CONDICAO: 'deck' não ocupa mais espaço no HEAP e aponta para NULL.
-*/
-void destroiDeck(tDeck *deck);
-
-void esvaziaDeck(tDeck *deck);
-
-/*
-    OBJETIVO: Retornar um Ponteiro tCelula* do Deck de acordo com o indice.
-    ENTRADAS: Ponteiro tDeck* para 'deck' e uma Variavel int para 'indice da Celula'.
-    SAIDA: Ponteiro tCelula* para 'Celula selecionada'
-    PRE-CONDICAO: 'deck' existente.
-    POS-CONDICAO: Nada é alterado.
-*/
-tCelula* buscaCelula(tDeck* deck, int n);
-
-tCelula* retiraCelula(tDeck *deck, int n);
 
 /*
     OBJETIVO: Transferir um Ponteiro tCelula* de um Deck ao outro Deck.
@@ -124,6 +84,69 @@ tCelula* retiraCelula(tDeck *deck, int n);
 void transfereCelula(tDeck *deck1, tDeck *deck2, int n);
 
 /*
+    OBJETIVO: Retirar um Ponteiro tCelula* de um Deck e retornar ela.
+    ENTRADAS: Ponteiro tDeck* para 'deck alvo', Variavel int para 'indice da carta no deck'.
+    SAIDA: Ponteiro tCarta* para 'carta retirada'.
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente e o indice 'n' ser um valor possivel dado o tamanho do deck.
+    POS-CONDICAO: Celula retirada do 'deck' e retornada.
+*/
+tCelula* retiraCelula(tDeck *deck, int n);
+
+/*
+    OBJETIVO: Troca 2 células de lugar.
+    ENTRADAS: Ponteiro para duas células.
+    SAIDA: -
+    PRE-CONDICAO: As células existem e são válidas.
+    POS-CONDICAO: As duas células trocam de posição na lista, inalteradas.
+*/
+void swap2Celulas(tCelula *a, tCelula *b);
+
+/*
+    OBJETIVO: Cortar 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'deck' está cortado (a carta cortada é o trunfo e ela vai pro fundo do deck).
+*/
+void corta(tDeck *deck);
+
+/*
+    OBJETIVO: Embaralhar 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'deck' está embaralhado.
+*/
+void embaralha(tDeck *deck, int passes);
+
+/*
+    OBJETIVO: Desalocar toda a memória ocupada por 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'deck' não ocupa mais espaço no HEAP e aponta para NULL.
+*/
+void destroiDeck(tDeck *deck);
+
+/*
+    OBJETIVO: Desalocar toda a memória ocupada por 'deck' menos na primeira Celula.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'deck' estar vazio.
+*/
+void esvaziaDeck(tDeck *deck);
+
+/*
+    OBJETIVO: Retornar um Ponteiro tCelula* do Deck de acordo com o indice.
+    ENTRADAS: Ponteiro tDeck* para 'deck' e uma Variavel int para 'indice da Celula'.
+    SAIDA: Ponteiro tCelula* para 'Celula selecionada'
+    PRE-CONDICAO: 'deck' existente.
+    POS-CONDICAO: Nada é alterado.
+*/
+tCelula* buscaCelula(tDeck* deck, int n);
+
+/*
     OBJETIVO: Imprimir 'deck' na tela.
     ENTRADAS: Ponteiro para 'deck'.
     SAIDA: -
@@ -131,6 +154,15 @@ void transfereCelula(tDeck *deck1, tDeck *deck2, int n);
     POS-CONDICAO: Nada é alterado.
 */
 void imprimeDeck(tDeck *deck);
+
+/*
+    OBJETIVO: Inserir 'carta' em 'deck'. *Será inserida no início
+    ENTRADAS: Ponteiro para 'deck', ponteiro para 'carta'.
+    SAIDA: Endereço para a célula criada.
+    PRE-CONDICAO: A carta existe.
+    POS-CONDICAO: A célula foi corretamente alocada, a carta não foi alterada.
+*/
+tCelula* criaItem(tCarta *carta);
 
 /*
     OBJETIVO: Inserir 'carta' em 'deck'.
@@ -151,15 +183,6 @@ void insereCarta(tCarta *carta, tDeck *deck);
 char vazio(tDeck *deck);
 
 /*
-    OBJETIVO: Troca 2 células de lugar.
-    ENTRADAS: Ponteiro para duas células.
-    SAIDA: -
-    PRE-CONDICAO: As células existem e são válidas.
-    POS-CONDICAO: As duas células trocam de posição na lista, inalteradas.
-*/
-void swap2Celulas(tCelula *a, tCelula *b);
-
-/*
     OBJETIVO: Iniciar 'deck' vazio corretamente.
     ENTRADAS: -
     SAIDA: 'deck'.
@@ -167,15 +190,6 @@ void swap2Celulas(tCelula *a, tCelula *b);
     POS-CONDICAO: Inicializado, porém sem elementos.
 */
 tDeck* iniciaVazio(void);
-
-/*
-    OBJETIVO: Inserir 'carta' em 'deck'. *Será inserida no início
-    ENTRADAS: Ponteiro para 'deck', ponteiro para 'carta'.
-    SAIDA: Endereço para a célula criada.
-    PRE-CONDICAO: A carta existe.
-    POS-CONDICAO: A célula foi corretamente alocada, a carta não foi alterada.
-*/
-tCelula* criaItem(tCarta *carta);
 
 /*
     OBJETIVO: Selecionar a menor carta de 'deck'.
@@ -187,15 +201,6 @@ tCelula* criaItem(tCarta *carta);
 tCarta* menorCarta(tDeck *deck, tCarta *trunfo);
 
 /*
-    OBJETIVO: Pegar o trunfo do fundo do baralho.
-    ENTRADAS: Ponteiro para 'deck'.
-    SAIDA: O naipe do fundo de 'deck'.
-    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
-    POS-CONDICAO: Nada é alterado.
-*/
-tCarta* defineTrunfo(tDeck *deck);
-
-/*
     OBJETIVO: Selecionar a menor carta de 'deck'.
     ENTRADAS: Ponteiro para 'deck'.
     SAIDA: Ponteiro para a menor carta.
@@ -203,5 +208,14 @@ tCarta* defineTrunfo(tDeck *deck);
     POS-CONDICAO: .
 */
 char contaPontos(tDeck *deck);
+
+/*
+    OBJETIVO: Pegar o trunfo do fundo do baralho.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: O naipe do fundo de 'deck'.
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: Nada é alterado.
+*/
+tCarta* defineTrunfo(tDeck *deck);
 
 #endif  //_H_DECKBISCA

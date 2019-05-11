@@ -43,6 +43,13 @@ void transfereCelula(tDeck *deck1, tDeck *deck2, int n){
     setQuantidade(deck1, getQuantidade(deck1) + 1);
 }
 
+/*
+    OBJETIVO: Retirar um Ponteiro tCelula* de um Deck e retornar ela.
+    ENTRADAS: Ponteiro tDeck* para 'deck alvo', Variavel int para 'indice da carta no deck'.
+    SAIDA: Ponteiro tCarta* para 'carta retirada'.
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente e o indice 'n' ser um valor possivel dado o tamanho do deck.
+    POS-CONDICAO: Celula retirada do 'deck' e retornada.
+*/
 tCelula* retiraCelula(tDeck *deck, int n){
     if(deck == NULL || n < 0 || n > getQuantidade(deck)) return NULL;
 
@@ -166,7 +173,13 @@ void destroiDeck(tDeck *deck){
     free(deck);
 }
 
-//mesma coisa q o destroiDeck so q sem dar free no primeiro ponteiro
+/*
+    OBJETIVO: Desalocar toda a memória ocupada por 'deck' menos na primeira Celula.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: 'deck' estar vazio.
+*/
 void esvaziaDeck(tDeck *deck){
     tCelula *Aux = NULL;
     while(deck->primeiro != NULL){
