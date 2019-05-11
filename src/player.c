@@ -14,44 +14,100 @@ char invalido(tPlayer *player){
     return 0;
 }
 
+/*
+    OBJETIVO: Funcao que seta a quantidade de pontos de um player.
+    ENTRADAS: Ponteiro tPLayer* para 'player alvo' e uma Variavel char para 'pontos'.
+    SAIDA: -
+    PRE-CONDICAO: Player existir.
+    POS-CONDICAO: Quantidade de pontos atribuida ao jogador.
+*/
 void pSetPontos(tPlayer *player, char pontos){
     if(player != NULL)
         player->points = pontos;
 }
 
+/*
+    OBJETIVO: Funcao que retorna a quantidade de pontos de um player.
+    ENTRADAS: Ponteiro tPLayer* para 'player alvo'.
+    SAIDA: Pontuacao de um player dado.
+    PRE-CONDICAO: Player existir.
+    POS-CONDICAO: Nada alterado.
+*/
 char pGetPontos(tPlayer *player){
     if(player != NULL)
         return player->points;
     return 0;
 }
 
+/*
+    OBJETIVO: Funcao que seta o ID de um player (humano ou bot).
+    ENTRADAS: Ponteiro tPLayer* para 'player' e uma Variavel char para dizer que eh humano.
+    SAIDA: -
+    PRE-CONDICAO: Player existir.
+    POS-CONDICAO: ID humano atribuido ao jogador.
+*/
 void pSetId(tPlayer *player, char humano){
     if(player != NULL)
         player->Id = humano;
 }
 
+/*
+    OBJETIVO: Funcao que retorna ID de um player.
+    ENTRADAS: Ponteiro tPLayer* para 'player alvo'.
+    SAIDA: ID de um player dado.
+    PRE-CONDICAO: Player existir.
+    POS-CONDICAO: Nada alterado.
+*/
 char pGetId(tPlayer *player){
     if(player != NULL)
         return player->Id;
     return 0;
 }
 
+/*
+    OBJETIVO: Funcao que seta qual sera a proxima celula.
+    ENTRADAS: Ponteiro tPLayer* para 'player' e Ponteiro tPLayer* para 'proximo player'.
+    SAIDA: -
+    PRE-CONDICAO: Player atual e o proximo existirem.
+    POS-CONDICAO: O proximo do Player de entrada ser o Player 'proximo' tambem da entrada.
+*/
 void pSetProximo(tPlayer *player, tPlayer *proximo){
     if(player != NULL)
         player->proximo = proximo;
 }
 
+/*
+    OBJETIVO: Funcao que retorna o proximo player de uma celula na lista.
+    ENTRADAS: Ponteiro tPLayer* para 'player alvo'.
+    SAIDA: Ponteiro tPLayer* para 'proximo player'.
+    PRE-CONDICAO: Player existir.
+    POS-CONDICAO: Proximo player retornado.
+*/
 tPlayer* pGetProximo(tPlayer *player){
     if(player != NULL)
         return player->proximo;
     return NULL;
 }
 
+/*
+    OBJETIVO: Funcao que seta a 'mao' do jogador.
+    ENTRADAS: Ponteiro tPLayer* para 'player' e Ponteiro tDeck* para 'mao'.
+    SAIDA: -
+    PRE-CONDICAO: Player atual e o deck da mao existirem.
+    POS-CONDICAO: Mao do jogador ser o deck passado na entrada.
+*/
 void pSetMao(tPlayer *player, tDeck *mao){
     if(player != NULL)
         player->mao = mao;
 }
 
+/*
+    OBJETIVO: Funcao que retorna a 'mao' do jogador.
+    ENTRADAS: Ponteiro tPLayer* para 'player alvo'.
+    SAIDA: Ponteiro tDeck* para 'mao'.
+    PRE-CONDICAO: Player existir.
+    POS-CONDICAO: Mao do jogador retornada.
+*/
 tDeck* pGetMao(tPlayer *player){
     if(player != NULL)
         return player->mao;

@@ -8,8 +8,9 @@ por Henrique Layber e Ezequiel Schneider
 /*Aqui vai as funcoes*/
 #include "deck.h"
 
-//Define os jogadores em lista circular;
-
+/*
+ *  Define os jogadores em lista circular;
+ */
 typedef struct Player tPlayer;
 
 typedef struct Player{
@@ -19,22 +20,87 @@ typedef struct Player{
 }tPlayer;
 
 
-//FUNÇÕES
+/*______ FUNÇÕES ______*/
 
+/*
+    OBJETIVO: Verificar se 'player' está alocado corretamente.
+    ENTRADAS: Ponteiro para 'player'.
+    SAIDA: 1 quando é nulo, 2 quando a mão é nula, 3 quando o próximo é nulo, 0 quando tá safe
+    PRE-CONDICAO: -
+    POS-CONDICAO: Nada é alterado.
+*/
+char invalido(tPlayer *player);
+
+/*
+    OBJETIVO: Funcao que seta a quantidade de pontos de um player.
+    ENTRADAS: Ponteiro tPLayer* para 'player alvo' e uma Variavel char para 'pontos'.
+    SAIDA: -
+    PRE-CONDICAO: Player existir.
+    POS-CONDICAO: Quantidade de pontos atribuida ao jogador.
+*/
 void pSetPontos(tPlayer *player, char pontos);
 
+/*
+    OBJETIVO: Funcao que retorna a quantidade de pontos de um player.
+    ENTRADAS: Ponteiro tPLayer* para 'player alvo'.
+    SAIDA: Pontuacao de um player dado.
+    PRE-CONDICAO: Player existir.
+    POS-CONDICAO: Nada alterado.
+*/
 char pGetPontos(tPlayer *player);
 
+/*
+    OBJETIVO: Funcao que seta o ID de um player (humano ou bot).
+    ENTRADAS: Ponteiro tPLayer* para 'player' e uma Variavel char para dizer que eh humano.
+    SAIDA: -
+    PRE-CONDICAO: Player existir.
+    POS-CONDICAO: ID humano atribuido ao jogador.
+*/
 void pSetId(tPlayer *player, char humano);
 
+/*
+    OBJETIVO: Funcao que retorna ID de um player.
+    ENTRADAS: Ponteiro tPLayer* para 'player alvo'.
+    SAIDA: ID de um player dado.
+    PRE-CONDICAO: Player existir.
+    POS-CONDICAO: Nada alterado.
+*/
 char pGetId(tPlayer *player);
 
+/*
+    OBJETIVO: Funcao que seta qual sera a proxima celula.
+    ENTRADAS: Ponteiro tPLayer* para 'player' e Ponteiro tPLayer* para 'proximo player'.
+    SAIDA: -
+    PRE-CONDICAO: Player atual e o proximo existirem.
+    POS-CONDICAO: O proximo do Player de entrada ser o Player 'proximo' tambem da entrada.
+*/
 void pSetProximo(tPlayer *player, tPlayer *proximo);
 
+/*
+    OBJETIVO: Funcao que retorna o proximo player de uma celula na lista.
+    ENTRADAS: Ponteiro tPLayer* para 'player alvo'.
+    SAIDA: Ponteiro tPLayer* para 'proximo player'.
+    PRE-CONDICAO: Player existir.
+    POS-CONDICAO: Proximo player retornado.
+*/
 tPlayer* pGetProximo(tPlayer *player);
 
+/*
+    OBJETIVO: Funcao que seta a 'mao' do jogador.
+    ENTRADAS: Ponteiro tPLayer* para 'player' e Ponteiro tDeck* para 'mao'.
+    SAIDA: -
+    PRE-CONDICAO: Player atual e o deck da mao existirem.
+    POS-CONDICAO: Mao do jogador ser o deck passado na entrada.
+*/
 void pSetMao(tPlayer *player, tDeck *mao);
 
+/*
+    OBJETIVO: Funcao que retorna a 'mao' do jogador.
+    ENTRADAS: Ponteiro tPLayer* para 'player alvo'.
+    SAIDA: Ponteiro tDeck* para 'mao'.
+    PRE-CONDICAO: Player existir.
+    POS-CONDICAO: Mao do jogador retornada.
+*/
 tDeck *pGetMao(tPlayer *player);
 
 /*
@@ -66,15 +132,6 @@ A de Oustá alocado corretamente.
 A de Ou
 */
 void imprimeMao(tPlayer *player);
-
-/*
-    OBJETIVO: Verificar se 'player' está alocado corretamente.
-    ENTRADAS: Ponteiro para 'player'.
-    SAIDA: 1 quando é nulo, 2 quando a mão é nula, 3 quando o próximo é nulo, 0 quando tá safe
-    PRE-CONDICAO: -
-    POS-CONDICAO: Nada é alterado.
-*/
-char invalido(tPlayer *player);
 
 /*
     OBJETIVO: Faz 'player' compra a carta do topo de 'deck'.
