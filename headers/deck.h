@@ -46,22 +46,85 @@ typedef struct tDeck{
 
 //*FUNÇÕES
 
+/*
+    OBJETIVO: Funcao que seta qual sera a proxima celula.
+    ENTRADAS: Ponteiro tCelula* para 'celula' e Ponteiro tCelula* para 'proxima celula'.
+    SAIDA: -
+    PRE-CONDICAO: Celula atual e o proximo existirem.
+    POS-CONDICAO: O proximo da Celula de entrada ser a celula 'proximo' tambem da entrada.
+*/
 void dSetProximo(tCelula *cel, tCelula *proximo);
 
-tCelula* proximo(tCelula *cel);
-
+/*
+    OBJETIVO: Faz Celula1 receber Celula2.
+    ENTRADAS: Ponteiro tCelula* para 'celula1' e Ponteiro tCelula* para 'celula2'.
+    SAIDA: -
+    PRE-CONDICAO: Celula 1 e 2 existirem.
+    POS-CONDICAO: Celula1 ter os mesmos atributos da Celula2.
+*/
 void dSetCel(tCelula *cel1, tCelula *cel2);
 
+/*
+    OBJETIVO: Funcao que retorna o proximo de uma celula.
+    ENTRADAS: Ponteiro tCelula* para 'celula alvo'.
+    SAIDA: Ponteiro tCelula* para 'proximo celula'.
+    PRE-CONDICAO: Celula existir.
+    POS-CONDICAO: Proximo da celula retornado.
+*/
+tCelula* proximo(tCelula *cel);
+
+/*
+    OBJETIVO: Funcao que retorna a primeira celula do deck.
+    ENTRADAS: Ponteiro tDeck* para 'deck alvo'.
+    SAIDA: Ponteiro tCelula* para 'primeira celula'.
+    PRE-CONDICAO: Deck existir.
+    POS-CONDICAO: Primeira celula do deck retornada.
+*/
 tCelula* primeiro(tDeck *deck);
 
+/*
+    OBJETIVO: Funcao que retorna a ultima celula do deck.
+    ENTRADAS: Ponteiro tDeck* para 'deck alvo'.
+    SAIDA: Ponteiro tCelula* para 'ultima celula'.
+    PRE-CONDICAO: Deck existir.
+    POS-CONDICAO: Ultima celula do deck retornada.
+*/
 tCelula* ultimo(tDeck *deck);
 
+/*
+    OBJETIVO: Funcao que acessa a carta de uma celula.
+    ENTRADAS: Ponteiro tCelula* para 'celula alvo'.
+    SAIDA: Ponteiro tCarta* para 'carta'.
+    PRE-CONDICAO: Celula existir.
+    POS-CONDICAO: Carta da celula retornada.
+*/
 tCarta* getCarta(tCelula *cel);
 
+/*
+    OBJETIVO: Funcao que seta a carta de uma celula.
+    ENTRADAS: Ponteiro tCelula* para 'celula alvo' e uma Variavel tCarta para 'carta'.
+    SAIDA: -
+    PRE-CONDICAO: Celula existir.
+    POS-CONDICAO: Carta da celula ser a carta de entrada.
+*/
 void setCarta(tCelula *cel, tCarta card);
 
+/*
+    OBJETIVO: Funcao que seta a quantidade de cartas de um Deck.
+    ENTRADAS: Ponteiro tDeck* para 'deck alvo' e uma Variavel int para 'quantidade de celulas'.
+    SAIDA: -
+    PRE-CONDICAO: Deck existir.
+    POS-CONDICAO: Quantidade do deck ser a quantidade da entrada.
+*/
 void setQuantidade(tDeck *deck, int qtd);
 
+/*
+    OBJETIVO: Funcao que acessa a quantidade de celulas de um deck.
+    ENTRADAS: Ponteiro tDeck* para 'deck alvo'.
+    SAIDA: Variavel int para 'quantidade de celulas em um deck'.
+    PRE-CONDICAO: Deck existir.
+    POS-CONDICAO: Quantidade de celulas retornada.
+*/
 int getQuantidade(tDeck *deck);
 
 /*
