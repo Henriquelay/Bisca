@@ -52,7 +52,7 @@ void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade, int
     int cartaJogada = -1;
     tPlayer *aux = player;
     for(int i = 0; i < nJogadores; i++, aux = pGetProximo(aux)){
-        if(pGetId(aux) == 0){
+        if(pGetId(aux) == 0){               //0 é o código de humano
             if(primeiro(monte) != NULL){    //caso o jogador não seja o primeiro
                 puts("Monte:");
                 imprimeDeck(monte);
