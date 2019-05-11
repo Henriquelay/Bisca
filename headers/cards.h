@@ -56,8 +56,6 @@ char getValor(tCarta *carta);
 */
 void filtrAEPrinta(tCarta *carta);
 
-char cartasIguais(tCarta *carta1, tCarta *carta2);
-
 /*
     OBJETIVO: Retornar o número de pontos da carta.
     ENTRADAS: Ponteiro para a carta.
@@ -66,5 +64,14 @@ char cartasIguais(tCarta *carta1, tCarta *carta2);
     POS-CONDICAO: Nada foi alterado.
 */
 char filtroDePontos(tCarta *carta);
+
+/*
+    OBJETIVO: Verificar se duas cartas sao iguais.
+    ENTRADAS: Ponteiro tCarta* para a 'carta1' e um Ponteiro tCarta* para a 'carta2'.
+    SAIDA: Retorna 1 se as duas cartas de entrada forem as mesmas, e 0 caso contrario.
+    PRE-CONDICAO: -
+    POS-CONDICAO: Nada foi alterado.
+*/
+char cartasIguais(tCarta *carta1, tCarta *carta2);
 
 #endif
