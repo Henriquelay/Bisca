@@ -25,14 +25,14 @@ char pGetPontos(tPlayer *player){
     return 0;
 }
 
-void pSetHumano(tPlayer *player, char humano){
+void pSetId(tPlayer *player, char humano){
     if(player != NULL)
-        player->ehHumano = humano;
+        player->Id = humano;
 }
 
-char pGetHumano(tPlayer *player){
+char pGetId(tPlayer *player){
     if(player != NULL)
-        return player->ehHumano;
+        return player->Id;
     return 0;
 }
 
@@ -65,12 +65,12 @@ tDeck* pGetMao(tPlayer *player){
     PRE-CONDICAO: -
     POS-CONDICAO: Inicializado, porém sem elementos, ou zerados.
 */
-tPlayer* iniciaPlayerVazio(void){
+tPlayer* iniciaPlayerVazio(int i){
     tPlayer *player = (tPlayer*) malloc(sizeof(tPlayer));
     pSetPontos(player, 0);
     pSetProximo(player, NULL);
     pSetMao(player, iniciaVazio());
-    pSetHumano(player, 0);
+    pSetId(player, i);
     
     return player;
 }
@@ -86,12 +86,18 @@ tPlayer* iniciaNPlayers(int n){
     if(n < 1)
         return NULL;
     tPlayer *cabeca, *atual;
-    cabeca = atual = iniciaPlayerVazio();
+    cabeca = atual = iniciaPlayerVazio(0);
     for(int i = 1; i < n; i++){
-        atual->proximo = iniciaPlayerVazio();   //percorre criando os outros N players
+        atual->proximo = iniciaPlayerVazio(i);   //percorre criando os outros N players
         atual = atual->proximo;
     }   
     atual->proximo = cabeca;    //faz a lista ficar circular;
+
+    tPlayer *aux = cabeca;
+    do{
+        printf("ID DO ALOCADO: %d\n", pGetId(aux));
+        aux = pGetProximo(aux);
+    }while(aux != cabeca);
 
     return cabeca;
 }
@@ -115,7 +121,6 @@ void imprimeMao(tPlayer *player){
     PRE-CONDICAO: 'deck' existe e está alocado corretamente, o mesmo para player.
     POS-CONDICAO: Nada é alterado.
 */
-//TODO: Fazer uma função que compre transferindo a célula entre listas
 void compraCarta(tPlayer *player, tDeck *deck){
     if(invalido(player) == 1) return;
     if(invalido(player) == 2) pSetMao(player, iniciaVazio());

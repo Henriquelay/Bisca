@@ -13,7 +13,7 @@ por Henrique Layber e Ezequiel Schneider
 typedef struct Player tPlayer;
 
 typedef struct Player{
-    char points, ehHumano;
+    char points, Id;
     tDeck *mao;
     tPlayer *proximo;
 }tPlayer;
@@ -25,9 +25,9 @@ void pSetPontos(tPlayer *player, char pontos);
 
 char pGetPontos(tPlayer *player);
 
-void pSetHumano(tPlayer *player, char humano);
+void pSetId(tPlayer *player, char humano);
 
-char pGetHumano(tPlayer *player);
+char pGetId(tPlayer *player);
 
 void pSetProximo(tPlayer *player, tPlayer *proximo);
 
@@ -44,7 +44,7 @@ tDeck *pGetMao(tPlayer *player);
     PRE-CONDICAO: -
     POS-CONDICAO: Inicializado, porém sem elementos, ou zerados.
 */
-tPlayer* iniciaPlayerVazio(void);
+tPlayer* iniciaPlayerVazio(int i);
 
 /*
     OBJETIVO: Iniciar 'n' quantidades de tPlayers vazios corretamente.

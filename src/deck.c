@@ -21,6 +21,14 @@ void preenche(tDeck *deck){
         }
 }
 
+/*
+    OBJETIVO: Transferir um Ponteiro tCelula* de um Deck ao outro Deck.
+        EXEMPLO: Comprar uma carta do monte exige tirar ela do monte e colocar ela na mao do jogador.
+    ENTRADAS: Ponteiro tDeck* para 'primeiro deck' e um Ponteiro tDeck* para 'segundo deck', Variavel int para 'indice da carta'.
+    SAIDA: -
+    PRE-CONDICAO: 'deck1 e deck2' existe e está alocado corretamente.
+    POS-CONDICAO: Mudanca de deck da Celula feita.
+*/
 void transfereCelula(tDeck *deck1, tDeck *deck2, int n){
     if(deck2 == NULL || n < 0 || n > getQuantidade(deck2)) return;
 
@@ -170,7 +178,17 @@ void esvaziaDeck(tDeck *deck){
     deck->quantidade = 0;
 }
 
+/*
+    OBJETIVO: Retornar um Ponteiro tCelula* do Deck de acordo com o indice.
+    ENTRADAS: Ponteiro tDeck* para 'deck' e uma Variavel int para 'indice da Celula'.
+    SAIDA: Ponteiro tCelula* para 'Celula selecionada'
+    PRE-CONDICAO: 'deck' existente.
+    POS-CONDICAO: Nada é alterado.
+*/
 tCelula* buscaCelula(tDeck* deck, int n){
+    if(vazio(deck) || n < 0)
+        return NULL;
+
     tCelula *aux = deck->primeiro;
     for(int i = 0; i < n && aux != NULL; i++)
         aux = proximo(aux);

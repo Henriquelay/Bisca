@@ -8,8 +8,59 @@ por Henrique Layber e Ezequiel Schneider
 /*Aqui vai as funcoes*/
 #include "AI.h"
 
-
+/*
+    OBJETIVO: Calcular quem foi o ganhador (quem encartou) do monte.
+    ENTRADAS: Ponteiro tDeck* para 'monte' e ponteiro tCarta* para 'trunfo'.
+    SAIDA: A posição na lista encadeada do player ganhador.
+    PRE-CONDICAO: -
+    POS-CONDICAO: Nada é alterado.
+*/
 int ganhador(tDeck *monte, tCarta *trunfo);
+
+/*
+    OBJETIVO: Fazer com que todos os jogadores coprem uma carta do monte.
+    ENTRADAS: Ponteiro tPlayer* para 'jogador' e ponteiro tDeck* para 'monte' e uma Variavel int para 'numero de jogadores'.
+    SAIDA: -
+    PRE-CONDICAO: Jogadores necessitarem comprar uma carta do monte.
+    POS-CONDICAO: Jogadores com tres cartas novamente.
+*/
+void todosCompram(tPlayer *player, tDeck *baralho, int nJogadores);
+
+/*
+    OBJETIVO: Realizar uma jogada (do usuário e dos bots).
+    ENTRADAS: Ponteiro tPlayer* para 'jogador' e ponteiro tDeck* para 'monte' e uma variavel char para 'dificuldade do jogo'.
+    SAIDA: -
+    PRE-CONDICAO: Ser um jogador com tres cartas ma mao.
+    POS-CONDICAO: Jogador ter efetuado a jogada.
+*/
+void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade, int nJogadores);
+
+/*
+    OBJETIVO: Printa qual jogador ganhou a partida e a sua pontuacao (int) final.
+    ENTRADAS: Ponteiro tPlayer* para 'Lista de jogadores'.
+    SAIDA: -
+    PRE-CONDICAO: O jogo ter terminado.
+    POS-CONDICAO: Nada alterado.
+*/
+void mostraPontuacaoEQuemGanhou(tPlayer *players);
+
+/*
+    OBJETIVO: Funcao que realiza a jogada, distribui os pontos ao ganhador da rodada e retorna o jogador vencedor do turno.
+    ENTRADAS: Ponteiro tPlayer* para 'Lista de jogadores', Ponteiro tDeck* para 'baralho', Ponteiro tDeck* para 'monte', Ponteiro tCarta para 'trunfo', Variavel char para 'Dificuldade do jogo', Variavel int para 'numero de jogadores'.
+    SAIDA: Ponteiro tPlayer* para 'Jogador vencedor da rodada'.
+    PRE-CONDICAO: Haver cartas para os jogadores comprar.
+    POS-CONDICAO: Todos os jogadores terem feitos uma jogada, proximo a jogar definido.
+*/
+tPlayer* turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCarta *trunfo, char dificuldade, int nJogadores);
+
+/*
+    OBJETIVO: Printa a pontuacao (int) do jogador.
+    ENTRADAS: Ponteiro tPlayer* para 'jogador'.
+    SAIDA: -
+    PRE-CONDICAO: -
+    POS-CONDICAO: Nada alterado.
+*/
+void mostraPontuacao(tPlayer *player);
 
 /*
     OBJETIVO: Iniciar 'n' quantidades de tPlayers vazios corretamente.
