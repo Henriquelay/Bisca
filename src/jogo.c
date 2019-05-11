@@ -52,7 +52,7 @@ void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade, int
     int cartaJogada = -1;
     tPlayer *aux = player;
     for(int i = 0; i < nJogadores; i++, aux = pGetProximo(aux)){
-        if(!pGetId(aux)){
+        if(pGetId(aux) == 0){
             if(primeiro(monte) != NULL){    //caso o jogador não seja o primeiro
                 puts("Monte:");
                 imprimeDeck(monte);
@@ -199,7 +199,7 @@ void jogo(tDeck *baralho){
             printf("O jogo n funciona com essa quantidade de players. Coloque uma quantidade que todos comprem carta iguais. Sao %d cartas.\n", NUMERODENAIPES * NUMERODEVALORES);
 
     }while((NUMERODENAIPES * NUMERODEVALORES) % nJogadores != 0);
-    
+
     if(nJogadores > getQuantidade(baralho)) return;
 
     tPlayer *players = iniciaNPlayers(nJogadores);
