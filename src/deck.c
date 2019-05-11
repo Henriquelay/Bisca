@@ -164,12 +164,7 @@ void embaralha(tDeck *deck, int passes){
     POS-CONDICAO: 'deck' não ocupa mais espaço no HEAP e aponta para NULL.
 */
 void destroiDeck(tDeck *deck){
-    tCelula *Aux = NULL;
-    while(deck->primeiro != NULL){
-        Aux = deck->primeiro;
-        deck->primeiro = deck->primeiro->proximo;
-        free(Aux);
-    }
+    esvaziaDeck(deck);
     free(deck);
 }
 

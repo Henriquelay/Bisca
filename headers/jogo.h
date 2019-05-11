@@ -27,6 +27,15 @@ int ganhador(tDeck *monte, tCarta *trunfo);
 void todosCompram(tPlayer *player, tDeck *baralho, int nJogadores);
 
 /*
+    OBJETIVO: Realizar uma jogada (do usuário).
+    ENTRADAS: Ponteiro tPlayer* para 'jogador' e ponteiro tDeck* para 'monte' e um Ponteiro tCarta* para 'trunfo'.
+    SAIDA: -
+    PRE-CONDICAO: Ser um jogador com tres cartas ma mao.
+    POS-CONDICAO: Jogador ter efetuado a jogada.
+*/
+void jogadaPlayer(tDeck *monte, tCarta *trunfo, tPlayer *jogador);
+
+/*
     OBJETIVO: Realizar uma jogada (do usuário e dos bots).
     ENTRADAS: Ponteiro tPlayer* para 'jogador' e ponteiro tDeck* para 'monte' e uma variavel char para 'dificuldade do jogo'.
     SAIDA: -
