@@ -89,5 +89,24 @@ void mostraPontuacao(tPlayer *player);
 */
 void jogo(tDeck *baralho);
 
+/* __________ MENU DE OPCOES _________ */
+
+/*
+    OBJETIVO: Recebe do teclado a quantidade de jogadores da partida e trada a entrada.
+    ENTRADAS: -
+    SAIDA: Variavel int qtd para 'quantidade de jogadores'
+    PRE-CONDICAO: -
+    POS-CONDICAO: Nada alterado.
+*/
+int quantosJogadores();
+
+/*
+    OBJETIVO: Recebe do teclado a dificuldade da partida e trada a entrada.
+    ENTRADAS: -
+    SAIDA: Variavel int dificuldade para 'dificuldade do jogo'
+    PRE-CONDICAO: -
+    POS-CONDICAO: Nada alterado.
+*/
+int dificuldade();
 
 #endif

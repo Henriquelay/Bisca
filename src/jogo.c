@@ -209,7 +209,7 @@ void mostraPontuacao(tPlayer *player){
     ENTRADAS: A quantidade de players a ser inicializada.
     SAIDA: Ponteiro para tPlayer, apontando para o jogador criado.
     PRE-CONDICAO: n > 0.
-    POS-CONDICAO: Inicializados, porém sem eleme0ntos, ou zerados.
+    POS-CONDICAO: Inicializados, porém sem elementos, ou zerados.
 */
 void jogo(tDeck *baralho){
     preenche(baralho);
@@ -223,14 +223,13 @@ void jogo(tDeck *baralho){
 
     //-----------------
     int nJogadores;
-    do{
-        printf("O jogo sera para quantos jogadores? > ");
-        scanf(" %d", &nJogadores);
+    // do{
+    //     if((NUMERODENAIPES * NUMERODEVALORES) % *nJogadores != 0)
+    //         printf("O jogo n funciona com essa quantidade de players. Coloque uma quantidade que todos comprem carta iguais. Sao %d cartas.\n", NUMERODENAIPES * NUMERODEVALORES);
 
-        if((NUMERODENAIPES * NUMERODEVALORES) % nJogadores != 0)
-            printf("O jogo n funciona com essa quantidade de players. Coloque uma quantidade que todos comprem carta iguais. Sao %d cartas.\n", NUMERODENAIPES * NUMERODEVALORES);
+    // }while((NUMERODENAIPES * NUMERODEVALORES) % *nJogadores != 0);
 
-    }while((NUMERODENAIPES * NUMERODEVALORES) % nJogadores != 0);
+    nJogadores = quantosJogadores();
 
     if(nJogadores > getQuantidade(baralho)) return;
 
@@ -269,4 +268,61 @@ void jogo(tDeck *baralho){
     mostraPontuacaoEQuemGanhou(players);
 
     destroiPlayers(players);
+}
+
+/*
+__________ MENU OPCOES _________
+
+1. Número de jogadores
+2. Dificuldade
+3. Embaralhar
+4. Cortar
+    a. Começa o jogo
+    b. Durante o jogo:
+5. Mostrar o baralho
+6. Mostrar pontuação de todos
+7. Exibir  informações  como:  Cartas  restantes  no  baralho,  quantidade  de  cartas  na  mão.
+8. Printar quando o bot compra, e qual compra
+*/
+
+/*
+    OBJETIVO: Recebe do teclado a quantidade de jogadores da partida e trada a entrada.
+    ENTRADAS: -
+    SAIDA: Variavel int qtd para 'quantidade de jogadores'
+    PRE-CONDICAO: -
+    POS-CONDICAO: Nada alterado.
+*/
+int quantosJogadores(){
+    int qtd;
+
+    printf("O JOGO SERA PARA QUANTOS JOGADORES?\n>> ");
+    scanf(" %d", qtd);
+    
+    while(qtd != 2 && qtd != 4){
+        printf("\nO JOGO SO PODE SER DE DOIS OU QUATRO JOGADORES\nO JOGO SERA PARA QUANTOS JOGADORES?\n>> ");
+        scanf(" %d", &qtd); 
+    }
+
+    return qtd;
+}
+
+/*
+    OBJETIVO: Recebe do teclado a dificuldade da partida e trada a entrada.
+    ENTRADAS: -
+    SAIDA: Variavel int dificuldade para 'dificuldade do jogo'
+    PRE-CONDICAO: -
+    POS-CONDICAO: Nada alterado.
+*/
+int dificuldade(){
+    int dificuldade;
+
+    printf("DEFINA A DIFICULDADE\n'0' PARA FACIL\n'1' PARA DIFICIL\n>> ");
+    scanf(" %d", dificuldade);
+    
+    while(dificuldade != 2 && dificuldade != 4){
+        printf("\nDIFICULDADE INVALIDA, LEMBRE-SE\n'0' PARA FACIL\n'1' PARA DIFICIL\nDIGITE NOVAMENTE\n>> ");
+        scanf(" %d", &dificuldade); 
+    }
+
+    return dificuldade;
 }
