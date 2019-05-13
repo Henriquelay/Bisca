@@ -251,7 +251,6 @@ tCelula* criaItem(tCarta *carta){
     PRE-CONDICAO: 'deck' existe e está alocado corretamente.
     POS-CONDICAO: 'carta' está contida em 'deck'.
 */
-//TODO: NÃO CONSIGO MEXER NESSA FUNÇÃO PRA ELA NÃO USA ACESSO DIRETO
 void insereCarta(tCarta *carta, tDeck *deck){
     if(deck == NULL) return;
     tCelula *item = criaItem(carta);
@@ -485,4 +484,18 @@ char possui(tDeck *deck, tCarta *carta){
             possui++;
     
     return possui;
+}
+
+void resgataTrunfo(tDeck *monte, tCelula* trunfo){
+    if(trunfo == NULL || monte == NULL)  return;
+    if(vazio(monte)) return;
+    int indice = 0, resp = -1;
+    tCelula *aux = primeiro(monte);
+    do{
+        if(cartasIguais(getCarta(aux), getCarta(trunfo)))
+            resp = indice;
+        aux = proximo(aux);
+        indice++;
+    }while(aux != NULL);
+    trunfo = retiraCelula(monte, resp);
 }

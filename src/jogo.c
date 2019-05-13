@@ -43,7 +43,12 @@ void todosCompram(tPlayer *player, tDeck *baralho, int nJogares){
     if(vazio(baralho)) return;
     tPlayer *aux = player;
     for(int i = 0; i < nJogares; i++, aux = pGetProximo(aux)){
-        printf("JOGADOR %d COMPROU!\n", pGetId(aux));
+        if(pGetId(aux) == 0)
+            printf("VOCE");
+        else
+            printf("BOT %d", pGetId(aux));
+        printf(" COMPROU A CARTA ");
+        filtrAEPrinta(getCarta(primeiro(baralho)));
         compraCarta(aux, baralho);
     }
 }
@@ -90,13 +95,12 @@ void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade, int
     for(int i = 0; i < nJogadores; i++, aux = pGetProximo(aux)){
         
         if(pGetId(aux) == 0)
-            printf("VOCE VAI JOGAR\n");
+            printf("VOCE VAI JOGAR\nOpcoes: \nm - mostra baralho\tc - corta baralho\ne - exibir pontuacoes\tq - exibir quantidades de cartas\n");
         else 
             printf("QUEM VAI JOGAR: BOT %d\n", pGetId(aux));
 
-        if(pGetId(aux) == 0){               //0 é o código de humano
+        if(pGetId(aux) == 0)               //0 é o código de humano
             jogadaPlayer(monte, trunfo, aux);
-        }
         else 
             jogadaBot(aux, monte, trunfo, dificuldade);
     }
@@ -179,20 +183,22 @@ tPlayer* ganhadorMonte(tPlayer *player, tDeck *monte, tCarta* trunfo){
     PRE-CONDICAO: Haver cartas para os jogadores comprar.
     POS-CONDICAO: Todos os jogadores terem feitos uma jogada, proximo a jogar definido.
 */
-tPlayer* turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCarta *trunfo, char dificuldade, int nJogadores){
+tPlayer* turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCelula *trunfo, char dificuldade, int nJogadores){
 
     // if(player != NULL)
     //     imprimeDeck(pGetMao(player));
     if(getQuantidade(pGetMao(player)) < 3)
         todosCompram(player, baralho, nJogadores);
 
-    jogada(player, monte, trunfo, 0, nJogadores);
+    jogada(player, monte, getCarta(trunfo), 0, nJogadores);
     
     puts("#MONTE NO FIM DO TURNO#");
     imprimeDeck(monte);
     //indicar quem ganhou
-    tPlayer *qmGanhou = ganhadorMonte(player, monte, trunfo);
+    tPlayer *qmGanhou = ganhadorMonte(player, monte, getCarta(trunfo));
 
+    if(possui(monte, getCarta(trunfo)))
+        resgataTrunfo(monte, trunfo);
     esvaziaDeck(monte);
     puts("--------------------------");
     return qmGanhou;
@@ -249,7 +255,7 @@ void jogo(tDeck *baralho){
     // imprimeDeck(baralho);
 
     
-    tCarta *trunfo = defineTrunfo(baralho);
+    tCelula *trunfo = ultimo(baralho);
     // puts("SUA MAO");
     // imprimeDeck(pGetMao(players));
     tDeck *monte = iniciaVazio();
@@ -271,7 +277,7 @@ void jogo(tDeck *baralho){
     //     filtrAEPrinta(trunfo);
     //     turno(players, baralho, monte, trunfo, 0);  //teste no easy
     // }
-
+    if(trunfo != NULL)  free(trunfo);
     destroiDeck(monte);
     mostraPontuacaoEQuemGanhou(players);
 
@@ -301,7 +307,7 @@ __________ MENU OPCOES _________
     POS-CONDICAO: Nada alterado.
 */
 int quantosJogadores(){
-    char qtd;
+    char qtd = -1;
 
     printf("O JOGO SERA PARA QUANTOS JOGADORES?\n>> ");
     scanf(" %c", &qtd);
@@ -310,7 +316,15 @@ int quantosJogadores(){
         printf("\nO JOGO SO PODE SER DE DOIS OU QUATRO JOGADORES\nO JOGO SERA PARA QUANTOS JOGADORES?\n>> ");
         scanf(" %c", &qtd); 
     }
-    int qtdInt = atoi(&qtd);
+    int qtdInt = 0;
+    switch(qtd){
+        case '2':
+            qtdInt = 2;
+            break;
+        case '4':
+            qtdInt = 4;
+            break;
+    }
 
     return qtdInt;
 }

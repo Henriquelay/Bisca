@@ -281,4 +281,16 @@ char contaPontos(tDeck *deck);
 */
 tCarta* defineTrunfo(tDeck *deck);
 
+/*
+    OBJETIVO: Dizer se tem uma carta especifica em um deck.
+    ENTRADAS: Ponteiro tDeck* para 'deck' e ponteiro para carta.
+    SAIDA: >0 quando existe, 0 quando nao existe.
+    PRE-CONDICAO: Deck existir.
+    POS-CONDICAO: Nada e alterado.
+*/
+char possui(tDeck *deck, tCarta *carta);
+
+
+void resgataTrunfo(tDeck *monte, tCelula* trunfo);
+
 #endif  //_H_DECKBISCA

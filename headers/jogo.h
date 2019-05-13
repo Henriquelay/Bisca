@@ -69,7 +69,7 @@ tPlayer* ganhadorMonte(tPlayer *player, tDeck *monte, tCarta* trunfo);
     PRE-CONDICAO: Haver cartas para os jogadores comprar.
     POS-CONDICAO: Todos os jogadores terem feitos uma jogada, proximo a jogar definido.
 */
-tPlayer* turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCarta *trunfo, char dificuldade, int nJogadores);
+tPlayer* turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCelula *trunfo, char dificuldade, int nJogadores);
 
 /*
     OBJETIVO: Printa a pontuacao (int) do jogador.
