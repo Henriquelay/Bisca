@@ -26,6 +26,8 @@ int ganhador(tDeck *monte, tCarta *trunfo){
                 maior = getCarta(aux);
         }
     }
+
+    printf("Indice do ganhador do monte: %d\n", indice);
     return indice;
 
 }
@@ -41,7 +43,7 @@ void todosCompram(tPlayer *player, tDeck *baralho, int nJogares){
     if(vazio(baralho)) return;
     tPlayer *aux = player;
     for(int i = 0; i < nJogares; i++, aux = pGetProximo(aux)){
-        printf("JOGADOR %d COMPROU!\n", i);
+        printf("JOGADOR %d COMPROU!\n", pGetId(aux));
         compraCarta(aux, baralho);
     }
 }
@@ -108,10 +110,15 @@ void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade, int
     POS-CONDICAO: Nada alterado.
 */
 void mostraPontuacaoEQuemGanhou(tPlayer *players){
-    int bot = 1, maior = -1, pontosAux = 0, indice = 0, indiceGanhador = -1, ocorrencias = 0;
-    for(tPlayer *aux = pGetProximo(players); aux != players; aux = pGetProximo(aux)){
+    int maior = -1, pontosAux = 0, indice = 0, indiceGanhador = -1, ocorrencias = 0;
+    tPlayer *aux = players;
+    do{
         pontosAux = pGetPontos(aux);
-        printf("PONTOS BOT %d: %d\n", bot++, pontosAux);
+        if(pGetId(aux) == 0){    //se for humano
+            printf("Seus pontos: %d\n", pontosAux);
+        }else{
+        printf("PONTOS BOT %d: %d\n", pGetId(aux), pontosAux);
+        }
 
         if(pontosAux > maior){
             maior = pontosAux;
@@ -122,17 +129,19 @@ void mostraPontuacaoEQuemGanhou(tPlayer *players){
                 ocorrencias++;
 
         indice++;
-    }
-    printf("Seus pontos: %d\n", pGetPontos(players));
+        aux = pGetProximo(aux);
+    } while(aux != players);
 
     if(ocorrencias > 1)
         printf("Ocorreu um empate! TODOS PERDEM!!!\n");
-    else
-        if(indiceGanhador == 0)
-            printf("Voce ganhou, parabens!\n");
+    else{
+        for(int i = 0; i < indiceGanhador; i++)
+            aux = pGetProximo(aux);
+        if(pGetId(aux) == 0)
+            printf("Parabens, voce ganhou!!!onzwe!w111\n\n");
         else
-            printf("O jogador BOT %d ganhou.\n", indiceGanhador);
-
+            printf("BOT %d ganhou!\n\n", pGetId(aux));
+    }   
 }
 
 /*
@@ -222,15 +231,14 @@ void jogo(tDeck *baralho){
     // filtrAEPrinta(trunfo);
 
     //-----------------
-    int nJogadores;
     // do{
     //     if((NUMERODENAIPES * NUMERODEVALORES) % *nJogadores != 0)
     //         printf("O jogo n funciona com essa quantidade de players. Coloque uma quantidade que todos comprem carta iguais. Sao %d cartas.\n", NUMERODENAIPES * NUMERODEVALORES);
 
     // }while((NUMERODENAIPES * NUMERODEVALORES) % *nJogadores != 0);
 
-    nJogadores = quantosJogadores();
-
+    int nJogadores = quantosJogadores();
+    int dificuldade = dificuldadeMenu();
     if(nJogadores > getQuantidade(baralho)) return;
 
     tPlayer *players = iniciaNPlayers(nJogadores);
@@ -246,7 +254,7 @@ void jogo(tDeck *baralho){
     // imprimeDeck(pGetMao(players));
     tDeck *monte = iniciaVazio();
     while(!vazio(pGetMao(players)))
-        players = turno(players, baralho, monte, trunfo, 0, nJogadores);
+        players = turno(players, baralho, monte, trunfo, dificuldade, nJogadores);
     // preenche(monte);
     // puts("Carta \"comprada\":");
     // filtrAEPrinta(getCarta(retiraCelula(baralho, 0)));
@@ -293,17 +301,18 @@ __________ MENU OPCOES _________
     POS-CONDICAO: Nada alterado.
 */
 int quantosJogadores(){
-    int qtd;
+    char qtd;
 
     printf("O JOGO SERA PARA QUANTOS JOGADORES?\n>> ");
-    scanf(" %d", qtd);
+    scanf(" %c", &qtd);
     
-    while(qtd != 2 && qtd != 4){
+    while(qtd != '2' && qtd != '4'){
         printf("\nO JOGO SO PODE SER DE DOIS OU QUATRO JOGADORES\nO JOGO SERA PARA QUANTOS JOGADORES?\n>> ");
-        scanf(" %d", &qtd); 
+        scanf(" %c", &qtd); 
     }
+    int qtdInt = atoi(&qtd);
 
-    return qtd;
+    return qtdInt;
 }
 
 /*
@@ -313,16 +322,27 @@ int quantosJogadores(){
     PRE-CONDICAO: -
     POS-CONDICAO: Nada alterado.
 */
-int dificuldade(){
-    int dificuldade;
+int dificuldadeMenu(){
+    char dificuldade;
 
-    printf("DEFINA A DIFICULDADE\n'0' PARA FACIL\n'1' PARA DIFICIL\n>> ");
-    scanf(" %d", dificuldade);
+    printf("DEFINA A DIFICULDADE\nf/F PARA FACIL\nd/D PARA DIFICIL\n>> ");
+    scanf(" %c", &dificuldade);
     
-    while(dificuldade != 2 && dificuldade != 4){
-        printf("\nDIFICULDADE INVALIDA, LEMBRE-SE\n'0' PARA FACIL\n'1' PARA DIFICIL\nDIGITE NOVAMENTE\n>> ");
-        scanf(" %d", &dificuldade); 
+    while(dificuldade != 'f' && dificuldade != 'd'){
+        printf("\nDIFICULDADE INVALIDA, LEMBRE-SE\nf/F PARA FACIL\nd/D PARA DIFICIL\nDIGITE NOVAMENTE\n>> ");
+        scanf(" %c", &dificuldade);
+    }
+    int dificuldadeInt = -1;
+    switch(dificuldade){
+        case 'f': 
+        case 'F':
+            dificuldadeInt = 0;
+            break;
+        case 'd':
+        case 'D':
+            dificuldadeInt = 1;
+            break;
     }
 
-    return dificuldade;
+    return dificuldadeInt;
 }

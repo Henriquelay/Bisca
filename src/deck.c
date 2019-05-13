@@ -466,3 +466,23 @@ int getQuantidade(tDeck *deck){
         return deck->quantidade;
     return 0;
 }
+
+/*
+    OBJETIVO: Dizer se tem uma carta especifica em um deck.
+    ENTRADAS: Ponteiro tDeck* para 'deck' e ponteiro para carta.
+    SAIDA: >0 quando existe, 0 quando nao existe.
+    PRE-CONDICAO: Deck existir.
+    POS-CONDICAO: Nada e alterado.
+*/
+char possui(tDeck *deck, tCarta *carta){
+    if(vazio(deck) || carta == NULL)
+        return 0;
+
+    tCelula *aux = primeiro(deck);
+    int possui = 0;
+    for(int i = 0; i < getQuantidade(deck); i++, aux = proximo(aux))
+        if(cartasIguais(getCarta(aux), carta))
+            possui++;
+    
+    return possui;
+}

@@ -107,6 +107,6 @@ int quantosJogadores();
     PRE-CONDICAO: -
     POS-CONDICAO: Nada alterado.
 */
-int dificuldade();
+int dificuldadeMenu();
 
 #endif
