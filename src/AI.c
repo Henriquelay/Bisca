@@ -21,13 +21,15 @@ void jogadaHard(tPlayer *player, tDeck *monte, tCarta *trunfo){
         tCarta* menor = menorCarta(pGetMao(player), trunfo);
         jogaCarta(player, monte, buscaCarta(menor, pGetMao(player)));
     }
-    else if(contaPontos(monte) > 0){
-        tCarta* maior = maiorCarta(pGetMao(player), trunfo);
-        jogaCarta(player, monte, buscaCarta(maior, pGetMao(player)));
-    }
-    else{
-        tCarta* menor = menorCarta(pGetMao(player), trunfo);
-        jogaCarta(player, monte, buscaCarta(menor, pGetMao(player)));
+    else{ 
+        if(contaPontos(monte) > 0){
+            tCarta* maior = maiorCarta(pGetMao(player), trunfo);
+            jogaCarta(player, monte, buscaCarta(maior, pGetMao(player)));
+        }
+        else{
+            tCarta* menor = menorCarta(pGetMao(player), trunfo);
+            jogaCarta(player, monte, buscaCarta(menor, pGetMao(player)));
+        }
     }
 }
 

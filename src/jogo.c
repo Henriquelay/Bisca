@@ -105,6 +105,16 @@ void jogadaPlayer(tDeck *monte, tCarta *trunfo, tPlayer *jogador, tDeck *baralho
                 for(tPlayer *aux = pGetProximo(jogador); aux != jogador; aux = pGetProximo(aux), i++)
                     printf("BOT %d: %d ", i, getQuantidade(pGetMao(aux)));
                 puts("");
+                puts("Sua mao:");
+                imprimeDeck(pGetMao(jogador));
+                puts("Monte:");
+                imprimeDeck(monte);
+                i = 1;
+                for(tPlayer *aux = pGetProximo(jogador); aux != jogador; aux = pGetProximo(aux), i++){
+                    printf("BOT %d: \n", i);
+                    imprimeDeck(pGetMao(aux));
+                }
+                puts("");
                 break;
             default:
                 cartaJogadaInt = atoi(&cartaJogada);
@@ -171,8 +181,10 @@ void mostraPontuacaoEQuemGanhou(tPlayer *players){
     else{
         for(int i = 0; i < indiceGanhador; i++)
             aux = pGetProximo(aux);
-        if(pGetId(aux) == 0)
+        if(pGetId(aux) == 0){
             printf("Parabens, voce ganhou!!!onzwe!w111\n\n");
+            system("eject -T");
+        }
         else
             printf("BOT %d ganhou!\n\n", pGetId(aux));
     }   
@@ -259,9 +271,10 @@ void mostraPontuacao(tPlayer *player){
 */
 void jogo(tDeck *baralho){
     preenche(baralho);
-    embaralha(baralho, 15000);
+    embaralha(baralho, 150000);
     corta(baralho);
 
+    system("clear");
     int nJogadores = quantosJogadores();
     int dificuldade = dificuldadeMenu();
     if(nJogadores > getQuantidade(baralho)) return;
@@ -273,6 +286,7 @@ void jogo(tDeck *baralho){
     
     tCelula *trunfo = ultimo(baralho);
     tDeck *monte = iniciaVazio();
+    system("clear");
     while(!vazio(pGetMao(players)))
         players = turno(players, baralho, monte, trunfo, dificuldade, nJogadores);
     free(trunfo);
