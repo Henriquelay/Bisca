@@ -142,8 +142,8 @@ void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade, int
     for(int i = 0; i < nJogadores; i++, aux = pGetProximo(aux)){
         if(pGetId(aux) == 0)               //0 é o código de humano
             jogadaPlayer(monte, trunfo, aux, baralho);
-        else 
-            jogadaBot(aux, monte, trunfo, dificuldade);
+            else 
+                jogadaBot(aux, monte, trunfo, dificuldade);
     }
 }
 

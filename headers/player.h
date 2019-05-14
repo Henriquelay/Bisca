@@ -8,9 +8,9 @@ por Henrique Layber e Ezequiel Schneider
 /*Aqui vai as funcoes*/
 #include "deck.h"
 
-/*
- *  Define os jogadores em lista circular;
- */
+
+
+//  Define os jogadores em lista circular;
 typedef struct Player tPlayer;
 
 typedef struct Player{

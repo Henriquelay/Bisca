@@ -25,7 +25,7 @@ tCarta criaCarta(char *naipe, char *valor){
 */
 char getNaipe(tCarta *carta){
     if(carta == NULL) return -1;
-    return carta->naipe;
+    return carta->naipe;    
 }
 
 /*

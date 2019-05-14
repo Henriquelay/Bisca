@@ -12,14 +12,16 @@ por Henrique Layber e Ezequiel Schneider
 
 //*STRUCTS
 
-//Define os items que serão contidos no deck. (lista encadeada de cartas com sentinela)
+/*Define os items que serão contidos no deck.
+(lista encadeada de cartas com sentinela)*/
 typedef struct tCelula tCelula;
 typedef struct tCelula{
     tCarta carta;
     tCelula *proximo;
 } tCelula;
 
-//Define as sentinelas e auxiliadores do deck. (lista encadeada de cartas com sentinela)
+/*Define as sentinelas e auxiliador do deck.
+(lista encadeada de cartas com sentinela)*/
 typedef struct tDeck{
     tCelula *primeiro, *ultimo;
     int quantidade;
