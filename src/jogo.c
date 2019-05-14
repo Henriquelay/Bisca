@@ -100,6 +100,7 @@ void jogadaPlayer(tDeck *monte, tCarta *trunfo, tPlayer *jogador, tDeck *baralho
                 break;
             case 'q':
             case 'Q':
+                puts("Pelo poder do olho do milenio, espada sagrada dai me visao alem do alcance!!!");
                 printf("Baralho: %d\t Monte: %d\t Sua mao: %d\n", getQuantidade(baralho), getQuantidade(monte), getQuantidade(pGetMao(jogador)));
                 int i = 1;
                 for(tPlayer *aux = pGetProximo(jogador); aux != jogador; aux = pGetProximo(aux), i++)
