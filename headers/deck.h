@@ -299,7 +299,8 @@ tCarta* defineTrunfo(tDeck *deck);
 */
 char possui(tDeck *deck, tCarta *carta);
 
-
 void resgataTrunfo(tDeck *monte, tCelula* trunfo);
+
+char buscaCarta(tCarta *carta, tDeck *deck);
 
 #endif  //_H_DECKBISCA

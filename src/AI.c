@@ -14,11 +14,20 @@ void jogadaEasy(tPlayer *player, tDeck *monte, tCarta *trunfo){
     jogaCarta(player, monte, 1);
 }
 
-void jogadaHard(tPlayer *player, tDeck *monte, tDeck *mao, tCarta *trunfo){
+void jogadaHard(tPlayer *player, tDeck *monte, tCarta *trunfo){
     //printf("Jogada feita pelo bot %d = ", pGetId(player));
 
     if(getNaipe(maiorCarta(monte, trunfo)) == getNaipe(trunfo)){          // compara se a maior carta do monte eh trunfo
-        jogaCarta(player, monte, );
+        tCarta* menor = menorCarta(pGetMao(player), trunfo);
+        jogaCarta(player, monte, buscaCarta(menor, pGetMao(player)));
+    }
+    else if(contaPontos(monte) > 0){
+        tCarta* maior = maiorCarta(pGetMao(player), trunfo);
+        jogaCarta(player, monte, buscaCarta(maior, pGetMao(player)));
+    }
+    else{
+        tCarta* menor = menorCarta(pGetMao(player), trunfo);
+        jogaCarta(player, monte, buscaCarta(menor, pGetMao(player)));
     }
 }
 
@@ -27,7 +36,5 @@ void jogadaBot(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade){
     if(dificuldade == 0)
         jogadaEasy(player, monte, trunfo);
     else
-        jogadaHard(player, monte, pGetMao(player), trunfo);
+        jogadaHard(player, monte, trunfo);
 }
-
-char possui(tDeck *deck, tCarta *carta)

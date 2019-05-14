@@ -524,3 +524,16 @@ void resgataTrunfo(tDeck *monte, tCelula* trunfo){
     }while(aux != NULL);
     trunfo = retiraCelula(monte, resp);
 }
+
+char buscaCarta(tCarta *carta, tDeck *deck){
+    if(carta == NULL || vazio(deck)) return -1;
+    int i = 0;
+    int indice = -1;
+    
+    for(tCelula *aux = primeiro(deck); aux != NULL; aux = proximo(aux), i++){
+        if(cartasIguais(carta, getCarta(aux)))
+            indice = i;
+    }
+
+    return indice;
+}

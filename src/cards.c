@@ -24,6 +24,7 @@ tCarta criaCarta(char *naipe, char *valor){
     POS-CONDICAO: Nenhuma
 */
 char getNaipe(tCarta *carta){
+    if(carta == NULL) return -1;
     return carta->naipe;
 }
 
@@ -35,6 +36,7 @@ char getNaipe(tCarta *carta){
     POS-CONDICAO: Nenhuma
 */
 char getValor(tCarta *carta){
+    if(carta == NULL) return -1;
     return carta->valor;
 }
 
