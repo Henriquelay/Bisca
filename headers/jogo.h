@@ -33,7 +33,7 @@ void todosCompram(tPlayer *player, tDeck *baralho, int nJogadores);
     PRE-CONDICAO: Ser um jogador com tres cartas ma mao.
     POS-CONDICAO: Jogador ter efetuado a jogada.
 */
-void jogadaPlayer(tDeck *monte, tCarta *trunfo, tPlayer *jogador);
+void jogadaPlayer(tDeck *monte, tCarta *trunfo, tPlayer *jogador, tDeck *baralho);
 
 /*
     OBJETIVO: Realizar uma jogada (do usuário e dos bots).
@@ -42,7 +42,7 @@ void jogadaPlayer(tDeck *monte, tCarta *trunfo, tPlayer *jogador);
     PRE-CONDICAO: Ser um jogador com tres cartas ma mao.
     POS-CONDICAO: Jogador ter efetuado a jogada.
 */
-void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade, int nJogadores);
+void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade, int nJogadores, tDeck *baralho);
 
 /*
     OBJETIVO: Printa qual jogador ganhou a partida e a sua pontuacao (int) final.

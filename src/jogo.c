@@ -60,26 +60,62 @@ void todosCompram(tPlayer *player, tDeck *baralho, int nJogares){
     PRE-CONDICAO: Ser um jogador com tres cartas ma mao.
     POS-CONDICAO: Jogador ter efetuado a jogada.
 */
-void jogadaPlayer(tDeck *monte, tCarta *trunfo, tPlayer *jogador){
-                
-            int cartaJogada = -1;
-            if(primeiro(monte) != NULL){    //caso o jogador não seja o primeiro
-                puts("Monte:");
-                imprimeDeck(monte);
-            }
-            puts("Sua mao:");
-            imprimeDeck(pGetMao(jogador));
-            printf("O trunfo é ");
-            filtrAEPrinta(trunfo);
-            do{
-                printf("Que carta quer jogar? > ");
-                scanf(" %d", &cartaJogada);
-                if(!(cartaJogada > 0 && cartaJogada <= (getQuantidade(pGetMao(jogador)))))  //guard para não jogar carta inválida
+void jogadaPlayer(tDeck *monte, tCarta *trunfo, tPlayer *jogador, tDeck *baralho){
+    printf("VOCE VAI JOGAR\nOpcoes: \nm - mostra baralho\tc - corta baralho\np - exibir pontuacoes\tq - exibir quantidades de cartas\te - embaralhar\n");
+    char cartaJogada = -1;
+    int cartaJogadaInt = -1;
+    int embaralhos = -1;
+    if(primeiro(monte) != NULL){    //caso o jogador não seja o primeiro
+        puts("Monte:");
+        imprimeDeck(monte);
+    }
+    puts("Sua mao:");
+    imprimeDeck(pGetMao(jogador));
+    printf("O trunfo é ");
+    filtrAEPrinta(trunfo);
+    do{
+        printf("Que carta quer jogar?\n>> ");
+        scanf(" %c", &cartaJogada);
+        switch(cartaJogada){
+            case 'm':
+            case 'M':
+                puts("Baralho:");
+                imprimeDeck(baralho);
+                break;
+            case 'c':
+            case 'C':
+                corta(baralho);
+                puts("Cortado!");
+                break;
+            case 'p':
+            case 'P':
+                mostraPontuacao(jogador);
+                break;
+            case 'e':
+            case 'E':
+                printf("Quantas trocas devo fazer? >> ");
+                scanf(" %d", &embaralhos);
+                embaralha(baralho, embaralhos);
+                puts("Embaralhado!");
+                break;
+            case 'q':
+            case 'Q':
+                printf("Baralho: %d\t Monte: %d\t Sua mao: %d\n", getQuantidade(baralho), getQuantidade(monte), getQuantidade(pGetMao(jogador)));
+                int i = 1;
+                for(tPlayer *aux = pGetProximo(jogador); aux != jogador; aux = pGetProximo(aux), i++)
+                    printf("BOT %d: %d ", i, getQuantidade(pGetMao(aux)));
+                puts("");
+                break;
+            default:
+                cartaJogadaInt = atoi(&cartaJogada);
+                if(!(cartaJogadaInt > 0 && cartaJogadaInt <= (getQuantidade(pGetMao(jogador)))))  //guard para não jogar carta inválida
                     puts("Esse indice de carta eh invalido! Escolha um que represente uma carta na sua mao!\n");
-            } while(!(cartaJogada > 0 && cartaJogada <= (getQuantidade(pGetMao(jogador)))));
-            printf("Opcao aceita: ");
-            filtrAEPrinta(getCarta(buscaCelula(pGetMao(jogador), cartaJogada - 1)));
-            jogaCarta(jogador, monte, cartaJogada);
+        }
+        cartaJogadaInt = atoi(&cartaJogada);
+    } while(!(cartaJogadaInt > 0 && cartaJogadaInt <= (getQuantidade(pGetMao(jogador)))));
+    printf("Opcao aceita: ");
+    filtrAEPrinta(getCarta(buscaCelula(pGetMao(jogador), cartaJogadaInt - 1)));
+    jogaCarta(jogador, monte, cartaJogadaInt);
 }
 
 /*
@@ -89,18 +125,12 @@ void jogadaPlayer(tDeck *monte, tCarta *trunfo, tPlayer *jogador){
     PRE-CONDICAO: Ser um jogador com tres cartas ma mao.
     POS-CONDICAO: Jogador ter efetuado a jogada.
 */
-void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade, int nJogadores){
+void jogada(tPlayer *player, tDeck *monte, tCarta *trunfo, char dificuldade, int nJogadores, tDeck *baralho){
 
     tPlayer *aux = player;
     for(int i = 0; i < nJogadores; i++, aux = pGetProximo(aux)){
-        
-        if(pGetId(aux) == 0)
-            printf("VOCE VAI JOGAR\nOpcoes: \nm - mostra baralho\tc - corta baralho\ne - exibir pontuacoes\tq - exibir quantidades de cartas\n");
-        else 
-            printf("QUEM VAI JOGAR: BOT %d\n", pGetId(aux));
-
         if(pGetId(aux) == 0)               //0 é o código de humano
-            jogadaPlayer(monte, trunfo, aux);
+            jogadaPlayer(monte, trunfo, aux, baralho);
         else 
             jogadaBot(aux, monte, trunfo, dificuldade);
     }
@@ -190,8 +220,9 @@ tPlayer* turno(tPlayer *player, tDeck *baralho, tDeck *monte, tCelula *trunfo, c
     if(getQuantidade(pGetMao(player)) < 3)
         todosCompram(player, baralho, nJogadores);
 
-    jogada(player, monte, getCarta(trunfo), 0, nJogadores);
+    jogada(player, monte, getCarta(trunfo), dificuldade, nJogadores, baralho);
     
+    system("clear");
     puts("#MONTE NO FIM DO TURNO#");
     imprimeDeck(monte);
     //indicar quem ganhou
@@ -229,19 +260,7 @@ void mostraPontuacao(tPlayer *player){
 void jogo(tDeck *baralho){
     preenche(baralho);
     embaralha(baralho, 15000);
-    // imprimeDeck(baralho);
     corta(baralho);
-    // puts("Baralho:");
-    // imprimeDeck(baralho);
-    // puts("Trunfo:");
-    // filtrAEPrinta(trunfo);
-
-    //-----------------
-    // do{
-    //     if((NUMERODENAIPES * NUMERODEVALORES) % *nJogadores != 0)
-    //         printf("O jogo n funciona com essa quantidade de players. Coloque uma quantidade que todos comprem carta iguais. Sao %d cartas.\n", NUMERODENAIPES * NUMERODEVALORES);
-
-    // }while((NUMERODENAIPES * NUMERODEVALORES) % *nJogadores != 0);
 
     int nJogadores = quantosJogadores();
     int dificuldade = dificuldadeMenu();
@@ -251,33 +270,12 @@ void jogo(tDeck *baralho){
 
     for(int i = 0; i < 3; i++)   //jogares compram 3 cartas
         todosCompram(players, baralho, nJogadores);
-    // puts("Baralho:");
-    // imprimeDeck(baralho);
-
     
     tCelula *trunfo = ultimo(baralho);
-    // puts("SUA MAO");
-    // imprimeDeck(pGetMao(players));
     tDeck *monte = iniciaVazio();
     while(!vazio(pGetMao(players)))
         players = turno(players, baralho, monte, trunfo, dificuldade, nJogadores);
-    // preenche(monte);
-    // puts("Carta \"comprada\":");
-    // filtrAEPrinta(getCarta(retiraCelula(baralho, 0)));
-    // puts("Baralho apos o turno:");
-    // imprimeDeck(baralho);
-
-    // printf("MAO APOS O TURNO:\n");
-    // imprimeDeck(players->mao);
-    // printf("MONTE:\n");
-    // imprimeDeck(monte);
-
-    // while(ultimo(baralho) != NULL){
-    //     printf("O Trunfo é ");
-    //     filtrAEPrinta(trunfo);
-    //     turno(players, baralho, monte, trunfo, 0);  //teste no easy
-    // }
-    if(trunfo != NULL)  free(trunfo);
+    free(trunfo);
     destroiDeck(monte);
     mostraPontuacaoEQuemGanhou(players);
 

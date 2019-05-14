@@ -321,6 +321,31 @@ tCarta* menorCarta(tDeck *deck, tCarta *trunfo){
 }
 
 /*
+    OBJETIVO: Selecionar a maior carta de 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: Ponteiro para a maior carta.
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: .
+*/
+tCarta* maiorCarta(tDeck *deck, tCarta *trunfo){
+    if(vazio(deck))
+        return NULL;
+
+    tCelula *aux = deck->primeiro;
+    tCarta *maior = &aux->carta;
+
+    while(aux != NULL){
+        if(getValor(&aux->carta) >= getValor(maior))
+            if(getNaipe(&aux->carta) == getNaipe(trunfo) || getNaipe(maior) != getNaipe(trunfo))
+                maior = &aux->carta;
+
+        aux = aux->proximo;
+    }
+
+    return maior;
+}
+
+/*
     OBJETIVO: Selecionar a menor carta de 'deck'.
     ENTRADAS: Ponteiro para 'deck'.
     SAIDA: Ponteiro para a menor carta.

@@ -264,6 +264,15 @@ tDeck* iniciaVazio(void);
 tCarta* menorCarta(tDeck *deck, tCarta *trunfo);
 
 /*
+    OBJETIVO: Selecionar a maior carta de 'deck'.
+    ENTRADAS: Ponteiro para 'deck'.
+    SAIDA: Ponteiro para a maior carta.
+    PRE-CONDICAO: 'deck' existe e está alocado corretamente.
+    POS-CONDICAO: .
+*/
+tCarta* maiorCarta(tDeck *deck, tCarta *trunfo);
+
+/*
     OBJETIVO: Selecionar a menor carta de 'deck'.
     ENTRADAS: Ponteiro para 'deck'.
     SAIDA: Ponteiro para a menor carta.
